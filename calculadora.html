@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Hipotecas | Nuevo Sol Inversiones - Santo Domingo</title>
+  <meta name="description" content="Calcula tu cuota mensual de hipoteca con nuestra calculadora interactiva. Estima el financiamiento para tu propiedad en Santo Domingo, República Dominicana.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://nuevosolinversiones.com/calculadora.html">
+  <link rel="icon" type="image/png" href="Nuevo Sol LOGO.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .calc-page { padding-top: 90px; }
+    .calc-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-12);
+      align-items: start;
+    }
+    .calc-card {
+      background: var(--color-white);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-10);
+      box-shadow: var(--shadow-lg);
+    }
+    .calc-result-card {
+      background: var(--color-navy);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-10);
+      color: white;
+      position: sticky;
+      top: 100px;
+    }
+    .calc-monthly {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 800;
+      color: var(--color-gold-light);
+      text-align: center;
+      margin-bottom: var(--space-8);
+    }
+    .calc-monthly span {
+      font-size: var(--text-lg);
+      font-weight: 400;
+      color: var(--color-gray-400);
+    }
+    .calc-breakdown {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+    .calc-breakdown__item {
+      padding: var(--space-5);
+      background: rgba(255,255,255,0.06);
+      border-radius: var(--radius-lg);
+    }
+    .calc-breakdown__label {
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+      margin-bottom: var(--space-1);
+    }
+    .calc-breakdown__value {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: white;
+    }
+    .range-group {
+      margin-bottom: var(--space-8);
+    }
+    .range-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: var(--space-3);
+    }
+    .range-label {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: var(--weight-semibold);
+      color: var(--color-navy);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+    }
+    .range-value {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: var(--weight-bold);
+      color: var(--color-gold-dark);
+    }
+    input[type="range"] {
+      width: 100%;
+      height: 6px;
+      appearance: none;
+      -webkit-appearance: none;
+      background: var(--color-gray-200);
+      border-radius: 3px;
+      outline: none;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--color-gold);
+      box-shadow: 0 2px 8px rgba(212, 160, 23, 0.4);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--color-gold);
+      box-shadow: 0 2px 8px rgba(212, 160, 23, 0.4);
+      cursor: pointer;
+      border: none;
+    }
+    .range-limits {
+      display: flex;
+      justify-content: space-between;
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+      margin-top: var(--space-2);
+    }
+    /* Donut chart */
+    .donut-chart {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto var(--space-6);
+      position: relative;
+    }
+    .donut-chart svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .donut-chart__center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .donut-chart__center-value {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--color-gold-light);
+    }
+    .donut-chart__center-label {
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+    }
+    .chart-legend {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-6);
+      margin-bottom: var(--space-6);
+    }
+    .chart-legend__item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-xs);
+      color: var(--color-gray-400);
+    }
+    .chart-legend__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .amort-table {
+      width: 100%;
+      margin-top: var(--space-8);
+      border-collapse: collapse;
+    }
+    .amort-table th {
+      text-align: left;
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+      color: var(--color-gray-500);
+      border-bottom: 2px solid var(--color-gray-200);
+    }
+    .amort-table td {
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--text-sm);
+      border-bottom: 1px solid var(--color-gray-100);
+      color: var(--color-gray-700);
+    }
+    .amort-table tr:hover td {
+      background: var(--color-cream-warm);
+    }
+  </style>
+</head>
+<body class="page-transition">
+
+  <!-- NAV -->
+  <nav class="nav nav--transparent" id="mainNav" role="navigation">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo"><img src="Nuevo Sol LOGO.png" alt="Nuevo Sol Inversiones" style="height: 50px; width: auto;"></a>
+        <div class="nav__links">
+          <a href="index.html" class="nav__link">Inicio</a>
+          <a href="propiedades.html" class="nav__link">Propiedades</a>
+          <a href="calculadora.html" class="nav__link nav__link--active">Calculadora</a>
+          <a href="agendar-tour.html" class="nav__link">Agendar Tour</a>
+          <a href="publicar.html" class="nav__link">Publicar</a>
+          <a href="nosotros.html" class="nav__link">Nosotros</a>
+          <a href="agendar-tour.html" class="btn btn-primary btn-sm nav__cta">Contactar</a>
+        </div>
+        <button class="nav__hamburger" id="navHamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav__mobile" id="navMobile">
+    <a href="index.html" class="nav__link" onclick="closeMobileNav()">Inicio</a>
+    <a href="propiedades.html" class="nav__link" onclick="closeMobileNav()">Propiedades</a>
+    <a href="calculadora.html" class="nav__link" onclick="closeMobileNav()">Calculadora</a>
+    <a href="agendar-tour.html" class="nav__link" onclick="closeMobileNav()">Agendar Tour</a>
+    <a href="publicar.html" class="nav__link" onclick="closeMobileNav()">Publicar</a>
+    <a href="nosotros.html" class="nav__link" onclick="closeMobileNav()">Nosotros</a>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumbs" style="justify-content:center;">
+        <a href="index.html">Inicio</a><span>/</span><span>Calculadora de Hipotecas</span>
+      </div>
+      <h1>Calculadora de Hipotecas</h1>
+      <p>Planifica tu inversión inmobiliaria con precisión. Estima tu cuota mensual, intereses totales y tabla de amortización.</p>
+    </div>
+  </div>
+
+  <!-- CALCULATOR -->
+  <section class="section">
+    <div class="container" style="position: relative;">
+      
+      <!-- COMING SOON OVERLAY -->
+      <div style="position: absolute; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center; background: rgba(250, 249, 246, 0.4);">
+        <div style="background: var(--color-navy); color: var(--color-gold); padding: var(--space-6) var(--space-10); border-radius: var(--radius-lg); font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+          Disponible Próximamente
+        </div>
+      </div>
+
+      <div class="calc-layout" style="filter: blur(8px); pointer-events: none; user-select: none;">
+        <!-- Inputs -->
+        <div class="calc-card reveal">
+          <div class="range-group">
+            <div class="range-header">
+              <span class="range-label">Precio de Propiedad</span>
+              <span class="range-value" id="priceDisplay">$0</span>
+            </div>
+            <input type="range" id="priceRange" min="0" max="2000000" value="0" step="5000">
+            <div class="range-limits"><span>$0</span><span>$2,000,000</span></div>
+          </div>
+
+          <div class="range-group">
+            <div class="range-header">
+              <span class="range-label">Pago Inicial</span>
+              <span class="range-value" id="downDisplay">20% ($0)</span>
+            </div>
+            <input type="range" id="downRange" min="5" max="60" value="20" step="5">
+            <div class="range-limits"><span>5%</span><span>60%</span></div>
+          </div>
+
+          <div class="range-group">
+            <div class="range-header">
+              <span class="range-label">Tasa de Interés Anual</span>
+              <span class="range-value" id="rateDisplay">8.00%</span>
+            </div>
+            <input type="range" id="rateRange" min="3" max="18" value="8" step="0.25">
+            <div class="range-limits"><span>3%</span><span>18%</span></div>
+          </div>
+
+          <div class="range-group">
+            <div class="range-header">
+              <span class="range-label">Plazo del Préstamo</span>
+              <span class="range-value" id="termDisplay">20 años</span>
+            </div>
+            <input type="range" id="termRange" min="5" max="30" value="20" step="1">
+            <div class="range-limits"><span>5 años</span><span>30 años</span></div>
+          </div>
+
+          <!-- Amortization Table -->
+          <div style="margin-top: var(--space-8);">
+            <h3 style="font-size:var(--text-xl);margin-bottom:var(--space-4);">Tabla de Amortización Anual</h3>
+            <div style="overflow-x:auto;">
+              <table class="amort-table" id="amortTable">
+                <thead>
+                  <tr>
+                    <th>Año</th>
+                    <th>Cuota Anual</th>
+                    <th>Capital</th>
+                    <th>Interés</th>
+                    <th>Balance</th>
+                  </tr>
+                </thead>
+                <tbody id="amortBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div class="calc-result-card reveal">
+          <p style="text-align:center;color:var(--color-gray-400);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:0.2em;margin-bottom:var(--space-4);">Tu Cuota Mensual Estimada</p>
+          <div class="calc-monthly" id="monthlyResult">$1,338<span>/mes</span></div>
+
+          <!-- Donut Chart -->
+          <div class="donut-chart">
+            <svg viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="12"/>
+              <circle id="chartCapital" cx="60" cy="60" r="50" fill="none" stroke="var(--color-gold)" stroke-width="12" stroke-dasharray="0 314" stroke-linecap="round"/>
+              <circle id="chartInterest" cx="60" cy="60" r="50" fill="none" stroke="var(--color-green-light)" stroke-width="12" stroke-dasharray="0 314" stroke-linecap="round"/>
+            </svg>
+            <div class="donut-chart__center">
+              <div class="donut-chart__center-value" id="chartPercent">50%</div>
+              <div class="donut-chart__center-label">Capital</div>
+            </div>
+          </div>
+
+          <div class="chart-legend">
+            <div class="chart-legend__item"><div class="chart-legend__dot" style="background:var(--color-gold);"></div>Capital</div>
+            <div class="chart-legend__item"><div class="chart-legend__dot" style="background:var(--color-green-light);"></div>Intereses</div>
+          </div>
+
+          <div class="calc-breakdown">
+            <div class="calc-breakdown__item">
+              <div class="calc-breakdown__label">Pago Inicial</div>
+              <div class="calc-breakdown__value" id="resultDown">$40,000</div>
+            </div>
+            <div class="calc-breakdown__item">
+              <div class="calc-breakdown__label">Monto Financiado</div>
+              <div class="calc-breakdown__value" id="resultLoan">$160,000</div>
+            </div>
+            <div class="calc-breakdown__item">
+              <div class="calc-breakdown__label">Intereses Totales</div>
+              <div class="calc-breakdown__value" id="resultInterest">$161,166</div>
+            </div>
+            <div class="calc-breakdown__item">
+              <div class="calc-breakdown__label">Costo Total</div>
+              <div class="calc-breakdown__value" id="resultTotal">$361,166</div>
+            </div>
+          </div>
+
+          <a href="agendar-tour.html" class="btn btn-primary btn-lg" style="width:100%;margin-bottom:var(--space-3);">
+            Hablar con un Asesor
+          </a>
+          <a href="https://wa.me/18096972050?text=Hola%2C%20necesito%20asesor%C3%ADa%20sobre%20financiamiento" class="whatsapp-btn" target="_blank" rel="noopener" style="background:#25D366;color:white;display:flex;align-items:center;justify-content:center;gap:var(--space-2);padding:var(--space-4);border-radius:var(--radius-md);font-weight:600;font-size:var(--text-sm);text-decoration:none;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+            Asesoría por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/18096972050?text=Hola%2C%20necesito%20asesor%C3%ADa" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+  </a>
+
+  <script src="js/app.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const precio = params.get('precio');
+      if (precio) document.getElementById('priceRange').value = parseInt(precio);
+
+      const sliders = ['priceRange', 'downRange', 'rateRange', 'termRange'];
+      sliders.forEach(id => {
+        document.getElementById(id).addEventListener('input', calculateMortgage);
+      });
+      calculateMortgage();
+    });
+
+    function calculateMortgage() {
+      const price = parseFloat(document.getElementById('priceRange').value);
+      const downPct = parseFloat(document.getElementById('downRange').value);
+      const rate = parseFloat(document.getElementById('rateRange').value);
+      const term = parseInt(document.getElementById('termRange').value);
+
+      const downPayment = price * (downPct / 100);
+      const loan = price - downPayment;
+      const monthlyRate = (rate / 100) / 12;
+      const n = term * 12;
+
+      let monthly;
+      if (monthlyRate === 0) {
+        monthly = loan / n;
+      } else {
+        monthly = loan * (monthlyRate * Math.pow(1 + monthlyRate, n)) / (Math.pow(1 + monthlyRate, n) - 1);
+      }
+
+      const totalPaid = monthly * n;
+      const totalInterest = totalPaid - loan;
+
+      const fmt = (v) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(v);
+
+      document.getElementById('priceDisplay').textContent = fmt(price);
+      document.getElementById('downDisplay').textContent = `${downPct}% (${fmt(downPayment)})`;
+      document.getElementById('rateDisplay').textContent = `${rate.toFixed(2)}%`;
+      document.getElementById('termDisplay').textContent = `${term} años`;
+      document.getElementById('monthlyResult').innerHTML = `${fmt(monthly)}<span>/mes</span>`;
+      document.getElementById('resultDown').textContent = fmt(downPayment);
+      document.getElementById('resultLoan').textContent = fmt(loan);
+      document.getElementById('resultInterest').textContent = fmt(totalInterest);
+      document.getElementById('resultTotal').textContent = fmt(totalPaid + downPayment);
+
+      // Donut chart
+      const capitalPct = (loan / (loan + totalInterest)) * 100;
+      const circumference = 2 * Math.PI * 50;
+      const capitalDash = (capitalPct / 100) * circumference;
+      const interestDash = ((100 - capitalPct) / 100) * circumference;
+
+      document.getElementById('chartCapital').setAttribute('stroke-dasharray', `${capitalDash} ${circumference}`);
+      document.getElementById('chartInterest').setAttribute('stroke-dasharray', `${interestDash} ${circumference}`);
+      document.getElementById('chartInterest').setAttribute('stroke-dashoffset', `-${capitalDash}`);
+      document.getElementById('chartPercent').textContent = `${Math.round(capitalPct)}%`;
+
+      // Amortization table
+      const tbody = document.getElementById('amortBody');
+      let balance = loan;
+      let rows = '';
+
+      for (let year = 1; year <= term; year++) {
+        let yearInterest = 0;
+        let yearCapital = 0;
+
+        for (let m = 0; m < 12; m++) {
+          const intPayment = balance * monthlyRate;
+          const capPayment = monthly - intPayment;
+          yearInterest += intPayment;
+          yearCapital += capPayment;
+          balance -= capPayment;
+        }
+
+        if (balance < 0) balance = 0;
+
+        rows += `<tr>
+          <td>${year}</td>
+          <td>${fmt(monthly * 12)}</td>
+          <td>${fmt(yearCapital)}</td>
+          <td>${fmt(yearInterest)}</td>
+          <td>${fmt(balance)}</td>
+        </tr>`;
+      }
+
+      tbody.innerHTML = rows;
+    }
+  </script>
+</body>
+</html>

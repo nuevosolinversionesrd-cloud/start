@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propiedades en Venta | Nuevo Sol Inversiones - Bienes Raíces Santo Domingo</title>
+  <meta name="description" content="Explora nuestro catálogo de propiedades en venta en Santo Domingo y República Dominicana. Filtra por ubicación, precio, habitaciones y tipo. Apartamentos, casas, villas y más.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://nuevosolinversiones.com/propiedades.html">
+  <meta property="og:title" content="Propiedades en Venta | Nuevo Sol Inversiones">
+  <meta property="og:description" content="Catálogo completo de propiedades en venta. Apartamentos de lujo, casas, villas y proyectos económicos en República Dominicana.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="Nuevo Sol LOGO.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/gallery.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .filter-bar {
+      background: var(--color-white);
+      padding: var(--space-6) var(--space-8);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      margin-top: -60px;
+      position: relative;
+      z-index: 10;
+      margin-bottom: var(--space-12);
+    }
+    .filter-bar__grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-4);
+      align-items: end;
+    }
+    .filter-bar__label {
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semibold);
+      color: var(--color-navy);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+      margin-bottom: var(--space-2);
+      display: block;
+    }
+    .results-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-8);
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+    .results-count {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: var(--weight-semibold);
+      color: var(--color-navy);
+    }
+    .results-count span {
+      color: var(--color-gold);
+    }
+    .view-toggle {
+      display: flex;
+      gap: var(--space-2);
+    }
+    .view-toggle button {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-gray-100);
+      transition: all var(--duration-normal) var(--ease-out);
+    }
+    .view-toggle button.active {
+      background: var(--color-navy);
+      color: white;
+    }
+    .view-toggle button svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+    .sort-select {
+      padding: var(--space-2) var(--space-4);
+      border: 1px solid var(--color-gray-200);
+      border-radius: var(--radius-md);
+      font-size: var(--text-sm);
+      color: var(--color-navy);
+      background: var(--color-white);
+      cursor: pointer;
+    }
+    .no-results {
+      text-align: center;
+      padding: var(--space-16) var(--space-8);
+      color: var(--color-gray-500);
+    }
+    .no-results h3 {
+      margin-bottom: var(--space-4);
+      color: var(--color-navy);
+    }
+    .active-filters {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-6);
+    }
+    .active-filter {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-1) var(--space-3);
+      background: var(--color-gold-glow);
+      color: var(--color-gold-dark);
+      font-size: var(--text-xs);
+      font-weight: var(--weight-semibold);
+      border-radius: var(--radius-full);
+      cursor: pointer;
+    }
+    .active-filter:hover {
+      background: var(--color-gold);
+      color: white;
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Propiedades en Venta - Nuevo Sol Inversiones",
+    "description": "Catálogo de propiedades inmobiliarias en venta en Santo Domingo, República Dominicana",
+    "url": "https://nuevosolinversiones.com/propiedades.html"
+  }
+  </script>
+</head>
+<body class="page-transition">
+
+  <!-- NAV -->
+  <nav class="nav nav--transparent" id="mainNav" role="navigation">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo"><img src="Nuevo Sol LOGO.png" alt="Nuevo Sol Inversiones" style="height: 50px; width: auto;"></a>
+        <div class="nav__links" id="navLinks">
+          <a href="index.html" class="nav__link">Inicio</a>
+          <a href="propiedades.html" class="nav__link nav__link--active">Propiedades</a>
+          <a href="calculadora.html" class="nav__link">Calculadora</a>
+          <a href="agendar-tour.html" class="nav__link">Agendar Tour</a>
+          <a href="publicar.html" class="nav__link">Publicar</a>
+          <a href="nosotros.html" class="nav__link">Nosotros</a>
+          <a href="agendar-tour.html" class="btn btn-primary btn-sm nav__cta">Contactar</a>
+        </div>
+        <button class="nav__hamburger" id="navHamburger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav__mobile" id="navMobile">
+    <a href="index.html" class="nav__link" onclick="closeMobileNav()">Inicio</a>
+    <a href="propiedades.html" class="nav__link" onclick="closeMobileNav()">Propiedades</a>
+    <a href="calculadora.html" class="nav__link" onclick="closeMobileNav()">Calculadora</a>
+    <a href="agendar-tour.html" class="nav__link" onclick="closeMobileNav()">Agendar Tour</a>
+    <a href="publicar.html" class="nav__link" onclick="closeMobileNav()">Publicar</a>
+    <a href="nosotros.html" class="nav__link" onclick="closeMobileNav()">Nosotros</a>
+    <a href="agendar-tour.html" class="btn btn-primary btn-lg" onclick="closeMobileNav()">Contactar</a>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumbs" style="justify-content:center;">
+        <a href="index.html">Inicio</a>
+        <span>/</span>
+        <span>Propiedades</span>
+      </div>
+      <h1>Nuestras Propiedades</h1>
+      <p>Explora nuestro portafolio de propiedades exclusivas en República Dominicana</p>
+    </div>
+  </div>
+
+  <!-- FILTER BAR -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="filter-bar reveal">
+        <div class="filter-bar__grid">
+          <div>
+            <label class="filter-bar__label" for="filterType">Tipo</label>
+            <select class="form-select" id="filterType">
+              <option value="">Todos los tipos</option>
+              <option value="Casa">Casa</option>
+              <option value="Apartamento">Apartamento</option>
+              <option value="Villa">Villa</option>
+              <option value="Penthouse">Penthouse</option>
+            </select>
+          </div>
+          <div>
+            <label class="filter-bar__label" for="filterLocation">Ubicación</label>
+            <select class="form-select" id="filterLocation">
+              <option value="">Todas las ubicaciones</option>
+              <option value="Los Ríos">Los Ríos</option>
+              <option value="Piantini">Piantini</option>
+              <option value="Naco">Naco</option>
+              <option value="Juan Dolio">Juan Dolio</option>
+              <option value="Los Alcarrizos">Los Alcarrizos</option>
+              <option value="Santo Domingo Este">Santo Domingo Este</option>
+            </select>
+          </div>
+          <div>
+            <label class="filter-bar__label" for="filterPrice">Precio Máximo</label>
+            <select class="form-select" id="filterPrice">
+              <option value="">Sin límite</option>
+              <option value="100000">Hasta $100,000</option>
+              <option value="200000">Hasta $200,000</option>
+              <option value="300000">Hasta $300,000</option>
+              <option value="500000">Hasta $500,000</option>
+              <option value="1000000">Hasta $1,000,000</option>
+            </select>
+          </div>
+          <div>
+            <label class="filter-bar__label" for="filterBedrooms">Habitaciones</label>
+            <select class="form-select" id="filterBedrooms">
+              <option value="">Cualquier cantidad</option>
+              <option value="2">2+ Habitaciones</option>
+              <option value="3">3+ Habitaciones</option>
+              <option value="4">4+ Habitaciones</option>
+              <option value="5">5+ Habitaciones</option>
+            </select>
+          </div>
+          <div>
+            <label class="filter-bar__label" for="filterCategory">Categoría</label>
+            <select class="form-select" id="filterCategory">
+              <option value="">Todas</option>
+              <option value="luxury">Lujo</option>
+              <option value="lowcost">Económica</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Filters -->
+      <div class="active-filters" id="activeFilters"></div>
+
+      <!-- Results Header -->
+      <div class="results-header">
+        <div class="results-count" id="resultsCount">Mostrando <span>6</span> propiedades</div>
+        <div style="display:flex;align-items:center;gap:var(--space-4);">
+          <select class="sort-select" id="sortSelect">
+            <option value="featured">Destacadas</option>
+            <option value="price-asc">Precio: Menor a Mayor</option>
+            <option value="price-desc">Precio: Mayor a Menor</option>
+            <option value="area-desc">Mayor Superficie</option>
+            <option value="rooms-desc">Más Habitaciones</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Properties Grid -->
+      <div class="grid grid--properties" id="propertiesGrid"></div>
+
+      <!-- No Results -->
+      <div class="no-results" id="noResults" style="display:none;">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-300)" stroke-width="1"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <h3>No encontramos propiedades</h3>
+        <p>Intenta ajustar los filtros o <a href="propiedades.html" style="color:var(--color-gold);">ver todas las propiedades</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (Simplified) -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border-top:none;">
+        <p>&copy; 2026 Nuevo Sol Inversiones. Todos los derechos reservados.</p>
+        <div class="footer__social">
+          <a href="https://www.instagram.com/nuevosol.inversiones" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/18096972050?text=Hola%2C%20estoy%20interesado%20en%20una%20propiedad" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+    <span class="whatsapp-float__tooltip">¿Necesitas ayuda? 💬</span>
+  </a>
+
+  <script src="js/app.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Wait for data to load
+      setTimeout(initFilters, 300);
+    });
+
+    function initFilters() {
+      const properties = window.getProperties ? window.getProperties() : [];
+      const grid = document.getElementById('propertiesGrid');
+      const countEl = document.getElementById('resultsCount');
+      const noResults = document.getElementById('noResults');
+      const activeFiltersEl = document.getElementById('activeFilters');
+
+      // Read URL params
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('type')) document.getElementById('filterType').value = params.get('type');
+      if (params.get('category')) document.getElementById('filterCategory').value = params.get('category');
+      if (params.get('location')) document.getElementById('filterLocation').value = params.get('location');
+
+      function applyFilters() {
+        const type = document.getElementById('filterType').value;
+        const location = document.getElementById('filterLocation').value;
+        const maxPrice = document.getElementById('filterPrice').value;
+        const minBedrooms = document.getElementById('filterBedrooms').value;
+        const category = document.getElementById('filterCategory').value;
+        const sort = document.getElementById('sortSelect').value;
+
+        let filtered = [...properties];
+
+        if (type) filtered = filtered.filter(p => p.type === type);
+        if (location) filtered = filtered.filter(p => p.location.neighborhood === location);
+        if (maxPrice) filtered = filtered.filter(p => p.price <= parseInt(maxPrice));
+        if (minBedrooms) filtered = filtered.filter(p => p.features.bedrooms >= parseInt(minBedrooms));
+        if (category) filtered = filtered.filter(p => p.category === category);
+
+        // Sort
+        switch (sort) {
+          case 'price-asc': filtered.sort((a, b) => a.price - b.price); break;
+          case 'price-desc': filtered.sort((a, b) => b.price - a.price); break;
+          case 'area-desc': filtered.sort((a, b) => b.features.area_m2 - a.features.area_m2); break;
+          case 'rooms-desc': filtered.sort((a, b) => b.features.bedrooms - a.features.bedrooms); break;
+          default: filtered.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0)); break;
+        }
+
+        // Render
+        if (filtered.length > 0) {
+          grid.innerHTML = filtered.map(p => window.createPropertyCard(p)).join('');
+          grid.style.display = '';
+          noResults.style.display = 'none';
+        } else {
+          grid.style.display = 'none';
+          noResults.style.display = 'block';
+        }
+
+        countEl.innerHTML = `Mostrando <span>${filtered.length}</span> propiedad${filtered.length !== 1 ? 'es' : ''}`;
+
+        // Active filters
+        const filters = [];
+        if (type) filters.push({ label: type, key: 'filterType' });
+        if (location) filters.push({ label: location, key: 'filterLocation' });
+        if (maxPrice) filters.push({ label: `Hasta $${parseInt(maxPrice).toLocaleString()}`, key: 'filterPrice' });
+        if (minBedrooms) filters.push({ label: `${minBedrooms}+ Hab.`, key: 'filterBedrooms' });
+        if (category) filters.push({ label: category === 'luxury' ? 'Lujo' : 'Económica', key: 'filterCategory' });
+
+        activeFiltersEl.innerHTML = filters.map(f =>
+          `<span class="active-filter" onclick="document.getElementById('${f.key}').value=''; applyFilters();">${f.label} ✕</span>`
+        ).join('');
+      }
+
+      window.applyFilters = applyFilters;
+
+      // Bind events
+      ['filterType', 'filterLocation', 'filterPrice', 'filterBedrooms', 'filterCategory', 'sortSelect'].forEach(id => {
+        document.getElementById(id).addEventListener('change', applyFilters);
+      });
+
+      applyFilters();
+    }
+  </script>
+</body>
+</html>

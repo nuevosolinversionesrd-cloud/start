@@ -1,0 +1,151 @@
+/* ============================================
+   NUEVO SOL INVERSIONES — Design Tokens
+   Premium Real Estate Design System
+   ============================================ */
+
+:root {
+  /* ── Brand Colors ── */
+  --color-gold: #C5A55A;
+  --color-gold-light: #F4B857;
+  --color-gold-dark: #C68119;
+  --color-gold-glow: rgba(231, 158, 36, 0.15);
+  
+  --color-green: #1B5E20;
+  --color-green-light: #1B5E20;
+  --color-green-dark: #072B12;
+  
+  --color-navy: #1A2744;
+  --color-navy-light: #1F3A63;
+  --color-navy-dark: #0A1628;
+  
+  /* ── Neutrals ── */
+  --color-white: #FFFFFF;
+  --color-cream: #FAF8F5;
+  --color-cream-warm: #F5F0E8;
+  --color-gray-50: #F8F9FA;
+  --color-gray-100: #F1F3F5;
+  --color-gray-200: #E9ECEF;
+  --color-gray-300: #DEE2E6;
+  --color-gray-400: #CED4DA;
+  --color-gray-500: #ADB5BD;
+  --color-gray-600: #868E96;
+  --color-gray-700: #495057;
+  --color-gray-800: #343A40;
+  --color-gray-900: #212529;
+  --color-black: #0A0A0A;
+  
+  /* ── Semantic ── */
+  --color-success: #2E7D32;
+  --color-error: #C62828;
+  --color-warning: #F9A825;
+  --color-info: #1565C0;
+  
+  /* ── Gradients ── */
+  --gradient-gold: linear-gradient(135deg, #C5A55A, #F4B857);
+  --gradient-navy: linear-gradient(135deg, #1A2744, #1F3A63);
+  --gradient-hero: linear-gradient(180deg, rgba(10, 10, 10, 0.7) 0%, rgba(10, 10, 10, 0.3) 40%, rgba(10, 10, 10, 0.6) 100%);
+  --gradient-card: linear-gradient(180deg, transparent 50%, rgba(10, 10, 10, 0.85) 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+  
+  /* ── Typography ── */
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  
+  --text-xs: clamp(0.7rem, 0.65rem + 0.25vw, 0.75rem);
+  --text-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.875rem);
+  --text-base: clamp(0.9rem, 0.85rem + 0.3vw, 1rem);
+  --text-lg: clamp(1rem, 0.95rem + 0.35vw, 1.125rem);
+  --text-xl: clamp(1.15rem, 1rem + 0.5vw, 1.25rem);
+  --text-2xl: clamp(1.4rem, 1.2rem + 0.8vw, 1.5rem);
+  --text-3xl: clamp(1.7rem, 1.4rem + 1.2vw, 1.875rem);
+  --text-4xl: clamp(2rem, 1.5rem + 2vw, 2.5rem);
+  --text-5xl: clamp(2.5rem, 1.8rem + 3vw, 3.5rem);
+  --text-6xl: clamp(3rem, 2rem + 4vw, 4.5rem);
+  --text-hero: clamp(3.5rem, 2rem + 5.5vw, 6rem);
+  
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+  
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+  --leading-loose: 1.8;
+  
+  --tracking-tighter: -0.03em;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+  --tracking-widest: 0.2em;
+  
+  /* ── Spacing ── */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+  --space-40: 10rem;
+  --space-48: 12rem;
+  --space-section: clamp(4rem, 3rem + 5vw, 8rem);
+  
+  /* ── Layout ── */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1200px;
+  --container-2xl: 1440px;
+  --container-padding: clamp(1rem, 0.5rem + 2vw, 2rem);
+  
+  /* ── Borders ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+  
+  /* ── Shadows ── */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 16px 50px rgba(0, 0, 0, 0.14);
+  --shadow-2xl: 0 24px 60px rgba(0, 0, 0, 0.18);
+  --shadow-gold: 0 4px 20px rgba(212, 160, 23, 0.25);
+  --shadow-card: 0 2px 20px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.12);
+  
+  /* ── Transitions ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 800ms;
+  
+  /* ── Z-Index ── */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-whatsapp: 450;
+  
+  /* ── Glass ── */
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-blur: blur(20px);
+}

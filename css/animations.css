@@ -1,0 +1,200 @@
+/* ============================================
+   NUEVO SOL INVERSIONES — Animations
+   Scroll reveals, micro-interactions
+   ============================================ */
+
+/* ── Fade In Variants ── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── Scroll Reveal Classes ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all var(--duration-slower) var(--ease-out);
+}
+
+.reveal--left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all var(--duration-slower) var(--ease-out);
+}
+
+.reveal--right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all var(--duration-slower) var(--ease-out);
+}
+
+.reveal--scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all var(--duration-slower) var(--ease-out);
+}
+
+.reveal.visible,
+.reveal--left.visible,
+.reveal--right.visible,
+.reveal--scale.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Stagger Children ── */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all var(--duration-slow) var(--ease-out);
+}
+
+.stagger.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: none; }
+.stagger.visible > *:nth-child(2) { transition-delay: 100ms; opacity: 1; transform: none; }
+.stagger.visible > *:nth-child(3) { transition-delay: 200ms; opacity: 1; transform: none; }
+.stagger.visible > *:nth-child(4) { transition-delay: 300ms; opacity: 1; transform: none; }
+.stagger.visible > *:nth-child(5) { transition-delay: 400ms; opacity: 1; transform: none; }
+.stagger.visible > *:nth-child(6) { transition-delay: 500ms; opacity: 1; transform: none; }
+.stagger.visible > *:nth-child(7) { transition-delay: 600ms; opacity: 1; transform: none; }
+.stagger.visible > *:nth-child(8) { transition-delay: 700ms; opacity: 1; transform: none; }
+
+/* ── Counter Animation ── */
+.counter {
+  display: inline-block;
+}
+
+/* ── Pulse ── */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* ── Shimmer (loading skeleton) ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-100) 25%,
+    var(--color-gray-200) 50%,
+    var(--color-gray-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+/* ── Parallax ── */
+.parallax {
+  will-change: transform;
+}
+
+/* ── Float ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ── WhatsApp Button Animation ── */
+@keyframes whatsappPulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+  70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+/* ── Smooth page transition ── */
+.page-transition {
+  animation: fadeIn var(--duration-slow) var(--ease-out);
+}
+
+/* ── Reduce Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal, .reveal--left, .reveal--right, .reveal--scale {
+    opacity: 1;
+    transform: none;
+  }
+
+  .stagger > * {
+    opacity: 1;
+    transform: none;
+  }
+}

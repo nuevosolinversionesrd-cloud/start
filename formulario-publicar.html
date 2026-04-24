@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Publicación | Nuevo Sol Inversiones</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --form-bg: #ffffff;
+            --input-bg: #f8fafc;
+            --input-border: #e2e8f0;
+            --input-focus: var(--color-gold);
+        }
+
+        body {
+            background-color: #f1f5f9;
+            padding-top: 40px;
+            padding-bottom: 80px;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--form-bg);
+            border-radius: var(--radius-2xl);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            padding: var(--space-10);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: var(--space-10);
+        }
+
+        .form-header h1 {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            color: var(--color-navy);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-header p {
+            color: var(--color-gray-500);
+            font-size: var(--text-sm);
+        }
+
+        .form-section {
+            margin-bottom: var(--space-10);
+            padding-bottom: var(--space-8);
+            border-bottom: 1px solid var(--input-border);
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .form-section__title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: var(--space-6);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-5);
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .form-group--full {
+            grid-column: span 2;
+        }
+
+        label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            color: var(--color-gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        input, select, textarea {
+            padding: var(--space-3) var(--space-4);
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: var(--radius-lg);
+            font-size: var(--text-sm);
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--input-focus);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(197, 165, 90, 0.1);
+        }
+
+        .file-upload {
+            border: 2px dashed var(--input-border);
+            padding: var(--space-8);
+            border-radius: var(--radius-xl);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload:hover {
+            border-color: var(--color-gold);
+            background: rgba(197, 165, 90, 0.02);
+        }
+
+        .signature-pad {
+            width: 100%;
+            height: 200px;
+            background: #fff;
+            border: 1px solid var(--input-border);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-2);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: var(--space-5);
+            background: var(--gradient-gold);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-xl);
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: var(--space-4);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        @media (max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-group--full {
+                grid-column: span 1;
+            }
+            .form-container {
+                padding: var(--space-6);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="form-header">
+            <h1>Publica tu Propiedad</h1>
+            <p>Completa el formulario para publicar tu inmueble en nuestra plataforma.</p>
+        </div>
+
+        <form id="publicarForm">
+            <input type="hidden" name="form_type" value="terceros">
+            
+            <!-- Sección 1: Información del Solicitante -->
+            <div class="form-section">
+                <h3 class="form-section__title">👤 Información del Solicitante</h3>
+                <div class="form-grid">
+                    <div class="form-group form-group--full">
+                        <label for="nombre">Nombre completo del propietario o representante autorizado</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cedula">Cédula / RNC / Pasaporte</label>
+                        <input type="text" id="cedula" name="cedula" placeholder="001-0000000-0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="809-000-0000" required>
+                    </div>
+                    <div class="form-group form-group--full">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" name="email" placeholder="juan@ejemplo.com" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 2: Detalles del Inmueble -->
+            <div class="form-section">
+                <h3 class="form-section__title">🏠 Detalles de la Propiedad</h3>
+                <div class="form-grid">
+                    <div class="form-group form-group--full">
+                        <label for="titulo">Título del Anuncio</label>
+                        <input type="text" id="titulo" name="titulo" placeholder="Ej: Hermosa Villa frente al mar" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo">Tipo de Inmueble</label>
+                        <select id="tipo" name="tipo" required>
+                            <option value="">Seleccione...</option>
+                            <option value="Casa">Casa</option>
+                            <option value="Apartamento">Apartamento</option>
+                            <option value="Solar">Solar / Terreno</option>
+                            <option value="Villa">Villa</option>
+                            <option value="Local Comercial">Local Comercial</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="operacion">Tipo de Operación</label>
+                        <select id="operacion" name="operacion" required>
+                            <option value="Venta">Venta</option>
+                            <option value="Alquiler">Alquiler</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="precio">Precio (USD)</label>
+                        <input type="number" id="precio" name="precio" placeholder="Ej: 250000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ubicacion">Ubicación (Ciudad/Sector)</label>
+                        <input type="text" id="ubicacion" name="ubicacion" placeholder="Ej: Santo Domingo, Piantini" required>
+                    </div>
+                    <div class="form-group form-group--full">
+                        <label for="descripcion">Descripción Detallada</label>
+                        <textarea id="descripcion" name="descripcion" rows="4" placeholder="Describe las bondades de la propiedad..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 3: Multimedia -->
+            <div class="form-section">
+                <h3 class="form-section__title">📸 Fotos y Documentos</h3>
+                <div class="form-group form-group--full">
+                    <label>Enlace a Fotos (Drive, Dropbox, etc.)</label>
+                    <input type="url" name="fotos_link" placeholder="https://drive.google.com/drive/folders/...">
+                    <p style="font-size: 10px; color: #64748b; margin-top: 4px;">* Recomendamos subir una carpeta con fotos de alta calidad.</p>
+                </div>
+            </div>
+
+            <!-- Sección 4: Firma y Aceptación -->
+            <div class="form-section">
+                <h3 class="form-section__title">✍️ Firma y Aceptación</h3>
+                <div class="form-group form-group--full">
+                    <div style="background: #fefce8; border: 1px solid #fde047; padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-6);">
+                        <p style="font-size: 13px; color: #854d0e; margin: 0; font-weight: 600;">
+                            ⚠️ AVISO IMPORTANTE: Al publicar bajo el plan gratuito, aceptas pagar una comisión del 2% del valor total de la operación si la propiedad genera una venta o alquiler a través de esta plataforma.
+                        </p>
+                    </div>
+
+                    <label>Firma digital o firma escaneada</label>
+                    <div class="file-upload" id="dropZone">
+                        <span id="fileLabel">Haz clic para subir o arrastra tu firma (PNG, JPG, PDF)</span>
+                        <input type="file" id="firma_archivo" name="firma_archivo" accept=".png,.jpg,.jpeg,.pdf" style="display:none">
+                    </div>
+                    <p style="font-size: 10px; color: #64748b; margin-top: 4px;">* Formatos: PNG, JPG, JPEG o PDF. Máx 5MB.</p>
+                    
+                    <div style="margin-top: 25px; display: flex; flex-direction: column; gap: 15px;">
+                        <div style="display: flex; gap: 10px; align-items: flex-start;">
+                            <input type="checkbox" id="terminos" name="terminos" required style="margin-top: 4px;">
+                            <label for="terminos" style="text-transform: none; font-size: 13px; color: var(--color-navy); cursor: pointer;">
+                                He leído y acepto los <a href="javascript:void(0)" onclick="openTC()" style="color: var(--color-gold); font-weight: 700; text-decoration: underline;">Términos y Condiciones</a> de Nuevo Sol Inversiones.
+                            </label>
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px; align-items: flex-start;">
+                            <input type="checkbox" id="comision_acepta" name="comision_acepta" required style="margin-top: 4px;">
+                            <label for="comision_acepta" style="text-transform: none; font-size: 13px; color: var(--color-navy); cursor: pointer;">
+                                Entiendo y acepto que, al publicar gratuitamente, deberé pagar una <strong>comisión del 2%</strong> si la propiedad genera una operación inmobiliaria a través de la plataforma.
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <p style="font-size: 11px; color: #64748b; margin-top: 20px; line-height: 1.4;">
+                        Al presionar “Enviar Publicación”, declaro bajo la fe del juramento que la información suministrada es real y que tengo la autorización legal para publicar este inmueble.
+                    </p>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">Enviar Publicación</button>
+            <div id="formMessage" style="margin-top: 20px; text-align: center; font-size: 14px; display: none;"></div>
+        </form>
+    </div>
+
+    <!-- Modal de Términos y Condiciones -->
+    <div id="modalTC" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.7); backdrop-filter:blur(5px); padding: 20px; display:flex; align-items:center; justify-content:center;">
+        <div style="background:white; max-width:800px; width:100%; max-height:85vh; border-radius:var(--radius-2xl); position:relative; display:flex; flex-direction:column; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);">
+            <div style="padding: 25px; border-bottom: 1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
+                <h2 style="font-family:var(--font-display); margin:0; color:var(--color-navy);">Términos y Condiciones de Uso</h2>
+                <button onclick="closeTC()" style="background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
+            </div>
+            <div id="tcContent" style="padding: 30px; overflow-y:auto; font-size:14px; line-height:1.6; color:#334155;">
+                <p><strong>Nuevo Sol Inversiones</strong><br>Última actualización: 23 de Abril de 2026</p>
+                
+                <p>Bienvenido/a a Nuevo Sol Inversiones, plataforma digital dedicada a la publicación, promoción y difusión de propiedades inmobiliarias en venta, alquiler, inversión y otros fines relacionados con el mercado de bienes raíces en la República Dominicana.</p>
+                
+                <p>Al registrarse, publicar una propiedad, contratar un plan, cargar información, subir fotografías, aceptar estos términos o utilizar cualquier servicio de la plataforma, el usuario declara que ha leído, entendido y aceptado plenamente los presentes Términos y Condiciones.</p>
+
+                <h3>1. Identificación de la plataforma</h3>
+                <p>Nuevo Sol Inversiones es una plataforma inmobiliaria digital que permite a propietarios, agentes, corredores, empresas, promotores y usuarios particulares publicar propiedades para su promoción ante potenciales compradores, arrendatarios o inversionistas.</p>
+                <p>La plataforma podrá operar mediante página web, redes sociales, formularios digitales, herramientas automatizadas, correo electrónico, WhatsApp, sistemas de calendario, CRM, paneles de usuario y cualquier otro medio digital autorizado por la empresa.</p>
+
+                <h3>2. Naturaleza del servicio</h3>
+                <p>Nuevo Sol Inversiones ofrece un espacio digital de publicación y promoción inmobiliaria. Salvo acuerdo expreso por escrito, la plataforma no garantiza la venta, alquiler, reserva, cierre contractual ni transferencia de ningún inmueble publicado.</p>
+
+                <h3>3. Tipos de planes disponibles</h3>
+                <h4>3.1. Plan gratuito</h4>
+                <p>El usuario podrá publicar una o varias propiedades sin realizar un pago inicial por la publicación. Al utilizar el plan gratuito, el usuario acepta expresamente que, si la propiedad publicada genera una operación de venta, alquiler, separación, reserva, promesa de venta, contrato definitivo o cualquier transacción derivada directa o indirectamente de la publicación realizada en la plataforma, deberá pagar a Nuevo Sol Inversiones una comisión equivalente al <strong>dos por ciento (2%)</strong> del valor total de la operación inmobiliaria.</p>
+
+                <h3>4. Comisión del 2% en publicaciones gratuitas</h3>
+                <p>El usuario reconoce y acepta que el plan gratuito no elimina la obligación de pago en caso de que la publicación genere una transacción inmobiliaria. El usuario no podrá evadir, ocultar, desconocer ni negociar por fuera de la plataforma con contactos generados a través de Nuevo Sol Inversiones con el propósito de evitar el pago de la comisión correspondiente.</p>
+
+                <h3>5. Responsabilidad del usuario sobre la información publicada</h3>
+                <p>El usuario declara bajo su responsabilidad que toda la información suministrada sobre la propiedad es verdadera, completa, actualizada y verificable. Nuevo Sol Inversiones no será responsable por datos falsos, incompletos, imprecisos, engañosos o desactualizados suministrados por el usuario.</p>
+
+                <h3>6. Autorización para publicar y promocionar propiedades</h3>
+                <p>Al cargar una propiedad en la plataforma, el usuario autoriza a Nuevo Sol Inversiones a publicar, editar, adaptar, resumir, organizar, optimizar, promocionar y difundir la información de dicha propiedad en su página web, redes sociales y otros canales comerciales.</p>
+
+                <h3>14. Protección de datos personales</h3>
+                <p>El usuario autoriza a Nuevo Sol Inversiones a recopilar, almacenar y utilizar sus datos personales para fines de registro, publicación y gestión comercial, conforme a la normativa de la República Dominicana (Ley 172-13).</p>
+
+                <h3>15. Firma digital y aceptación electrónica</h3>
+                <p>La aceptación electrónica mediante formularios web tendrá valor como manifestación de consentimiento del usuario respecto al uso de la plataforma y las condiciones establecidas, conforme a la Ley 126-02.</p>
+
+                <div style="background:#f8fafc; padding:20px; border-radius:10px; margin-top:20px; border:1px solid #e2e8f0;">
+                    <p style="margin:0; font-weight:600; color:var(--color-navy);">Declaración Final:</p>
+                    <p style="margin:5px 0 0; font-style:italic;">"He leído y acepto que al publicar gratuitamente deberé pagar una comisión del 2% si la propiedad genera una operación inmobiliaria a través de la plataforma."</p>
+                </div>
+            </div>
+            <div style="padding: 20px; border-top: 1px solid #eee; text-align:right;">
+                <button onclick="closeTC()" class="btn btn-primary">Entendido y Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SCRIPT_URL = 'URL_DEL_SCRIPT_AQUI';
+
+        // Manejo de Modal TC
+        const modal = document.getElementById('modalTC');
+        modal.style.display = 'none'; // Asegurar que inicie cerrado
+
+        function openTC() { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+        function closeTC() { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+        // Manejo de subida de firma
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('firma_archivo');
+        const fileLabel = document.getElementById('fileLabel');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', () => {
+            if(fileInput.files.length > 0) {
+                fileLabel.textContent = `Archivo seleccionado: ${fileInput.files[0].name}`;
+                fileLabel.style.color = 'var(--color-gold-dark)';
+                fileLabel.style.fontWeight = '600';
+            }
+        });
+
+        document.getElementById('publicarForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const msg = document.getElementById('formMessage');
+            
+            btn.disabled = true;
+            btn.textContent = 'Enviando...';
+            msg.style.display = 'none';
+
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            data.terminos = formData.get('terminos') === 'on';
+            data.comision_acepta = formData.get('comision_acepta') === 'on';
+
+            // Convertir archivo de firma a Base64 si existe
+            const firmaFile = fileInput.files[0];
+            if (firmaFile) {
+                const reader = new FileReader();
+                const base64Promise = new Promise((resolve) => {
+                    reader.onload = () => resolve(reader.result.split(',')[1]);
+                    reader.readAsDataURL(firmaFile);
+                });
+                data.firma_base64 = await base64Promise;
+                data.firma_filename = firmaFile.name;
+                data.firma_mimetype = firmaFile.type;
+            }
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    cache: 'no-cache',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                msg.style.color = '#059669';
+                msg.textContent = '¡Publicación enviada con éxito! Nos contactaremos contigo pronto.';
+                msg.style.display = 'block';
+                e.target.reset();
+                fileLabel.textContent = 'Haz clic para subir o arrastra tu firma (PNG, JPG, PDF)';
+            } catch (error) {
+                console.error('Error:', error);
+                msg.style.color = '#dc2626';
+                msg.textContent = 'Hubo un error al enviar. Por favor intenta de nuevo.';
+                msg.style.display = 'block';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Enviar Publicación';
+            }
+        });
+    </script>
+</body>
+</html>

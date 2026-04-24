@@ -1,0 +1,88 @@
+{
+  "company": {
+    "name": "Nuevo Sol Inversiones",
+    "tagline": "Tu futuro comienza con una inversión inteligente",
+    "phone": "+1 (809) 697-2050",
+    "whatsapp": "18096972050",
+    "email": "nuevosolinversionesrd@gmail.com",
+    "address": "Santo Domingo, República Dominicana",
+    "city": "Santo Domingo",
+    "country": "República Dominicana",
+    "social": {
+      "instagram": "https://www.instagram.com/nuevosol.inversiones",
+      "facebook": "https://www.facebook.com/profile.php?id=61574348483343",
+    }
+  },
+  "properties": [
+    {
+      "id": "NSI-2604-LIX2",
+      "title": "Casa / Mansión 3 Niveles – Los Ríos",
+      "slug": "mansion-3-niveles-los-rios",
+      "type": "Casa",
+      "category": "luxury",
+      "badge": "Destacada",
+      "price": 1000000,
+      "currency": "USD",
+      "location": {
+        "neighborhood": "Los Ríos",
+        "city": "Santo Domingo",
+        "province": "Distrito Nacional"
+      },
+      "features": {
+        "bedrooms": 6,
+        "bathrooms": 5,
+        "half_bathrooms": 2,
+        "area_m2": 600,
+        "land_m2": 1000,
+        "parking": 10,
+        "floors": 3,
+        "year_built": null
+      },
+      "amenities": [
+        "Sala",
+        "Comedor",
+        "Cocina Fría",
+        "Cocina Caliente",
+        "Balcón",
+        "Terraza",
+        "Estudio",
+        "Área de Lavado",
+        "Cuartos de Servicio",
+        "Patio Trasero",
+        "Cisterna 3,000 Galones",
+        "Planta Eléctrica Full",
+        "Cámaras de Seguridad",
+        "Intercom",
+        "Gas Común",
+        "Jacuzzi",
+        "Walking Closet",
+        "Jardinera Frontal"
+      ],
+      "description": "Majestuosa casa de 3 niveles, donde el primer piso tiene la particularidad de ser estilo sótano, diseñada para ofrecer amplitud, comodidad y funcionalidad en cada uno de sus espacios. La propiedad cuenta con entrada principal y accesos laterales, una distribución pensada para la vida familiar, el entretenimiento y el servicio, así como amplias áreas interiores y exteriores.\n\nEn el primer nivel se encuentran elegantes áreas sociales, incluyendo dos salas, una sala adicional, oficina, comedor principal, comedor de diario, cocina de gran tamaño con dos credenzas, balcones y un amplio lobby central que conecta armoniosamente con el segundo nivel y el sótano.\n\nEl sótano ofrece entrada interna y externa, dos habitaciones con baño compartido, dos cuartos de servicio con baño independiente, área de lavado y planchado, tendedero y cuarto de almacén.\n\nEn el segundo nivel se destacan 4 habitaciones de generosas dimensiones. La habitación principal cuenta con baño completo, dos lavamanos, dos walking closets en cedro, jacuzzi y ventana corrediza con vista al patio. Las habitaciones secundarias también cuentan con jacuzzi, walking closet y acceso a balcón.\n\nCapacidad total de estacionamiento para 11 vehículos: marquesina sin techo para 5, techada para 2 y espacio exterior para 4 adicionales.",
+      "description_short": "Majestuosa mansión de 3 niveles con 6 habitaciones, jacuzzi, planta eléctrica full y capacidad para 11 vehículos en Los Ríos.",
+      "status_label": "Listo / Reventa",
+      "finishes": "Pisos de porcelanato de primera, terminación en caoba (puertas, gabinetes, etc.)",
+      "documents": [
+        "Título de Propiedad",
+        "IPI al Día",
+        "Planos"
+      ],
+      "images": [
+        "assets/images/properties/NSI-2604-LIX2/NKN_0023.jpg",
+        "assets/images/properties/NSI-2604-LIX2/NKN_0012.jpg",
+        "assets/images/properties/NSI-2604-LIX2/NKN_0037.jpg",
+        "assets/images/properties/NSI-2604-LIX2/NKN_0160.jpg",
+        "assets/images/properties/NSI-2604-LIX2/NKN_0177.jpg",
+        "assets/images/properties/NSI-2604-LIX2/NKN_0183.jpg",
+        "assets/images/properties/NSI-2604-LIX2/NKN_0152.jpg",
+        "assets/images/properties/NSI-2604-LIX2/NKN_0132.jpg",
+        "assets/images/properties/NSI-2604-LIX2/NKN_0113.jpg",
+        "assets/images/properties/NSI-2604-LIX2/NKN_0054.jpg"
+      ],
+      "hero_image": "assets/images/properties/NSI-2604-LIX2/NKN_0023.jpg",
+      "thumbnail": "assets/images/properties/NSI-2604-LIX2/NKN_0023.jpg",
+      "featured": true,
+      "status": "available"
+    }
+  ]
+}

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre Nosotros | Nuevo Sol Inversiones - Bienes Raíces en Santo Domingo</title>
+  <meta name="description" content="Conoce a Nuevo Sol Inversiones, tu partner estratégico en bienes raíces en República Dominicana. Más de 12 años de experiencia en propiedades de lujo y proyectos económicos.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://nuevosolinversiones.com/nosotros.html">
+  <link rel="icon" type="image/png" href="Nuevo Sol LOGO.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .about-hero {
+      position: relative;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+    .about-hero__bg {
+      position: absolute;
+      inset: 0;
+    }
+    .about-hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .about-hero__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26,39,68,0.92), rgba(26,39,68,0.75));
+    }
+    .about-hero__content {
+      position: relative;
+      z-index: 2;
+      color: white;
+      max-width: 700px;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+    }
+    .value-card {
+      text-align: center;
+      padding: var(--space-8);
+      border-radius: var(--radius-xl);
+      background: var(--color-white);
+      box-shadow: var(--shadow-card);
+      transition: all var(--duration-slow) var(--ease-out);
+    }
+    .value-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+    .value-icon {
+      font-size: 3rem;
+      margin-bottom: var(--space-4);
+    }
+    .timeline {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--color-gold);
+      transform: translateX(-50%);
+    }
+    .timeline-item {
+      position: relative;
+      padding: var(--space-6) 0;
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      align-items: center;
+    }
+    .timeline-item__date {
+      text-align: right;
+      padding-right: var(--space-6);
+    }
+    .timeline-item__year {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-bold);
+      color: var(--color-gold);
+    }
+    .timeline-item__dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--color-gold);
+      border: 4px solid var(--color-cream);
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    .timeline-item__content {
+      padding-left: var(--space-6);
+    }
+    .timeline-item__title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: var(--weight-semibold);
+      color: var(--color-navy);
+      margin-bottom: var(--space-1);
+    }
+    .timeline-item__text {
+      font-size: var(--text-sm);
+      color: var(--color-gray-600);
+      margin: 0;
+    }
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-8);
+      text-align: center;
+      padding: var(--space-4) 0;
+    }
+    .stats-bar__number {
+      font-family: var(--font-display);
+      font-size: var(--text-5xl);
+      font-weight: var(--weight-bold);
+      color: var(--color-gold);
+    }
+    .stats-bar__label {
+      font-size: var(--text-sm);
+      color: var(--color-gray-400);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+      margin-top: var(--space-2);
+    }
+    @media (max-width: 768px) {
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+      .timeline::before { left: 20px; }
+      .timeline-item {
+        grid-template-columns: 40px 1fr;
+      }
+      .timeline-item__date {
+        display: none;
+      }
+      .timeline-item__dot {
+        margin: 0;
+      }
+      .timeline-item__content {
+        padding-left: var(--space-4);
+      }
+      .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body class="page-transition">
+
+  <!-- NAV -->
+  <nav class="nav nav--transparent" id="mainNav" role="navigation">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo"><img src="Nuevo Sol LOGO.png" alt="Nuevo Sol Inversiones" style="height: 50px; width: auto;"></a>
+        <div class="nav__links">
+          <a href="index.html" class="nav__link">Inicio</a>
+          <a href="propiedades.html" class="nav__link">Propiedades</a>
+          <a href="calculadora.html" class="nav__link">Calculadora</a>
+          <a href="agendar-tour.html" class="nav__link">Agendar Tour</a>
+          <a href="publicar.html" class="nav__link">Publicar</a>
+          <a href="nosotros.html" class="nav__link nav__link--active">Nosotros</a>
+          <a href="agendar-tour.html" class="btn btn-primary btn-sm nav__cta">Contactar</a>
+        </div>
+        <button class="nav__hamburger" id="navHamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav__mobile" id="navMobile">
+    <a href="index.html" class="nav__link" onclick="closeMobileNav()">Inicio</a>
+    <a href="propiedades.html" class="nav__link" onclick="closeMobileNav()">Propiedades</a>
+    <a href="calculadora.html" class="nav__link" onclick="closeMobileNav()">Calculadora</a>
+    <a href="agendar-tour.html" class="nav__link" onclick="closeMobileNav()">Agendar Tour</a>
+    <a href="publicar.html" class="nav__link" onclick="closeMobileNav()">Publicar</a>
+    <a href="nosotros.html" class="nav__link" onclick="closeMobileNav()">Nosotros</a>
+  </div>
+
+  <!-- ABOUT HERO -->
+  <section class="about-hero">
+    <div class="about-hero__bg">
+      <img src="assets/images/properties/NKN_0010_1920.jpg" alt="Nuevo Sol Inversiones oficina" width="1920" height="1080" fetchpriority="high">
+    </div>
+    <div class="about-hero__overlay"></div>
+    <div class="container" style="position:relative;z-index:2;">
+      <div class="about-hero__content" style="animation: fadeInUp 1s ease both;">
+        <span class="section-label" style="color:var(--color-gold-light);">Sobre Nosotros</span>
+        <h1 style="color:white;font-size:var(--text-5xl);margin-bottom:var(--space-6);">Tu partner estratégico en bienes raíces</h1>
+        <p style="color:rgba(255,255,255,0.75);font-size:var(--text-lg);line-height:var(--leading-relaxed);">En Nuevo Sol Inversiones transformamos sueños en hogares y oportunidades en inversiones rentables. Con más de una década en el mercado inmobiliario dominicano, somos la referencia de excelencia y confianza.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section section--dark">
+    <div class="container">
+        <div class="stats-bar stagger">
+          <div style="text-align:center;">
+            <div style="margin-bottom:var(--space-2);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div class="stats-bar__label" style="font-size:var(--text-lg);font-weight:600;color:white;letter-spacing:1px;text-transform:uppercase;">Asesoría Premium</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="margin-bottom:var(--space-2);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div>
+            <div class="stats-bar__label" style="font-size:var(--text-lg);font-weight:600;color:white;letter-spacing:1px;text-transform:uppercase;">Propiedades Exclusivas</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="margin-bottom:var(--space-2);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div class="stats-bar__label" style="font-size:var(--text-lg);font-weight:600;color:white;letter-spacing:1px;text-transform:uppercase;">Inversión Segura</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="margin-bottom:var(--space-2);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="stats-bar__label" style="font-size:var(--text-lg);font-weight:600;color:white;letter-spacing:1px;text-transform:uppercase;">Acompañamiento 360°</div>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- MISSION & VISION -->
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:center;margin-bottom:var(--space-section);">
+        <div class="reveal">
+          <span class="section-label">Nuestra Misión</span>
+          <h2 class="section-title">Conectar personas con el hogar de sus sueños</h2>
+          <p style="font-size:var(--text-lg);line-height:var(--leading-loose);color:var(--color-gray-600);">Nuestra misión es democratizar el acceso a bienes raíces de calidad, ofreciendo tanto propiedades de lujo como proyectos económicos que se adapten a cada perfil de inversión. Combinamos tecnología de vanguardia con un servicio humano excepcional.</p>
+          <div class="divider" style="margin-top:var(--space-6);"></div>
+          <p style="font-size:var(--text-base);color:var(--color-gray-600);">Creemos que cada persona merece un espacio que refleje sus aspiraciones, y trabajamos incansablemente para hacer eso posible.</p>
+        </div>
+        <div class="reveal--right" style="border-radius:var(--radius-2xl);overflow:hidden;">
+          <img src="assets/images/properties/NKN_0020_800.jpg" alt="Equipo Nuevo Sol Inversiones" loading="lazy" style="width:100%;height:400px;object-fit:cover;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="section section--cream">
+    <div class="container">
+      <div class="text-center reveal" style="margin-bottom:var(--space-12);">
+        <span class="section-label" style="justify-content:center;">Nuestros Valores</span>
+        <h2 class="section-title" style="margin:0 auto;">Lo que nos define</h2>
+      </div>
+
+      <div class="values-grid stagger">
+        <div class="value-card">
+          <div class="value-icon">🌟</div>
+          <h4 style="font-size:var(--text-xl);margin-bottom:var(--space-3);color:var(--color-navy);">Excelencia</h4>
+          <p style="font-size:var(--text-sm);color:var(--color-gray-600);margin:0;">Cada propiedad, cada interacción y cada detalle refleja nuestro compromiso con la calidad superior. No nos conformamos con menos que lo mejor.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <h4 style="font-size:var(--text-xl);margin-bottom:var(--space-3);color:var(--color-navy);">Confianza</h4>
+          <p style="font-size:var(--text-sm);color:var(--color-gray-600);margin:0;">La transparencia es la base de cada relación. Nuestros clientes confían en nosotros porque honramos nuestra palabra en cada transacción.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🚀</div>
+          <h4 style="font-size:var(--text-xl);margin-bottom:var(--space-3);color:var(--color-navy);">Innovación</h4>
+          <p style="font-size:var(--text-sm);color:var(--color-gray-600);margin:0;">Desde búsqueda con inteligencia artificial hasta tours virtuales, lideramos la transformación digital del mercado inmobiliario dominicano.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="section">
+    <div class="container">
+      <div class="text-center reveal" style="margin-bottom:var(--space-12);">
+        <span class="section-label" style="justify-content:center;">Nuestra Historia</span>
+        <h2 class="section-title" style="margin:0 auto;">Un camino de crecimiento</h2>
+      </div>
+
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="timeline-item__date"><div class="timeline-item__year">2014</div></div>
+          <div class="timeline-item__dot"></div>
+          <div class="timeline-item__content">
+            <h4 class="timeline-item__title">Inicio del Sueño</h4>
+            <p class="timeline-item__text">Fundación de Nuevo Sol Inversiones con la visión de transformar el mercado inmobiliario dominicano.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-item__date"><div class="timeline-item__year">2017</div></div>
+          <div class="timeline-item__dot"></div>
+          <div class="timeline-item__content">
+            <h4 class="timeline-item__title">Expansión a Lujo</h4>
+            <p class="timeline-item__text">Lanzamiento de nuestro portafolio de propiedades premium en Piantini y Naco.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-item__date"><div class="timeline-item__year">2020</div></div>
+          <div class="timeline-item__dot"></div>
+          <div class="timeline-item__content">
+            <h4 class="timeline-item__title">Proyectos Sociales</h4>
+            <p class="timeline-item__text">Inicio de proyectos económicos para hacer accesible la compra de vivienda a más familias dominicanas.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-item__date"><div class="timeline-item__year">2024</div></div>
+          <div class="timeline-item__dot"></div>
+          <div class="timeline-item__content">
+            <h4 class="timeline-item__title">Innovación Digital</h4>
+            <p class="timeline-item__text">Implementación de búsqueda con inteligencia artificial y plataforma digital premium para nuestros clientes.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-item__date"><div class="timeline-item__year">2026</div></div>
+          <div class="timeline-item__dot"></div>
+          <div class="timeline-item__content">
+            <h4 class="timeline-item__title">El Futuro es Ahora</h4>
+            <p class="timeline-item__text">0 propiedades vendidas, expansión a Juan Dolio y nuevos desarrollos exclusivos en camino.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section--dark">
+    <div class="container">
+      <div class="text-center reveal" style="max-width:700px;margin:0 auto;">
+        <h2 style="color:white;font-size:var(--text-4xl);margin-bottom:var(--space-6);">¿Listo para encontrar tu próxima inversión?</h2>
+        <p style="color:var(--color-gray-400);font-size:var(--text-lg);margin-bottom:var(--space-8);">Nuestro equipo está listo para ayudarte a encontrar la propiedad perfecta para ti.</p>
+        <div style="display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap;">
+          <a href="propiedades.html" class="btn btn-primary btn-lg">Explorar Propiedades</a>
+          <a href="agendar-tour.html" class="btn btn-outline-white btn-lg">Agendar Tour</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__bottom" style="border-top:none;">
+        <p>&copy; 2026 Nuevo Sol Inversiones. Todos los derechos reservados.</p>
+        <div class="footer__social">
+          <a href="https://www.instagram.com/nuevosol.inversiones" target="_blank" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/18096972050" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+  </a>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>

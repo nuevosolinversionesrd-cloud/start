@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propiedad | Nuevo Sol Inversiones</title>
+  <meta name="description" content="Descubre esta propiedad exclusiva con Nuevo Sol Inversiones. Galería de fotos, detalles completos, calculadora de hipotecas y agenda un tour.">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" type="image/png" href="Nuevo Sol LOGO.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/gallery.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/chatbot.css">
+  <style>
+    .property-detail__grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: var(--space-10);
+      align-items: start;
+    }
+    .property-detail__sidebar {
+      position: sticky;
+      top: 100px;
+    }
+    .sidebar-card {
+      background: var(--color-white);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      box-shadow: var(--shadow-lg);
+      margin-bottom: var(--space-6);
+    }
+    .sidebar-card__price {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      font-weight: var(--weight-bold);
+      color: var(--color-gold-dark);
+      margin-bottom: var(--space-2);
+    }
+    .sidebar-card__label {
+      font-size: var(--text-xs);
+      color: var(--color-gray-500);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+      margin-bottom: var(--space-6);
+    }
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      margin: var(--space-8) 0;
+    }
+    .spec-item {
+      text-align: center;
+      padding: var(--space-5);
+      background: var(--color-gray-50);
+      border-radius: var(--radius-lg);
+    }
+    .spec-item__value {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-bold);
+      color: var(--color-navy);
+    }
+    .spec-item__label {
+      font-size: var(--text-xs);
+      color: var(--color-gray-500);
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wider);
+      margin-top: var(--space-1);
+    }
+    .amenity-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-3);
+    }
+    .amenity-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-size: var(--text-sm);
+      color: var(--color-gray-700);
+    }
+    .amenity-item::before {
+      content: '✓';
+      color: var(--color-gold);
+      font-weight: 700;
+      font-size: var(--text-lg);
+    }
+    .detail-section {
+      margin-bottom: var(--space-10);
+    }
+    .detail-section__title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: var(--weight-semibold);
+      color: var(--color-navy);
+      margin-bottom: var(--space-6);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .detail-section__title::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: var(--color-gold);
+      border-radius: 2px;
+    }
+    .contact-actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .whatsapp-btn {
+      background: #25D366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      font-weight: var(--weight-semibold);
+      font-size: var(--text-sm);
+      transition: all var(--duration-normal) var(--ease-out);
+      text-decoration: none;
+    }
+    .whatsapp-btn:hover {
+      background: #20BA56;
+      transform: translateY(-2px);
+    }
+    .similar-properties {
+      padding: var(--space-section) 0;
+      background: var(--color-cream-warm);
+    }
+    /* Blur Overlay for unauthorized signs */
+    .blur-overlay {
+      position: absolute;
+      top: 51%;
+      left: 62%;
+      width: 8%;
+      height: 7%;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 4px;
+      pointer-events: none;
+      z-index: 5;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body class="page-transition">
+
+  <!-- NAV -->
+  <nav class="nav nav--solid" id="mainNav" role="navigation">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo"><img src="Nuevo Sol LOGO.png" alt="Nuevo Sol Inversiones" style="height: 50px; width: auto;"></a>
+        <div class="nav__links">
+          <a href="index.html" class="nav__link">Inicio</a>
+          <a href="propiedades.html" class="nav__link nav__link--active">Propiedades</a>
+          <a href="calculadora.html" class="nav__link">Calculadora</a>
+          <a href="agendar-tour.html" class="nav__link">Agendar Tour</a>
+          <a href="publicar.html" class="nav__link">Publicar</a>
+          <a href="nosotros.html" class="nav__link">Nosotros</a>
+          <a href="agendar-tour.html" class="btn btn-primary btn-sm nav__cta">Contactar</a>
+        </div>
+        <button class="nav__hamburger" id="navHamburger" aria-label="Menú"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav__mobile" id="navMobile">
+    <a href="index.html" class="nav__link" onclick="closeMobileNav()">Inicio</a>
+    <a href="propiedades.html" class="nav__link" onclick="closeMobileNav()">Propiedades</a>
+    <a href="calculadora.html" class="nav__link" onclick="closeMobileNav()">Calculadora</a>
+    <a href="agendar-tour.html" class="nav__link" onclick="closeMobileNav()">Agendar Tour</a>
+    <a href="publicar.html" class="nav__link" onclick="closeMobileNav()">Publicar</a>
+    <a href="nosotros.html" class="nav__link" onclick="closeMobileNav()">Nosotros</a>
+  </div>
+
+  <!-- CONTENT (dynamically loaded) -->
+  <main id="propertyContent" style="padding-top: 90px;"></main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox__close" id="lightboxClose">&times;</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <img class="lightbox__image loading" id="lightboxImage" src="" alt="">
+    <button class="lightbox__nav lightbox__nav--next" id="lightboxNext"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+    <div class="lightbox__counter" id="lightboxCounter"></div>
+  </div>
+
+  <!-- WhatsApp -->
+  <a href="#" class="whatsapp-float" id="whatsappFloat" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+    <span class="whatsapp-float__tooltip">¿Necesitas ayuda? 💬</span>
+  </a>
+
+  <script src="js/app.js" defer></script>
+  <script src="js/chatbot.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(loadProperty, 300);
+    });
+
+    function loadProperty() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      const properties = window.getProperties ? window.getProperties() : [];
+      const prop = properties.find(p => p.id === id);
+      const content = document.getElementById('propertyContent');
+
+      if (!prop) {
+        content.innerHTML = `<div class="container" style="padding:var(--space-32) 0;text-align:center;">
+          <h2>Propiedad no encontrada</h2>
+          <p>La propiedad que buscas no existe o fue removida.</p>
+          <a href="propiedades.html" class="btn btn-primary" style="margin-top:var(--space-6);">Ver Propiedades</a>
+        </div>`;
+        return;
+      }
+
+      // Update page title
+      document.title = `${prop.title} | Nuevo Sol Inversiones`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.content = prop.description;
+
+      // Update WhatsApp link
+      const wa = document.getElementById('whatsappFloat');
+      if (wa) wa.href = `https://wa.me/18096972050?text=${encodeURIComponent(`Hola, me interesa esta propiedad: ${prop.title} (Ref: ${prop.id})\nEnlace: ${window.location.href}`)}`;
+
+      const fmt = (n) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+      
+      // Store images globally for the lightbox to access easily
+      window.currentPropertyImages = prop.images;
+
+      const galleryItems = prop.images.slice(0, 5).map((img, i) => {
+        const isFirst = i === 0;
+        const extra = i === 4 && prop.images.length > 5 ? `<div class="gallery-grid__more">+${prop.images.length - 5} fotos</div>` : '';
+        
+        // Check for third-party images that need blurring
+        const needsBlur = ['NKN_0006', 'NKN_0007', 'NKN_0008', 'NKN_0009', 'NKN_0021'].some(name => img.includes(name));
+        const blurHtml = needsBlur ? '<div class="blur-overlay"></div>' : '';
+
+        return `<div class="gallery-grid__item" style="position:relative;" onclick="openLightbox(window.currentPropertyImages, ${i})">
+          <img src="${img}" alt="${prop.title} - Foto ${i + 1}" loading="${isFirst ? 'eager' : 'lazy'}" width="800" height="600">
+          ${blurHtml}
+          ${extra}
+        </div>`;
+      }).join('');
+
+      content.innerHTML = `
+        <div class="container" style="padding-top:var(--space-6);">
+          <!-- Breadcrumbs -->
+          <div class="breadcrumbs">
+            <a href="index.html">Inicio</a><span>/</span>
+            <a href="propiedades.html">Propiedades</a><span>/</span>
+            <span>${prop.title}</span>
+          </div>
+
+          <!-- Gallery -->
+          <div class="gallery-grid" style="margin-bottom:var(--space-10);">${galleryItems}</div>
+
+          <!-- Detail Grid -->
+          <div class="property-detail__grid">
+            <div>
+              <!-- Title & Location -->
+              <div style="margin-bottom:var(--space-8);">
+                <div style="display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-3); flex-wrap:wrap;">
+                  <span class="property-card__badge ${prop.category === 'luxury' ? 'badge-luxury' : 'badge-lowcost'}" style="position:static;">${prop.badge}</span>
+                  <span style="font-size:var(--text-sm);color:var(--color-gray-500);">${prop.type}</span>
+                  <button onclick="window.copyToClipboard('${prop.id}', this)" style="cursor:pointer; font-size:var(--text-xs); color:var(--color-gray-400); margin-left:auto; font-weight:600; letter-spacing:0.05em; background:var(--color-gray-50); padding:4px 12px; border-radius:4px; border:1px solid var(--color-gray-100); display:flex; align-items:center; gap:8px; transition: all 0.2s; outline:none;">
+                    REF: ${prop.id}
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  </button>
+                </div>
+                <h1 style="font-size:var(--text-4xl);margin-bottom:var(--space-3);">${prop.title}</h1>
+                <p style="display:flex;align-items:center;gap:var(--space-2);color:var(--color-gray-500);font-size:var(--text-base);margin:0;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+                  ${prop.location.neighborhood}, ${prop.location.city}, ${prop.location.province}
+                </p>
+              </div>
+
+              <!-- Specs -->
+              <div class="specs-grid">
+                <div class="spec-item"><div class="spec-item__value">${prop.features.bedrooms ?? 'N/A'}</div><div class="spec-item__label">Habitaciones</div></div>
+                <div class="spec-item"><div class="spec-item__value">${prop.features.bathrooms ?? 'N/A'}</div><div class="spec-item__label">Baños</div></div>
+                <div class="spec-item"><div class="spec-item__value">${prop.features.area_m2 ?? 'N/A'}</div><div class="spec-item__label">m² Const.</div></div>
+                <div class="spec-item"><div class="spec-item__value">${prop.features.land_m2 ?? 'N/A'}</div><div class="spec-item__label">m² Solar</div></div>
+                <div class="spec-item"><div class="spec-item__value">${prop.features.parking ?? 'N/A'}</div><div class="spec-item__label">Parqueos</div></div>
+                <div class="spec-item"><div class="spec-item__value">${prop.features.floors ?? 'N/A'}</div><div class="spec-item__label">Niveles</div></div>
+                <div class="spec-item"><div class="spec-item__value">${prop.features.year_built ?? 'N/A'}</div><div class="spec-item__label">Año</div></div>
+              </div>
+
+              <!-- Description -->
+              <div class="detail-section">
+                <h2 class="detail-section__title">Descripción</h2>
+                <p style="font-size:var(--text-lg);line-height:var(--leading-loose);color:var(--color-gray-700);">${prop.description}</p>
+              </div>
+
+              <!-- Amenities -->
+              <div class="detail-section">
+                <h2 class="detail-section__title">Amenidades</h2>
+                <div class="amenity-list">${prop.amenities.map(a => `<div class="amenity-item">${a}</div>`).join('')}</div>
+              </div>
+            </div>
+
+            <!-- SIDEBAR -->
+            <div class="property-detail__sidebar">
+              <div class="sidebar-card">
+                <div class="sidebar-card__price">${fmt(prop.price)}</div>
+                <div class="sidebar-card__label">${prop.currency} · Precio de venta</div>
+                <div class="contact-actions">
+                  <a href="https://wa.me/18096972050?text=${encodeURIComponent(`Hola, me interesa esta propiedad: ${prop.title} (Ref: ${prop.id})\nEnlace: ${window.location.href}`)}" class="whatsapp-btn" target="_blank" rel="noopener">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+                    Contactar por WhatsApp
+                  </a>
+                  <a href="agendar-tour.html?propiedad=${encodeURIComponent(prop.title)}" class="btn btn-primary" style="width:100%;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+                    Agendar Tour
+                  </a>
+                  <a href="tel:+18096972050" class="btn btn-outline" style="width:100%;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Llamar Ahora
+                  </a>
+                </div>
+              </div>
+
+              <!-- Mini Calculator Dropdown -->
+              <details class="sidebar-card" style="cursor:pointer; padding:var(--space-4); border:1px solid var(--color-gray-200); border-radius:var(--radius-lg); margin-bottom:var(--space-6);">
+                <summary style="font-size:var(--text-lg); font-weight:600; color:var(--color-navy); list-style:none; display:flex; justify-content:space-between; align-items:center;">
+                  Estima tu cuota
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+                </summary>
+                <div style="margin-top:var(--space-4); text-align:center; padding:var(--space-4); background:var(--color-cream-warm); border-radius:var(--radius-lg);">
+                  <p style="font-size:var(--text-sm); color:var(--color-gray-500); margin:0;">Calculadora de cuotas disponible próximamente.</p>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+
+        <!-- Similar Properties -->
+        <div class="similar-properties">
+          <div class="container">
+            <h2 class="section-title">Propiedades Similares</h2>
+            <div class="grid grid--properties" id="similarGrid"></div>
+          </div>
+        </div>
+      `;
+
+      // Calculate sidebar monthly
+      const loanAmount = prop.price * 0.8;
+      const monthlyRate = 0.08 / 12;
+      const n = 20 * 12;
+      const monthly = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, n)) / (Math.pow(1 + monthlyRate, n) - 1);
+      document.getElementById('sidebarMonthly').textContent = fmt(monthly) + '/mes';
+
+      // Similar properties
+      const similar = properties.filter(p => p.id !== prop.id && (p.type === prop.type || p.category === prop.category)).slice(0, 3);
+      const similarGrid = document.getElementById('similarGrid');
+      if (similarGrid) {
+        similarGrid.innerHTML = similar.map(p => window.createPropertyCard(p)).join('');
+      }
+
+      // Initialize Chatbot
+      if (window.initChatbot) {
+        window.initChatbot(prop);
+      }
+    }
+  </script>
+</body>
+</html>
