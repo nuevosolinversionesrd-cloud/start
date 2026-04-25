@@ -445,134 +445,106 @@
         </div>
     </div>
 
-    <script>
-        const SCRIPT_URL = 'URL_DEL_SCRIPT_AQUI';
+    <!-- El envío del formulario se maneja en el módulo Firebase de abajo -->
 
-        // Manejo de Modal TC
-        const modal = document.getElementById('modalTC');
-        modal.style.display = 'none'; // Asegurar que inicie cerrado
-
-        function openTC() { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-        function closeTC() { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
-
-        // Manejo de subida de firma
-        const dropZone = document.getElementById('dropZone');
-        const fileInput = document.getElementById('firma_archivo');
-        const fileLabel = document.getElementById('fileLabel');
-
-        dropZone.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', () => {
-            if(fileInput.files.length > 0) {
-                fileLabel.textContent = `Archivo seleccionado: ${fileInput.files[0].name}`;
-                fileLabel.style.color = 'var(--color-gold-dark)';
-                fileLabel.style.fontWeight = '600';
-            }
-        });
-
-        document.getElementById('publicarForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            const msg = document.getElementById('formMessage');
-            
-            btn.disabled = true;
-            btn.textContent = 'Enviando...';
-            msg.style.display = 'none';
-
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData.entries());
-            data.terminos = formData.get('terminos') === 'on';
-            data.comision_acepta = formData.get('comision_acepta') === 'on';
-
-            // Convertir archivo de firma a Base64 si existe
-            const firmaFile = fileInput.files[0];
-            if (firmaFile) {
-                const reader = new FileReader();
-                const base64Promise = new Promise((resolve) => {
-                    reader.onload = () => resolve(reader.result.split(',')[1]);
-                    reader.readAsDataURL(firmaFile);
-                });
-                data.firma_base64 = await base64Promise;
-                data.firma_filename = firmaFile.name;
-                data.firma_mimetype = firmaFile.type;
-            }
-
-            try {
-                const response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    cache: 'no-cache',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                msg.style.color = '#059669';
-                msg.textContent = '¡Publicación enviada con éxito! Nos contactaremos contigo pronto.';
-                msg.style.display = 'block';
-                e.target.reset();
-                fileLabel.textContent = 'Haz clic para subir o arrastra tu firma (PNG, JPG, PDF)';
-            } catch (error) {
-                console.error('Error:', error);
-                msg.style.color = '#dc2626';
-                msg.textContent = 'Hubo un error al enviar. Por favor intenta de nuevo.';
-                msg.style.display = 'block';
-            } finally {
-                btn.disabled = false;
-                btn.textContent = 'Enviar Publicación';
-            }
-        });
-    </script>
 
   <!-- ── Google Translate ── -->
   <div id="google_translate_element" style="display:none;"></div>
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <script src="js/translate.js"></script>
 
-  <!-- ── Firebase Auth Guard ── -->
+  <!-- ── Firebase Auth Guard + Contact Guard (módulo unificado) ── -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import { initializeApp }                          from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut }   from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc }              from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+    import {
+      formContainsContactInfo,
+      checkSuspension,
+      recordViolation,
+      injectContactWarningModal,
+      showContactWarningModal,
+      showSuspensionBanner,
+      formatDuration
+    } from './js/contact-guard.js';
+
+    // ── Configuración ──
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwL6Sd9N8VWUSmzJa5fSADOHOhCH5ORaD7bHoDBWWJmGQ2q-X_qo7jt6p4ckfQa0VaWBQ/exec';
 
     const firebaseConfig = {
-      apiKey: "AIzaSyBMHuristbpJdUIFbGXYNSNq-DzXzoKbJw",
-      authDomain: "nuevo-sol-inversiones-app.firebaseapp.com",
-      projectId: "nuevo-sol-inversiones-app",
-      storageBucket: "nuevo-sol-inversiones-app.firebasestorage.app",
+      apiKey:            "AIzaSyBMHuristbpJdUIFbGXYNSNq-DzXzoKbJw",
+      authDomain:        "nuevo-sol-inversiones-app.firebaseapp.com",
+      projectId:         "nuevo-sol-inversiones-app",
+      storageBucket:     "nuevo-sol-inversiones-app.firebasestorage.app",
       messagingSenderId: "468690027360",
-      appId: "1:468690027360:web:160448f95e751392dc1405"
+      appId:             "1:468690027360:web:160448f95e751392dc1405"
     };
 
-    const app = initializeApp(firebaseConfig);
+    const app  = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const db = getFirestore(app);
+    const db   = getFirestore(app);
 
+    // ── Referencias UI ──
     const loadingEl   = document.getElementById('auth-loading');
     const authBar     = document.getElementById('auth-bar');
     const authName    = document.getElementById('auth-username');
     const logoutBtn   = document.getElementById('logoutBtn');
+    const dropZone    = document.getElementById('dropZone');
+    const fileInput   = document.getElementById('firma_archivo');
+    const fileLabel   = document.getElementById('fileLabel');
+    const tcModal     = document.getElementById('modalTC');
 
-    // Campos que se prellenarán con datos de la cuenta
+    // Campos de identidad prellenados
     const campoNombre   = document.getElementById('nombre');
     const campoTelefono = document.getElementById('telefono');
     const campoEmail    = document.getElementById('email');
 
+    // ── Modal TC ──
+    if (tcModal) tcModal.style.display = 'none';
+    window.openTC  = () => { tcModal.style.display = 'flex'; document.body.style.overflow = 'hidden'; };
+    window.closeTC = () => { tcModal.style.display = 'none'; document.body.style.overflow = ''; };
+
+    // ── Subida de firma ──
+    dropZone.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length > 0) {
+        fileLabel.textContent    = `Archivo seleccionado: ${fileInput.files[0].name}`;
+        fileLabel.style.color       = 'var(--color-gold-dark)';
+        fileLabel.style.fontWeight  = '600';
+      }
+    });
+
+    // ── Inyectar modal de advertencia de contacto ──
+    injectContactWarningModal();
+
+    // Variable de estado del usuario autenticado
+    let currentUser = null;
+
+    // ── Auth Guard ──
     onAuthStateChanged(auth, async (user) => {
-      // Ocultar spinner siempre
       loadingEl.style.display = 'none';
 
       if (!user) {
-        // ── No autenticado: redirigir a login ──
         sessionStorage.setItem('redirectAfterLogin', 'formulario-publicar.html');
         window.location.href = 'login.html';
         return;
       }
 
-      // ── Autenticado ──
+      currentUser = user;
+
+      // ── Verificar suspensión activa ──
+      const { suspended, remainingMs } = await checkSuspension(db, user.uid);
+      if (suspended) {
+        loadingEl.style.display = 'none';
+        showSuspensionBanner(remainingMs);
+        return; // No mostrar el formulario
+      }
+
       // Mostrar barra de usuario
       authBar.style.display = 'flex';
       document.body.classList.add('auth-visible');
 
-      // Intentar obtener datos completos desde Firestore
+      // Obtener datos desde Firestore
       let nombre   = user.displayName || '';
       let telefono = '';
       let email    = user.email || '';
@@ -580,44 +552,120 @@
       try {
         const snap = await getDoc(doc(db, 'usuarios', user.uid));
         if (snap.exists()) {
-          const d = snap.data();
+          const d  = snap.data();
           nombre   = d.nombre   || nombre;
           telefono = d.telefono || '';
         }
-      } catch (_) { /* Firestore puede estar offline; usamos Auth como fallback */ }
+      } catch (_) {}
 
-      // Mostrar nombre en la barra
       authName.textContent = nombre || email;
 
-      // Prerellenar y bloquear campos de identidad
-      if (campoNombre) {
-        campoNombre.value = nombre;
-        campoNombre.setAttribute('readonly', 'true');
-        campoNombre.title = 'Este campo se completa con los datos de tu cuenta.';
-      }
-      if (campoTelefono && telefono) {
-        campoTelefono.value = telefono;
-        campoTelefono.setAttribute('readonly', 'true');
-        campoTelefono.title = 'Este campo se completa con los datos de tu cuenta.';
-      }
-      if (campoEmail) {
-        campoEmail.value = email;
-        campoEmail.setAttribute('readonly', 'true');
-        campoEmail.title = 'Este campo se completa con los datos de tu cuenta.';
-      }
+      if (campoNombre)   { campoNombre.value   = nombre;   campoNombre.setAttribute('readonly', 'true');   campoNombre.title   = 'Completado con los datos de tu cuenta.'; }
+      if (campoTelefono && telefono) { campoTelefono.value = telefono; campoTelefono.setAttribute('readonly', 'true'); campoTelefono.title = 'Completado con los datos de tu cuenta.'; }
+      if (campoEmail)    { campoEmail.value    = email;    campoEmail.setAttribute('readonly', 'true');    campoEmail.title    = 'Completado con los datos de tu cuenta.'; }
 
-      // También inyectar el uid en el formulario (útil para el backend)
-      const hiddenUid = document.createElement('input');
-      hiddenUid.type  = 'hidden';
-      hiddenUid.name  = 'user_uid';
-      hiddenUid.value = user.uid;
+      // Inyectar UID oculto
+      const hiddenUid   = document.createElement('input');
+      hiddenUid.type    = 'hidden';
+      hiddenUid.name    = 'user_uid';
+      hiddenUid.value   = user.uid;
       document.getElementById('publicarForm').appendChild(hiddenUid);
     });
 
-    // Botón de cerrar sesión
+    // Botón cerrar sesión
     logoutBtn.addEventListener('click', async () => {
       await signOut(auth);
       window.location.href = 'login.html';
+    });
+
+    // ── Submit con Contact Guard ──
+    document.getElementById('publicarForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const msg = document.getElementById('formMessage');
+
+      // 1. Verificar suspensión activa antes de cualquier cosa
+      if (currentUser) {
+        const { suspended, remainingMs } = await checkSuspension(db, currentUser.uid);
+        if (suspended) {
+          showContactWarningModal({ suspended: true, remainingMs });
+          return;
+        }
+      }
+
+      // 2. Detectar información de contacto prohibida
+      if (formContainsContactInfo(e.target)) {
+        let violations = 0;
+        let nowSuspended = false;
+        let suspendedUntil = null;
+
+        if (currentUser) {
+          const result   = await recordViolation(db, currentUser.uid);
+          violations     = result.violations;
+          nowSuspended   = result.nowSuspended;
+          suspendedUntil = result.suspendedUntil;
+        }
+
+        if (nowSuspended) {
+          const remainingMs = suspendedUntil ? suspendedUntil.getTime() - Date.now() : 24 * 3600 * 1000;
+          showContactWarningModal({ suspended: true, remainingMs });
+          // Mostrar banner de suspensión
+          setTimeout(() => {
+            document.getElementById('cg-backdrop').style.display = 'none';
+            showSuspensionBanner(remainingMs);
+          }, 3500);
+        } else {
+          showContactWarningModal({ suspended: false, violations });
+        }
+        return; // No enviar el formulario
+      }
+
+      // 3. Enviar formulario (sin info de contacto)
+      btn.disabled    = true;
+      btn.textContent = 'Enviando...';
+      msg.style.display = 'none';
+
+      const formData = new FormData(e.target);
+      const data     = Object.fromEntries(formData.entries());
+      data.terminos        = formData.get('terminos')        === 'on';
+      data.comision_acepta = formData.get('comision_acepta') === 'on';
+
+      // Convertir firma a Base64
+      const firmaFile = fileInput.files[0];
+      if (firmaFile) {
+        const base64Promise = new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result.split(',')[1]);
+          reader.readAsDataURL(firmaFile);
+        });
+        data.firma_base64    = await base64Promise;
+        data.firma_filename  = firmaFile.name;
+        data.firma_mimetype  = firmaFile.type;
+      }
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method:  'POST',
+          mode:    'no-cors',
+          cache:   'no-cache',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(data)
+        });
+        msg.style.color   = '#059669';
+        msg.textContent   = '¡Publicación enviada con éxito! Nos contactaremos contigo pronto.';
+        msg.style.display = 'block';
+        e.target.reset();
+        fileLabel.textContent = 'Haz clic para subir o arrastra tu firma (PNG, JPG, PDF)';
+        fileLabel.style.color = '';
+      } catch (error) {
+        console.error('Error:', error);
+        msg.style.color   = '#dc2626';
+        msg.textContent   = 'Hubo un error al enviar. Por favor intenta de nuevo.';
+        msg.style.display = 'block';
+      } finally {
+        btn.disabled    = false;
+        btn.textContent = 'Enviar Publicación';
+      }
     });
   </script>
 </body>
