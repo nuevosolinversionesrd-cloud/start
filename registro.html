@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Cuenta | Nuevo Sol Inversiones</title>
+  <meta name="description" content="Crea tu cuenta en Nuevo Sol Inversiones y publica tus propiedades en nuestra plataforma.">
+  <link rel="stylesheet" href="css/variables.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-navy-dark);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -30%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(197, 165, 90, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -20%;
+      left: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(31, 58, 99, 0.5) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .auth-card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 3rem;
+      width: 100%;
+      max-width: 460px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    }
+
+    .auth-logo {
+      display: block;
+      width: 160px;
+      margin: 0 auto 2rem;
+    }
+
+    .auth-title {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .auth-subtitle {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.875rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.875rem 1.125rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 0.9375rem;
+      font-family: var(--font-body);
+      transition: all 0.25s ease;
+    }
+
+    input::placeholder { color: rgba(255,255,255,0.3); }
+    input:focus {
+      outline: none;
+      border-color: var(--color-gold);
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 0 0 4px rgba(197, 165, 90, 0.15);
+    }
+
+    .password-strength {
+      height: 3px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.1);
+      margin-top: 0.5rem;
+      overflow: hidden;
+    }
+
+    .password-strength-bar {
+      height: 100%;
+      width: 0%;
+      border-radius: 99px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 1rem;
+      background: var(--gradient-gold);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      transition: all 0.3s ease;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(197, 165, 90, 0.4);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.75rem 0;
+    }
+
+    .auth-divider::before, .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .auth-divider span {
+      color: rgba(255,255,255,0.35);
+      font-size: 0.75rem;
+    }
+
+    .auth-link {
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.875rem;
+    }
+
+    .auth-link a {
+      color: var(--color-gold);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .auth-link a:hover { text-decoration: underline; }
+
+    .error-msg {
+      background: rgba(198, 40, 40, 0.15);
+      border: 1px solid rgba(198, 40, 40, 0.3);
+      border-radius: 10px;
+      padding: 0.875rem 1rem;
+      color: #ff8a80;
+      font-size: 0.875rem;
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8125rem;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover { color: var(--color-gold); }
+
+    .terms-check {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      margin-top: 0.5rem;
+    }
+
+    .terms-check input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      accent-color: var(--color-gold);
+    }
+
+    .terms-check label {
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.5;
+    }
+
+    .terms-check label a {
+      color: var(--color-gold);
+      text-decoration: none;
+    }
+
+    @media (max-width: 480px) {
+      .auth-card { padding: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-card">
+    <a href="login.html" class="back-link">← Volver al inicio de sesión</a>
+
+    <img src="Nuevo Sol LOGO (Transparente).png" alt="Nuevo Sol Inversiones" class="auth-logo">
+    <h1 class="auth-title">Crea tu cuenta</h1>
+    <p class="auth-subtitle">Regístrate para publicar tus propiedades en nuestra plataforma</p>
+
+    <form id="registerForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" placeholder="Juan" required autocomplete="given-name">
+        </div>
+        <div class="form-group">
+          <label for="apellido">Apellido</label>
+          <input type="text" id="apellido" placeholder="Pérez" required autocomplete="family-name">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" placeholder="809-000-0000" required autocomplete="tel">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" placeholder="tu@correo.com" required autocomplete="email">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" placeholder="Mínimo 8 caracteres" required autocomplete="new-password">
+        <div class="password-strength">
+          <div class="password-strength-bar" id="strengthBar"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password2">Confirmar contraseña</label>
+        <input type="password" id="password2" placeholder="Repite tu contraseña" required autocomplete="new-password">
+      </div>
+
+      <div class="terms-check">
+        <input type="checkbox" id="terminos" required>
+        <label for="terminos">
+          He leído y acepto los <a href="formulario-publicar.html" target="_blank">Términos y Condiciones</a> de Nuevo Sol Inversiones, incluyendo la comisión del 2% en publicaciones gratuitas.
+        </label>
+      </div>
+
+      <button type="submit" class="btn-primary" id="registerBtn">Crear mi cuenta</button>
+      <div class="error-msg" id="errorMsg"></div>
+    </form>
+
+    <div class="auth-divider"><span>¿Ya tienes cuenta?</span></div>
+    <p class="auth-link">
+      <a href="login.html">Iniciar sesión</a>
+    </p>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBMHuristbpJdUIFbGXYNSNq-DzXzoKbJw",
+      authDomain: "nuevo-sol-inversiones-app.firebaseapp.com",
+      projectId: "nuevo-sol-inversiones-app",
+      storageBucket: "nuevo-sol-inversiones-app.firebasestorage.app",
+      messagingSenderId: "468690027360",
+      appId: "1:468690027360:web:160448f95e751392dc1405"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Medidor de fuerza de contraseña
+    const passwordInput = document.getElementById('password');
+    const strengthBar = document.getElementById('strengthBar');
+
+    passwordInput.addEventListener('input', () => {
+      const val = passwordInput.value;
+      let strength = 0;
+      if (val.length >= 8) strength++;
+      if (/[A-Z]/.test(val)) strength++;
+      if (/[0-9]/.test(val)) strength++;
+      if (/[^A-Za-z0-9]/.test(val)) strength++;
+
+      const colors = ['#ef4444', '#f97316', '#eab308', '#22c55e'];
+      const widths = ['25%', '50%', '75%', '100%'];
+      strengthBar.style.width = strength > 0 ? widths[strength - 1] : '0%';
+      strengthBar.style.background = strength > 0 ? colors[strength - 1] : 'transparent';
+    });
+
+    const form = document.getElementById('registerForm');
+    const btn = document.getElementById('registerBtn');
+    const errorMsg = document.getElementById('errorMsg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const nombre = document.getElementById('nombre').value.trim();
+      const apellido = document.getElementById('apellido').value.trim();
+      const telefono = document.getElementById('telefono').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const password2 = document.getElementById('password2').value;
+      const fullName = `${nombre} ${apellido}`;
+
+      errorMsg.style.display = 'none';
+
+      if (password !== password2) {
+        errorMsg.textContent = 'Las contraseñas no coinciden.';
+        errorMsg.style.display = 'block';
+        return;
+      }
+
+      if (password.length < 8) {
+        errorMsg.textContent = 'La contraseña debe tener al menos 8 caracteres.';
+        errorMsg.style.display = 'block';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Creando cuenta...';
+
+      try {
+        // Crear usuario en Firebase Auth
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Actualizar perfil con nombre completo
+        await updateProfile(user, { displayName: fullName });
+
+        // Guardar datos adicionales en Firestore
+        await setDoc(doc(db, 'usuarios', user.uid), {
+          nombre: fullName,
+          telefono: telefono,
+          email: email,
+          creadoEn: new Date().toISOString()
+        });
+
+        // Redirigir al formulario
+        window.location.href = 'formulario-publicar.html';
+
+      } catch (error) {
+        let msg = 'Ocurrió un error al crear tu cuenta.';
+        if (error.code === 'auth/email-already-in-use') {
+          msg = 'Este correo ya está registrado. ¿Quieres iniciar sesión?';
+        } else if (error.code === 'auth/weak-password') {
+          msg = 'La contraseña es muy débil. Usa al menos 8 caracteres.';
+        } else if (error.code === 'auth/invalid-email') {
+          msg = 'El correo electrónico no es válido.';
+        }
+        errorMsg.textContent = msg;
+        errorMsg.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Crear mi cuenta';
+      }
+    });
+  </script>
+</body>
+</html>

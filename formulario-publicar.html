@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <script>
-    if (localStorage.getItem('ns_lang') === 'en') {
-      document.write('<style id="anti-flicker">html { opacity: 0; transition: opacity 0.4s ease; }</style>');
-    }
-  </script>
-
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Publicación | Nuevo Sol Inversiones</title>
     <link rel="stylesheet" href="css/variables.css">
@@ -174,8 +168,104 @@
         }
     </style>
   <link rel="stylesheet" href="css/translate.css">
+
+  <style>
+    /* Barra de usuario autenticado */
+    #auth-bar {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: linear-gradient(135deg, #1a3c5e 0%, #0f2640 100%);
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      font-family: var(--font-body);
+    }
+    #auth-bar .user-greeting {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.8125rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #auth-bar .user-greeting strong {
+      color: #c5a55a;
+      font-weight: 600;
+    }
+    #auth-bar .btn-logout {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.7);
+      font-size: 0.75rem;
+      padding: 5px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-body);
+    }
+    #auth-bar .btn-logout:hover {
+      background: rgba(198, 40, 40, 0.25);
+      border-color: rgba(198, 40, 40, 0.4);
+      color: #ff8a80;
+    }
+    /* Cuando auth-bar visible, empujar contenido */
+    body.auth-visible {
+      padding-top: 50px;
+    }
+    /* Campo bloqueado (prellenado) */
+    input[readonly] {
+      background: #f0f7ff !important;
+      border-color: #93c5fd !important;
+      color: #1e40af !important;
+      cursor: not-allowed;
+    }
+    /* Overlay de carga inicial */
+    #auth-loading {
+      position: fixed;
+      inset: 0;
+      background: #f1f5f9;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      font-family: var(--font-body);
+    }
+    #auth-loading .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(197, 165, 90, 0.2);
+      border-top-color: #c5a55a;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #auth-loading p {
+      color: #64748b;
+      font-size: 0.875rem;
+    }
+  </style>
 </head>
-<body>
+<body class="page-transition">
+
+  <!-- Overlay mientras Firebase verifica la sesión -->
+  <div id="auth-loading">
+    <div class="spinner"></div>
+    <p>Verificando sesión...</p>
+  </div>
+
+  <!-- Barra de usuario autenticado -->
+  <div id="auth-bar">
+    <div class="user-greeting">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#c5a55a"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Publicando como <strong id="auth-username">...</strong>
+    </div>
+    <button class="btn-logout" id="logoutBtn">Cerrar sesión</button>
+  </div>
 
     <div class="form-container">
         <div class="form-header">
@@ -436,5 +526,99 @@
   <div id="google_translate_element" style="display:none;"></div>
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <script src="js/translate.js"></script>
+
+  <!-- ── Firebase Auth Guard ── -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBMHuristbpJdUIFbGXYNSNq-DzXzoKbJw",
+      authDomain: "nuevo-sol-inversiones-app.firebaseapp.com",
+      projectId: "nuevo-sol-inversiones-app",
+      storageBucket: "nuevo-sol-inversiones-app.firebasestorage.app",
+      messagingSenderId: "468690027360",
+      appId: "1:468690027360:web:160448f95e751392dc1405"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const loadingEl   = document.getElementById('auth-loading');
+    const authBar     = document.getElementById('auth-bar');
+    const authName    = document.getElementById('auth-username');
+    const logoutBtn   = document.getElementById('logoutBtn');
+
+    // Campos que se prellenarán con datos de la cuenta
+    const campoNombre   = document.getElementById('nombre');
+    const campoTelefono = document.getElementById('telefono');
+    const campoEmail    = document.getElementById('email');
+
+    onAuthStateChanged(auth, async (user) => {
+      // Ocultar spinner siempre
+      loadingEl.style.display = 'none';
+
+      if (!user) {
+        // ── No autenticado: redirigir a login ──
+        sessionStorage.setItem('redirectAfterLogin', 'formulario-publicar.html');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // ── Autenticado ──
+      // Mostrar barra de usuario
+      authBar.style.display = 'flex';
+      document.body.classList.add('auth-visible');
+
+      // Intentar obtener datos completos desde Firestore
+      let nombre   = user.displayName || '';
+      let telefono = '';
+      let email    = user.email || '';
+
+      try {
+        const snap = await getDoc(doc(db, 'usuarios', user.uid));
+        if (snap.exists()) {
+          const d = snap.data();
+          nombre   = d.nombre   || nombre;
+          telefono = d.telefono || '';
+        }
+      } catch (_) { /* Firestore puede estar offline; usamos Auth como fallback */ }
+
+      // Mostrar nombre en la barra
+      authName.textContent = nombre || email;
+
+      // Prerellenar y bloquear campos de identidad
+      if (campoNombre) {
+        campoNombre.value = nombre;
+        campoNombre.setAttribute('readonly', 'true');
+        campoNombre.title = 'Este campo se completa con los datos de tu cuenta.';
+      }
+      if (campoTelefono && telefono) {
+        campoTelefono.value = telefono;
+        campoTelefono.setAttribute('readonly', 'true');
+        campoTelefono.title = 'Este campo se completa con los datos de tu cuenta.';
+      }
+      if (campoEmail) {
+        campoEmail.value = email;
+        campoEmail.setAttribute('readonly', 'true');
+        campoEmail.title = 'Este campo se completa con los datos de tu cuenta.';
+      }
+
+      // También inyectar el uid en el formulario (útil para el backend)
+      const hiddenUid = document.createElement('input');
+      hiddenUid.type  = 'hidden';
+      hiddenUid.name  = 'user_uid';
+      hiddenUid.value = user.uid;
+      document.getElementById('publicarForm').appendChild(hiddenUid);
+    });
+
+    // Botón de cerrar sesión
+    logoutBtn.addEventListener('click', async () => {
+      await signOut(auth);
+      window.location.href = 'login.html';
+    });
+  </script>
 </body>
 </html>
