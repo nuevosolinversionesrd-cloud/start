@@ -1,0 +1,58 @@
+/* translate.css - Hides Google Translate default UI and styles custom button */
+
+/* Hide Google Translate Top Banner */
+.skiptranslate iframe,
+.goog-te-banner-frame {
+    display: none !important;
+}
+
+body {
+    top: 0 !important;
+}
+
+/* Hide Google Tooltip on hover */
+#goog-gt-tt, .goog-te-balloon-frame {
+    display: none !important;
+}
+.goog-text-highlight {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+/* Lang Toggle Button Styles */
+.nav__lang-toggle {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: var(--font-primary, 'Inter', sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+}
+.nav__lang-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Nav scrolled state */
+.nav--scrolled .nav__lang-toggle {
+    color: var(--color-navy, #1A2744);
+    border-color: var(--color-gray-200, #E5E7EB);
+}
+.nav--scrolled .nav__lang-toggle:hover {
+    background: var(--color-gray-100, #F3F4F6);
+}
+
+/* Mobile Nav state */
+.nav__mobile .nav__lang-toggle {
+    margin: 10px auto;
+    width: fit-content;
+    color: var(--color-navy, #1A2744);
+    border-color: var(--color-gray-300, #D1D5DB);
+}

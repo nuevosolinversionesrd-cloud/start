@@ -70,6 +70,7 @@
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
   </style>
+  <link rel="stylesheet" href="css/translate.css">
 </head>
 <body class="page-transition">
 
@@ -86,7 +87,10 @@
           <a href="publicar.html" class="nav__link nav__link--active">Publicar</a>
           <a href="nosotros.html" class="nav__link">Nosotros</a>
           <a href="agendar-tour.html" class="btn btn-primary btn-sm nav__cta">Contactar</a>
+        
+          <button class="nav__lang-toggle" aria-label="Cambiar Idioma">🇺🇸 EN</button>
         </div>
+        
         <button class="nav__hamburger" id="navHamburger" aria-label="Menú"><span></span><span></span><span></span></button>
       </div>
     </div>
@@ -356,5 +360,10 @@
       };
     });
   </script>
+
+  <!-- ── Google Translate ── -->
+  <div id="google_translate_element" style="display:none;"></div>
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script src="js/translate.js"></script>
 </body>
 </html>
