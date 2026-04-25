@@ -28,13 +28,13 @@ function updateLanguageUI(lang) {
   
   toggleBtns.forEach(btn => {
     if (lang === 'en') {
-      btn.innerHTML = '🇪🇸 ES';
+      btn.innerHTML = '🇺🇸 EN';
       btn.onclick = (e) => {
         e.preventDefault();
         changeLanguage('es');
       };
     } else {
-      btn.innerHTML = '🇺🇸 EN';
+      btn.innerHTML = '🇪🇸 ES';
       btn.onclick = (e) => {
         e.preventDefault();
         changeLanguage('en');
