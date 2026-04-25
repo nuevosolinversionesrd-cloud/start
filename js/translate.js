@@ -43,6 +43,15 @@ function updateLanguageUI(lang) {
   });
 }
 
+function revealPage() {
+  document.documentElement.style.opacity = '1';
+  document.documentElement.style.visibility = 'visible';
+  const style = document.getElementById('anti-flicker');
+  if (style) {
+    setTimeout(() => style.remove(), 400);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const savedLang = localStorage.getItem('ns_lang');
   
@@ -53,9 +62,26 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(checkGoogleLoaded);
       if (savedLang === 'en') {
         updateLanguageUI('en');
+        
+        // Wait for translation to complete before revealing the page
+        const observer = new MutationObserver((mutations, obs) => {
+          if (document.documentElement.classList.contains('translated-ltr') || document.documentElement.classList.contains('translated-rtl')) {
+            revealPage();
+            obs.disconnect();
+          }
+        });
+        
+        observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+        
+        // Fallback just in case Google Translate fails or takes too long
+        setTimeout(revealPage, 2000);
       } else {
         updateLanguageUI('es');
+        revealPage();
       }
     }
   }, 100);
+  
+  // Hard fallback just in case
+  setTimeout(revealPage, 3000);
 });

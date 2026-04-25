@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 <head>
+  <script>
+    if (localStorage.getItem('ns_lang') === 'en') {
+      document.write('<style id="anti-flicker">html { opacity: 0; transition: opacity 0.4s ease; }</style>');
+    }
+  </script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sobre Nosotros | Nuevo Sol Inversiones - Bienes Raíces en Santo Domingo</title>
