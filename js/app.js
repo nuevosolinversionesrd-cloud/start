@@ -179,7 +179,7 @@
     if (!nav) return;
 
     // Scroll behavior
-    let lastScroll = 0;
+    const isInitiallyTransparent = nav.classList.contains('nav--transparent');
     let scrollTicking = false;
 
     window.addEventListener('scroll', () => {
@@ -189,11 +189,10 @@
           if (currentScroll > 80) {
             nav.classList.remove('nav--transparent');
             nav.classList.add('nav--solid');
-          } else {
+          } else if (isInitiallyTransparent) {
             nav.classList.add('nav--transparent');
             nav.classList.remove('nav--solid');
           }
-          lastScroll = currentScroll;
           scrollTicking = false;
         });
         scrollTicking = true;
