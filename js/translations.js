@@ -480,9 +480,9 @@ window.TRANSLATIONS = {
 
   // Plan 4: Enterprise
   "pub.plan.enterprise.name": { es: "Inversionista", en: "Investor" },
-  "pub.plan.enterprise.price": { es: "Personalizado", en: "Custom" },
+  "pub.plan.enterprise.price": { es: "Cotización Directa", en: "Direct Quote" },
   "pub.plan.enterprise.desc": { es: "Para proyectos nuevos o torres en construcción.", en: "For new projects or towers under construction." },
-  "pub.plan.enterprise.comision": { es: "Comisión basada en unidades", en: "Commission based on units" },
+  "pub.plan.enterprise.comision": { es: "Comisiones a discutir con el usuario", en: "Commissions to be discussed" },
   "pub.plan.enterprise.f1": { es: "Predictive Analytics: Campañas a inversores internacionales.", en: "Predictive Analytics: Campaigns targeting international investors." },
   "pub.plan.enterprise.f2": { es: "Asistente de Cierre: IA experta en leyes y procesos bancarios.", en: "Closing Assistant: AI expert in local laws and banking processes." },
   "pub.plan.enterprise.f3": { es: "Prioridad Absoluta: \"Top 1\" garantizado en todas las búsquedas.", en: "Absolute Priority: Guaranteed \"Top 1\" in all searches." }
