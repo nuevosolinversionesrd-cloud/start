@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 <head>
-  <script>
-    if (localStorage.getItem('ns_lang') === 'en') {
-      document.write('<style id="anti-flicker">html { opacity: 0; transition: opacity 0.4s ease; }</style>');
-    }
-  </script>
+  
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -174,8 +170,9 @@
     }
   </style>
   <link rel="stylesheet" href="css/translate.css">
-</head>
+    </head>
 <body class="page-transition">
+  
 
   <!-- NAV -->
   <nav class="nav nav--transparent" id="mainNav" role="navigation">
@@ -183,15 +180,29 @@
       <div class="nav__inner">
         <a href="index.html" class="nav__logo"><img src="Nuevo Sol LOGO.png" alt="Nuevo Sol Inversiones" style="height: 50px; width: auto;"></a>
         <div class="nav__links">
-          <a href="index.html" class="nav__link">Inicio</a>
-          <a href="propiedades.html" class="nav__link">Propiedades</a>
-          <a href="calculadora.html" class="nav__link">Calculadora</a>
-          <a href="agendar-tour.html" class="nav__link">Agendar Tour</a>
-          <a href="publicar.html" class="nav__link">Publicar</a>
-          <a href="nosotros.html" class="nav__link nav__link--active">Nosotros</a>
-          <a href="agendar-tour.html" class="btn btn-primary btn-sm nav__cta">Contactar</a>
+          <a href="index.html" class="nav__link" data-i18n="nav.home">Inicio</a>
+          <a href="propiedades.html" class="nav__link" data-i18n="nav.properties">Propiedades</a>
+          <a href="calculadora.html" class="nav__link" data-i18n="nav.calculator">Calculadora</a>
+          <a href="agendar-tour.html" class="nav__link" data-i18n="nav.tour">Agendar Tour</a>
+          <a href="publicar.html" class="nav__link" data-i18n="nav.publish">Publicar</a>
+          <a href="nosotros.html" class="nav__link nav__link--active" data-i18n="nav.about">Nosotros</a>
+          <a href="contacto.html" class="btn btn-primary btn-sm nav__cta" data-i18n="nav.contact">Contactar</a>
         
-          <button class="nav__lang-toggle notranslate" aria-label="Cambiar Idioma">🇪🇸 ES</button>
+          <div class="lang-picker">
+          <button class="nav__lang-toggle" aria-label="Cambiar Idioma" data-lang-btn>🇪🇸 ES</button>
+          <div class="lang-dropdown">
+            <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+            <button class="lang-option" data-lang="en">🇺🇸 English</button>          </div>
+        </div>
+          
+          <!-- Desktop Auth -->
+          <div class="nav__auth">
+            <a href="login.html" class="btn-login" data-i18n="nav.login">Login</a>
+            <span class="nav__signup-text">
+              <span data-i18n="nav.no_account">¿No tienes cuenta?</span> 
+              <a href="registro.html" data-i18n="nav.signup">Sign Up</a>
+            </span>
+          </div>
         </div>
         
         <button class="nav__hamburger" id="navHamburger" aria-label="Menú"><span></span><span></span><span></span></button>
@@ -199,12 +210,28 @@
     </div>
   </nav>
   <div class="nav__mobile" id="navMobile">
-    <a href="index.html" class="nav__link" onclick="closeMobileNav()">Inicio</a>
-    <a href="propiedades.html" class="nav__link" onclick="closeMobileNav()">Propiedades</a>
-    <a href="calculadora.html" class="nav__link" onclick="closeMobileNav()">Calculadora</a>
-    <a href="agendar-tour.html" class="nav__link" onclick="closeMobileNav()">Agendar Tour</a>
-    <a href="publicar.html" class="nav__link" onclick="closeMobileNav()">Publicar</a>
-    <a href="nosotros.html" class="nav__link" onclick="closeMobileNav()">Nosotros</a>
+    <a href="index.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.home">Inicio</a>
+    <a href="propiedades.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.properties">Propiedades</a>
+    <a href="calculadora.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.calculator">Calculadora</a>
+    <a href="agendar-tour.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.tour">Agendar Tour</a>
+    <a href="publicar.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.publish">Publicar</a>
+    <a href="nosotros.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.about">Nosotros</a>
+
+    <div class="lang-picker">
+          <button class="nav__lang-toggle" aria-label="Cambiar Idioma" data-lang-btn>🇪🇸 ES</button>
+          <div class="lang-dropdown">
+            <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+            <button class="lang-option" data-lang="en">🇺🇸 English</button>          </div>
+        </div>
+
+    <!-- Mobile Auth -->
+    <div class="nav__auth" style="margin-left: 0; margin-top: var(--space-4);">
+      <a href="login.html" class="btn-login" style="min-height: 44px; width: 200px; font-size: 14px;" data-i18n="nav.login_full">Login / Iniciar Sesión</a>
+      <span class="nav__signup-text" style="font-size: 12px; margin-top: 8px;">
+        <span data-i18n="nav.no_account">¿No tienes cuenta?</span> 
+        <a href="registro.html" style="font-size: 12px;" data-i18n="nav.register_here">Regístrate aquí</a>
+      </span>
+    </div>
   </div>
 
   <!-- ABOUT HERO -->
@@ -215,9 +242,9 @@
     <div class="about-hero__overlay"></div>
     <div class="container" style="position:relative;z-index:2;">
       <div class="about-hero__content" style="animation: fadeInUp 1s ease both;">
-        <span class="section-label" style="color:var(--color-gold-light);">Sobre Nosotros</span>
-        <h1 style="color:white;font-size:var(--text-5xl);margin-bottom:var(--space-6);">Tu partner estratégico en bienes raíces</h1>
-        <p style="color:rgba(255,255,255,0.75);font-size:var(--text-lg);line-height:var(--leading-relaxed);">En Nuevo Sol Inversiones transformamos sueños en hogares y oportunidades en inversiones rentables. Con más de una década en el mercado inmobiliario dominicano, somos la referencia de excelencia y confianza.</p>
+        <span class="section-label" style="color:var(--color-gold-light);" data-i18n="about.hero.label">Sobre Nosotros</span>
+        <h1 style="color:white;font-size:var(--text-5xl);margin-bottom:var(--space-6);" data-i18n="about.hero.title">Tu partner estratégico en bienes raíces</h1>
+        <p style="color:rgba(255,255,255,0.75);font-size:var(--text-lg);line-height:var(--leading-relaxed);" data-i18n="about.hero.desc">En Nuevo Sol Inversiones transformamos sueños en hogares y oportunidades en inversiones rentables. Con más de una década en el mercado inmobiliario dominicano, somos la referencia de excelencia y confianza.</p>
       </div>
     </div>
   </section>
@@ -228,19 +255,19 @@
         <div class="stats-bar stagger">
           <div style="text-align:center;">
             <div style="margin-bottom:var(--space-2);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-            <div class="stats-bar__label" style="font-size:var(--text-lg);font-weight:600;color:white;letter-spacing:1px;text-transform:uppercase;">Asesoría Premium</div>
+            <div class="stats-bar__label" style="font-size:var(--text-lg);font-weight:600;color:white;letter-spacing:1px;text-transform:uppercase;" data-i18n="home.stats.premium">Asesoría Premium</div>
           </div>
           <div style="text-align:center;">
             <div style="margin-bottom:var(--space-2);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div>
-            <div class="stats-bar__label" style="font-size:var(--text-lg);font-weight:600;color:white;letter-spacing:1px;text-transform:uppercase;">Propiedades Exclusivas</div>
+            <div class="stats-bar__label" style="font-size:var(--text-lg);font-weight:600;color:white;letter-spacing:1px;text-transform:uppercase;" data-i18n="home.stats.exclusive">Propiedades Exclusivas</div>
           </div>
           <div style="text-align:center;">
             <div style="margin-bottom:var(--space-2);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <div class="stats-bar__label" style="font-size:var(--text-lg);font-weight:600;color:white;letter-spacing:1px;text-transform:uppercase;">Inversión Segura</div>
+            <div class="stats-bar__label" style="font-size:var(--text-lg);font-weight:600;color:white;letter-spacing:1px;text-transform:uppercase;" data-i18n="home.stats.secure">Inversión Segura</div>
           </div>
           <div style="text-align:center;">
             <div style="margin-bottom:var(--space-2);"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-            <div class="stats-bar__label" style="font-size:var(--text-lg);font-weight:600;color:white;letter-spacing:1px;text-transform:uppercase;">Acompañamiento 360°</div>
+            <div class="stats-bar__label" style="font-size:var(--text-lg);font-weight:600;color:white;letter-spacing:1px;text-transform:uppercase;" data-i18n="home.stats.support">Acompañamiento 360°</div>
           </div>
         </div>
     </div>
@@ -251,11 +278,11 @@
     <div class="container">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:center;margin-bottom:var(--space-section);">
         <div class="reveal">
-          <span class="section-label">Nuestra Misión</span>
-          <h2 class="section-title">Conectar personas con el hogar de sus sueños</h2>
-          <p style="font-size:var(--text-lg);line-height:var(--leading-loose);color:var(--color-gray-600);">Nuestra misión es democratizar el acceso a bienes raíces de calidad, ofreciendo tanto propiedades de lujo como proyectos económicos que se adapten a cada perfil de inversión. Combinamos tecnología de vanguardia con un servicio humano excepcional.</p>
+          <span class="section-label" data-i18n="about.mission.label">Nuestra Misión</span>
+          <h2 class="section-title" data-i18n="about.mission.title">Conectar personas con el hogar de sus sueños</h2>
+          <p style="font-size:var(--text-lg);line-height:var(--leading-loose);color:var(--color-gray-600);" data-i18n="about.mission.desc">Nuestra misión es democratizar el acceso a bienes raíces de calidad, ofreciendo tanto propiedades de lujo como proyectos económicos que se adapten a cada perfil de inversión. Combinamos tecnología de vanguardia con un servicio humano excepcional.</p>
           <div class="divider" style="margin-top:var(--space-6);"></div>
-          <p style="font-size:var(--text-base);color:var(--color-gray-600);">Creemos que cada persona merece un espacio que refleje sus aspiraciones, y trabajamos incansablemente para hacer eso posible.</p>
+          <p style="font-size:var(--text-base);color:var(--color-gray-600);" data-i18n="about.mission.sub">Creemos que cada persona merece un espacio que refleje sus aspiraciones, y trabajamos incansablemente para hacer eso posible.</p>
         </div>
         <div class="reveal--right" style="border-radius:var(--radius-2xl);overflow:hidden;">
           <img src="assets/images/properties/NKN_0020_800.jpg" alt="Equipo Nuevo Sol Inversiones" loading="lazy" style="width:100%;height:400px;object-fit:cover;">
@@ -268,25 +295,25 @@
   <section class="section section--cream">
     <div class="container">
       <div class="text-center reveal" style="margin-bottom:var(--space-12);">
-        <span class="section-label" style="justify-content:center;">Nuestros Valores</span>
-        <h2 class="section-title" style="margin:0 auto;">Lo que nos define</h2>
+        <span class="section-label" style="justify-content:center;" data-i18n="about.values.label">Nuestros Valores</span>
+        <h2 class="section-title" style="margin:0 auto;" data-i18n="about.values.title">Lo que nos define</h2>
       </div>
 
       <div class="values-grid stagger">
         <div class="value-card">
           <div class="value-icon">🌟</div>
-          <h4 style="font-size:var(--text-xl);margin-bottom:var(--space-3);color:var(--color-navy);">Excelencia</h4>
-          <p style="font-size:var(--text-sm);color:var(--color-gray-600);margin:0;">Cada propiedad, cada interacción y cada detalle refleja nuestro compromiso con la calidad superior. No nos conformamos con menos que lo mejor.</p>
+          <h4 style="font-size:var(--text-xl);margin-bottom:var(--space-3);color:var(--color-navy);" data-i18n="about.val1.title">Excelencia</h4>
+          <p style="font-size:var(--text-sm);color:var(--color-gray-600);margin:0;" data-i18n="about.val1.desc">Cada propiedad, cada interacción y cada detalle refleja nuestro compromiso con la calidad superior. No nos conformamos con menos que lo mejor.</p>
         </div>
         <div class="value-card">
           <div class="value-icon">🤝</div>
-          <h4 style="font-size:var(--text-xl);margin-bottom:var(--space-3);color:var(--color-navy);">Confianza</h4>
-          <p style="font-size:var(--text-sm);color:var(--color-gray-600);margin:0;">La transparencia es la base de cada relación. Nuestros clientes confían en nosotros porque honramos nuestra palabra en cada transacción.</p>
+          <h4 style="font-size:var(--text-xl);margin-bottom:var(--space-3);color:var(--color-navy);" data-i18n="about.val2.title">Confianza</h4>
+          <p style="font-size:var(--text-sm);color:var(--color-gray-600);margin:0;" data-i18n="about.val2.desc">La transparencia es la base de cada relación. Nuestros clientes confían en nosotros porque honramos nuestra palabra en cada transacción.</p>
         </div>
         <div class="value-card">
           <div class="value-icon">🚀</div>
-          <h4 style="font-size:var(--text-xl);margin-bottom:var(--space-3);color:var(--color-navy);">Innovación</h4>
-          <p style="font-size:var(--text-sm);color:var(--color-gray-600);margin:0;">Desde búsqueda con inteligencia artificial hasta tours virtuales, lideramos la transformación digital del mercado inmobiliario dominicano.</p>
+          <h4 style="font-size:var(--text-xl);margin-bottom:var(--space-3);color:var(--color-navy);" data-i18n="about.val3.title">Innovación</h4>
+          <p style="font-size:var(--text-sm);color:var(--color-gray-600);margin:0;" data-i18n="about.val3.desc">Desde búsqueda con inteligencia artificial hasta tours virtuales, lideramos la transformación digital del mercado inmobiliario dominicano.</p>
         </div>
       </div>
     </div>
@@ -296,8 +323,8 @@
   <section class="section">
     <div class="container">
       <div class="text-center reveal" style="margin-bottom:var(--space-12);">
-        <span class="section-label" style="justify-content:center;">Nuestra Historia</span>
-        <h2 class="section-title" style="margin:0 auto;">Un camino de crecimiento</h2>
+        <span class="section-label" style="justify-content:center;" data-i18n="about.history.label">Nuestra Historia</span>
+        <h2 class="section-title" style="margin:0 auto;" data-i18n="about.history.title">Un camino de crecimiento</h2>
       </div>
 
       <div class="timeline reveal">
@@ -305,40 +332,40 @@
           <div class="timeline-item__date"><div class="timeline-item__year">2014</div></div>
           <div class="timeline-item__dot"></div>
           <div class="timeline-item__content">
-            <h4 class="timeline-item__title">Inicio del Sueño</h4>
-            <p class="timeline-item__text">Fundación de Nuevo Sol Inversiones con la visión de transformar el mercado inmobiliario dominicano.</p>
+            <h4 class="timeline-item__title" data-i18n="about.tl1.title">Inicio del Sueño</h4>
+            <p class="timeline-item__text" data-i18n="about.tl1.desc">Fundación de Nuevo Sol Inversiones con la visión de transformar el mercado inmobiliario dominicano.</p>
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-item__date"><div class="timeline-item__year">2017</div></div>
           <div class="timeline-item__dot"></div>
           <div class="timeline-item__content">
-            <h4 class="timeline-item__title">Expansión a Lujo</h4>
-            <p class="timeline-item__text">Lanzamiento de nuestro portafolio de propiedades premium en Piantini y Naco.</p>
+            <h4 class="timeline-item__title" data-i18n="about.tl2.title">Expansión a Lujo</h4>
+            <p class="timeline-item__text" data-i18n="about.tl2.desc">Lanzamiento de nuestro portafolio de propiedades premium en Piantini y Naco.</p>
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-item__date"><div class="timeline-item__year">2020</div></div>
           <div class="timeline-item__dot"></div>
           <div class="timeline-item__content">
-            <h4 class="timeline-item__title">Proyectos Sociales</h4>
-            <p class="timeline-item__text">Inicio de proyectos económicos para hacer accesible la compra de vivienda a más familias dominicanas.</p>
+            <h4 class="timeline-item__title" data-i18n="about.tl3.title">Proyectos Sociales</h4>
+            <p class="timeline-item__text" data-i18n="about.tl3.desc">Inicio de proyectos económicos para hacer accesible la compra de vivienda a más familias dominicanas.</p>
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-item__date"><div class="timeline-item__year">2024</div></div>
           <div class="timeline-item__dot"></div>
           <div class="timeline-item__content">
-            <h4 class="timeline-item__title">Innovación Digital</h4>
-            <p class="timeline-item__text">Implementación de búsqueda con inteligencia artificial y plataforma digital premium para nuestros clientes.</p>
+            <h4 class="timeline-item__title" data-i18n="about.tl4.title">Innovación Digital</h4>
+            <p class="timeline-item__text" data-i18n="about.tl4.desc">Implementación de búsqueda con inteligencia artificial y plataforma digital premium para nuestros clientes.</p>
           </div>
         </div>
         <div class="timeline-item">
           <div class="timeline-item__date"><div class="timeline-item__year">2026</div></div>
           <div class="timeline-item__dot"></div>
           <div class="timeline-item__content">
-            <h4 class="timeline-item__title">El Futuro es Ahora</h4>
-            <p class="timeline-item__text">0 propiedades vendidas, expansión a Juan Dolio y nuevos desarrollos exclusivos en camino.</p>
+            <h4 class="timeline-item__title" data-i18n="about.tl5.title">El Futuro es Ahora</h4>
+            <p class="timeline-item__text" data-i18n="about.tl5.desc">0 propiedades vendidas, expansión a Juan Dolio y nuevos desarrollos exclusivos en camino.</p>
           </div>
         </div>
       </div>
@@ -349,11 +376,11 @@
   <section class="section section--dark">
     <div class="container">
       <div class="text-center reveal" style="max-width:700px;margin:0 auto;">
-        <h2 style="color:white;font-size:var(--text-4xl);margin-bottom:var(--space-6);">¿Listo para encontrar tu próxima inversión?</h2>
-        <p style="color:var(--color-gray-400);font-size:var(--text-lg);margin-bottom:var(--space-8);">Nuestro equipo está listo para ayudarte a encontrar la propiedad perfecta para ti.</p>
+        <h2 style="color:white;font-size:var(--text-4xl);margin-bottom:var(--space-6);" data-i18n="about.cta.title">¿Listo para encontrar tu próxima inversión?</h2>
+        <p style="color:var(--color-gray-400);font-size:var(--text-lg);margin-bottom:var(--space-8);" data-i18n="about.cta.desc">Nuestro equipo está listo para ayudarte a encontrar la propiedad perfecta para ti.</p>
         <div style="display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap;">
-          <a href="propiedades.html" class="btn btn-primary btn-lg">Explorar Propiedades</a>
-          <a href="agendar-tour.html" class="btn btn-outline-white btn-lg">Agendar Tour</a>
+          <a href="propiedades.html" class="btn btn-primary btn-lg" data-i18n="home.hero_btn_explore">Explorar Propiedades</a>
+          <a href="agendar-tour.html" class="btn btn-outline-white btn-lg" data-i18n="about.cta.tour">Agendar Tour</a>
         </div>
       </div>
     </div>
@@ -363,7 +390,7 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__bottom" style="border-top:none;">
-        <p>&copy; 2026 Nuevo Sol Inversiones. Todos los derechos reservados.</p>
+        <p data-i18n="footer.rights">&copy; 2026 Nuevo Sol Inversiones. Todos los derechos reservados.</p>
         <div class="footer__social">
           <a href="https://www.instagram.com/nuevosol.inversiones" target="_blank" aria-label="Instagram">
             <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
@@ -381,8 +408,7 @@
   <script src="js/app.js" defer></script>
 
   <!-- ── Google Translate ── -->
-  <div id="google_translate_element" style="display:none;"></div>
-  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script src="js/translate.js"></script>
+      <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
 </body>
 </html>

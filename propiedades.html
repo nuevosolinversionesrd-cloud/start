@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 <head>
-  <script>
-    if (localStorage.getItem('ns_lang') === 'en') {
-      document.write('<style id="anti-flicker">html { opacity: 0; transition: opacity 0.4s ease; }</style>');
-    }
-  </script>
+  
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -147,8 +143,9 @@
   }
   </script>
   <link rel="stylesheet" href="css/translate.css">
-</head>
+    </head>
 <body class="page-transition">
+  
 
   <!-- NAV -->
   <nav class="nav nav--transparent" id="mainNav" role="navigation">
@@ -156,15 +153,29 @@
       <div class="nav__inner">
         <a href="index.html" class="nav__logo"><img src="Nuevo Sol LOGO.png" alt="Nuevo Sol Inversiones" style="height: 50px; width: auto;"></a>
         <div class="nav__links" id="navLinks">
-          <a href="index.html" class="nav__link">Inicio</a>
-          <a href="propiedades.html" class="nav__link nav__link--active">Propiedades</a>
-          <a href="calculadora.html" class="nav__link">Calculadora</a>
-          <a href="agendar-tour.html" class="nav__link">Agendar Tour</a>
-          <a href="publicar.html" class="nav__link">Publicar</a>
-          <a href="nosotros.html" class="nav__link">Nosotros</a>
-          <a href="agendar-tour.html" class="btn btn-primary btn-sm nav__cta">Contactar</a>
+          <a href="index.html" class="nav__link" data-i18n="nav.home">Inicio</a>
+          <a href="propiedades.html" class="nav__link nav__link--active" data-i18n="nav.properties">Propiedades</a>
+          <a href="calculadora.html" class="nav__link" data-i18n="nav.calculator">Calculadora</a>
+          <a href="agendar-tour.html" class="nav__link" data-i18n="nav.tour">Agendar Tour</a>
+          <a href="publicar.html" class="nav__link" data-i18n="nav.publish">Publicar</a>
+          <a href="nosotros.html" class="nav__link" data-i18n="nav.about">Nosotros</a>
+          <a href="contacto.html" class="btn btn-primary btn-sm nav__cta" data-i18n="nav.contact">Contactar</a>
         
-          <button class="nav__lang-toggle notranslate" aria-label="Cambiar Idioma">🇪🇸 ES</button>
+          <div class="lang-picker">
+          <button class="nav__lang-toggle" aria-label="Cambiar Idioma" data-lang-btn>🇪🇸 ES</button>
+          <div class="lang-dropdown">
+            <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+            <button class="lang-option" data-lang="en">🇺🇸 English</button>          </div>
+        </div>
+          
+          <!-- Desktop Auth -->
+          <div class="nav__auth">
+            <a href="login.html" class="btn-login" data-i18n="nav.login">Login</a>
+            <span class="nav__signup-text">
+              <span data-i18n="nav.no_account">¿No tienes cuenta?</span> 
+              <a href="registro.html" data-i18n="nav.signup">Sign Up</a>
+            </span>
+          </div>
         </div>
         
         <button class="nav__hamburger" id="navHamburger" aria-label="Abrir menú"><span></span><span></span><span></span></button>
@@ -172,25 +183,41 @@
     </div>
   </nav>
   <div class="nav__mobile" id="navMobile">
-    <a href="index.html" class="nav__link" onclick="closeMobileNav()">Inicio</a>
-    <a href="propiedades.html" class="nav__link" onclick="closeMobileNav()">Propiedades</a>
-    <a href="calculadora.html" class="nav__link" onclick="closeMobileNav()">Calculadora</a>
-    <a href="agendar-tour.html" class="nav__link" onclick="closeMobileNav()">Agendar Tour</a>
-    <a href="publicar.html" class="nav__link" onclick="closeMobileNav()">Publicar</a>
-    <a href="nosotros.html" class="nav__link" onclick="closeMobileNav()">Nosotros</a>
-    <a href="agendar-tour.html" class="btn btn-primary btn-lg" onclick="closeMobileNav()">Contactar</a>
+    <a href="index.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.home">Inicio</a>
+    <a href="propiedades.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.properties">Propiedades</a>
+    <a href="calculadora.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.calculator">Calculadora</a>
+    <a href="agendar-tour.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.tour">Agendar Tour</a>
+    <a href="publicar.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.publish">Publicar</a>
+    <a href="nosotros.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.about">Nosotros</a>
+    <a href="contacto.html" class="btn btn-primary btn-lg" onclick="closeMobileNav()" data-i18n="nav.contact">Contactar</a>
+
+    <div class="lang-picker">
+          <button class="nav__lang-toggle" aria-label="Cambiar Idioma" data-lang-btn>🇪🇸 ES</button>
+          <div class="lang-dropdown">
+            <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+            <button class="lang-option" data-lang="en">🇺🇸 English</button>          </div>
+        </div>
+
+    <!-- Mobile Auth -->
+    <div class="nav__auth" style="margin-left: 0; margin-top: var(--space-4);">
+      <a href="login.html" class="btn-login" style="min-height: 44px; width: 200px; font-size: 14px;" data-i18n="nav.login_full">Login / Iniciar Sesión</a>
+      <span class="nav__signup-text" style="font-size: 12px; margin-top: 8px;">
+        <span data-i18n="nav.no_account">¿No tienes cuenta?</span> 
+        <a href="registro.html" style="font-size: 12px;" data-i18n="nav.register_here">Regístrate aquí</a>
+      </span>
+    </div>
   </div>
 
   <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="container">
       <div class="breadcrumbs" style="justify-content:center;">
-        <a href="index.html">Inicio</a>
+        <a href="index.html" data-i18n="nav.home">Inicio</a>
         <span>/</span>
-        <span>Propiedades</span>
+        <span data-i18n="nav.properties">Propiedades</span>
       </div>
-      <h1>Nuestras Propiedades</h1>
-      <p>Explora nuestro portafolio de propiedades exclusivas en República Dominicana</p>
+      <h1 data-i18n="props.header.title">Nuestras Propiedades</h1>
+      <p data-i18n="props.header.desc">Explora nuestro portafolio de propiedades exclusivas en República Dominicana</p>
     </div>
   </div>
 
@@ -200,19 +227,19 @@
       <div class="filter-bar reveal">
         <div class="filter-bar__grid">
           <div>
-            <label class="filter-bar__label" for="filterType">Tipo</label>
+            <label class="filter-bar__label" for="filterType" data-i18n="props.filter.type">Tipo</label>
             <select class="form-select" id="filterType">
-              <option value="">Todos los tipos</option>
-              <option value="Casa">Casa</option>
-              <option value="Apartamento">Apartamento</option>
-              <option value="Villa">Villa</option>
-              <option value="Penthouse">Penthouse</option>
+              <option value="" data-i18n-opt="props.filter.all_types">Todos los tipos</option>
+              <option value="Casa" data-i18n-opt="props.filter.house">Casa</option>
+              <option value="Apartamento" data-i18n-opt="props.filter.apartment">Apartamento</option>
+              <option value="Villa" data-i18n-opt="props.filter.villa">Villa</option>
+              <option value="Penthouse" data-i18n-opt="props.filter.penthouse">Penthouse</option>
             </select>
           </div>
           <div>
-            <label class="filter-bar__label" for="filterLocation">Ubicación</label>
+            <label class="filter-bar__label" for="filterLocation" data-i18n="props.filter.location">Ubicación</label>
             <select class="form-select" id="filterLocation">
-              <option value="">Todas las ubicaciones</option>
+              <option value="" data-i18n-opt="props.filter.all_locations">Todas las ubicaciones</option>
               <option value="Los Ríos">Los Ríos</option>
               <option value="Piantini">Piantini</option>
               <option value="Naco">Naco</option>
@@ -222,32 +249,32 @@
             </select>
           </div>
           <div>
-            <label class="filter-bar__label" for="filterPrice">Precio Máximo</label>
+            <label class="filter-bar__label" for="filterPrice" data-i18n="props.filter.max_price">Precio Máximo</label>
             <select class="form-select" id="filterPrice">
-              <option value="">Sin límite</option>
-              <option value="100000">Hasta $100,000</option>
-              <option value="200000">Hasta $200,000</option>
-              <option value="300000">Hasta $300,000</option>
-              <option value="500000">Hasta $500,000</option>
-              <option value="1000000">Hasta $1,000,000</option>
+              <option value="" data-i18n-opt="props.filter.no_limit">Sin límite</option>
+              <option value="100000" data-i18n-opt="props.filter.up_to_100k">Hasta $100,000</option>
+              <option value="200000" data-i18n-opt="props.filter.up_to_200k">Hasta $200,000</option>
+              <option value="300000" data-i18n-opt="props.filter.up_to_300k">Hasta $300,000</option>
+              <option value="500000" data-i18n-opt="props.filter.up_to_500k">Hasta $500,000</option>
+              <option value="1000000" data-i18n-opt="props.filter.up_to_1m">Hasta $1,000,000</option>
             </select>
           </div>
           <div>
-            <label class="filter-bar__label" for="filterBedrooms">Habitaciones</label>
+            <label class="filter-bar__label" for="filterBedrooms" data-i18n="ui.rooms">Habitaciones</label>
             <select class="form-select" id="filterBedrooms">
-              <option value="">Cualquier cantidad</option>
-              <option value="2">2+ Habitaciones</option>
-              <option value="3">3+ Habitaciones</option>
-              <option value="4">4+ Habitaciones</option>
-              <option value="5">5+ Habitaciones</option>
+              <option value="" data-i18n-opt="props.filter.any_rooms">Cualquier cantidad</option>
+              <option value="2" data-i18n-opt="props.filter.2plus">2+ Habitaciones</option>
+              <option value="3" data-i18n-opt="props.filter.3plus">3+ Habitaciones</option>
+              <option value="4" data-i18n-opt="props.filter.4plus">4+ Habitaciones</option>
+              <option value="5" data-i18n-opt="props.filter.5plus">5+ Habitaciones</option>
             </select>
           </div>
           <div>
-            <label class="filter-bar__label" for="filterCategory">Categoría</label>
+            <label class="filter-bar__label" for="filterCategory" data-i18n="props.filter.category">Categoría</label>
             <select class="form-select" id="filterCategory">
-              <option value="">Todas</option>
-              <option value="luxury">Lujo</option>
-              <option value="lowcost">Económica</option>
+              <option value="" data-i18n-opt="props.filter.all_cats">Todas</option>
+              <option value="luxury" data-i18n-opt="props.filter.luxury">Lujo</option>
+              <option value="lowcost" data-i18n-opt="props.filter.economy">Económica</option>
             </select>
           </div>
         </div>
@@ -261,11 +288,11 @@
         <div class="results-count" id="resultsCount">Mostrando <span>6</span> propiedades</div>
         <div style="display:flex;align-items:center;gap:var(--space-4);">
           <select class="sort-select" id="sortSelect">
-            <option value="featured">Destacadas</option>
-            <option value="price-asc">Precio: Menor a Mayor</option>
-            <option value="price-desc">Precio: Mayor a Menor</option>
-            <option value="area-desc">Mayor Superficie</option>
-            <option value="rooms-desc">Más Habitaciones</option>
+            <option value="featured" data-i18n-opt="props.sort.featured">Destacadas</option>
+            <option value="price-asc" data-i18n-opt="props.sort.price_asc">Precio: Menor a Mayor</option>
+            <option value="price-desc" data-i18n-opt="props.sort.price_desc">Precio: Mayor a Menor</option>
+            <option value="area-desc" data-i18n-opt="props.sort.area">Mayor Superficie</option>
+            <option value="rooms-desc" data-i18n-opt="props.sort.rooms">Más Habitaciones</option>
           </select>
         </div>
       </div>
@@ -276,8 +303,8 @@
       <!-- No Results -->
       <div class="no-results" id="noResults" style="display:none;">
         <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-300)" stroke-width="1"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <h3>No encontramos propiedades</h3>
-        <p>Intenta ajustar los filtros o <a href="propiedades.html" style="color:var(--color-gold);">ver todas las propiedades</a></p>
+        <h3 data-i18n="props.no_results.title">No encontramos propiedades</h3>
+        <p data-i18n="props.no_results.desc">Intenta ajustar los filtros o <a href="propiedades.html" style="color:var(--color-gold);">ver todas las propiedades</a></p>
       </div>
     </div>
   </section>
@@ -286,7 +313,7 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__bottom" style="border-top:none;">
-        <p>&copy; 2026 Nuevo Sol Inversiones. Todos los derechos reservados.</p>
+        <p data-i18n="footer.rights">&copy; 2026 Nuevo Sol Inversiones. Todos los derechos reservados.</p>
         <div class="footer__social">
           <a href="https://www.instagram.com/nuevosol.inversiones" target="_blank" rel="noopener" aria-label="Instagram">
             <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
@@ -299,7 +326,7 @@
   <!-- WhatsApp -->
   <a href="https://wa.me/18096972050?text=Hola%2C%20estoy%20interesado%20en%20una%20propiedad" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-    <span class="whatsapp-float__tooltip">¿Necesitas ayuda? 💬</span>
+    <span class="whatsapp-float__tooltip" data-i18n="ui.wa_help">¿Necesitas ayuda? 💬</span>
   </a>
 
   <script src="js/app.js" defer></script>
@@ -357,19 +384,41 @@
           noResults.style.display = 'block';
         }
 
-        countEl.innerHTML = `Mostrando <span>${filtered.length}</span> propiedad${filtered.length !== 1 ? 'es' : ''}`;
+        const lang = window.getCurrentLanguage ? window.getCurrentLanguage() : 'es';
+        const showingText = lang === 'en' ? 'Showing' : 'Mostrando';
+        const propsText = lang === 'en' ? (filtered.length === 1 ? 'property' : 'properties') : (filtered.length === 1 ? 'propiedad' : 'propiedades');
+        countEl.innerHTML = `${showingText} <span>${filtered.length}</span> ${propsText}`;
 
         // Active filters
         const filters = [];
+        const upToText = lang === 'en' ? 'Up to' : 'Hasta';
+        const bedsText = lang === 'en' ? 'Beds' : 'Hab.';
         if (type) filters.push({ label: type, key: 'filterType' });
         if (location) filters.push({ label: location, key: 'filterLocation' });
-        if (maxPrice) filters.push({ label: `Hasta $${parseInt(maxPrice).toLocaleString()}`, key: 'filterPrice' });
-        if (minBedrooms) filters.push({ label: `${minBedrooms}+ Hab.`, key: 'filterBedrooms' });
-        if (category) filters.push({ label: category === 'luxury' ? 'Lujo' : 'Económica', key: 'filterCategory' });
+        if (maxPrice) filters.push({ label: `${upToText} $${parseInt(maxPrice).toLocaleString()}`, key: 'filterPrice' });
+        if (minBedrooms) filters.push({ label: `${minBedrooms}+ ${bedsText}`, key: 'filterBedrooms' });
+        if (category) {
+          let catLabel = category;
+          if(category === 'luxury') catLabel = lang === 'en' ? 'Luxury' : 'Lujo';
+          if(category === 'lowcost') catLabel = lang === 'en' ? 'Low Cost' : 'Económica';
+          filters.push({ label: catLabel, key: 'filterCategory' });
+        }
 
         activeFiltersEl.innerHTML = filters.map(f =>
           `<span class="active-filter" onclick="document.getElementById('${f.key}').value=''; applyFilters();">${f.label} ✕</span>`
         ).join('');
+      }
+
+    function repopulateSelectOptions() {
+        const lang = window.i18n ? window.i18n.currentLang : 'es';
+        const dictionary = window.i18n ? window.i18n.dictionary : {};
+        
+        document.querySelectorAll('[data-i18n-opt]').forEach(opt => {
+          const key = opt.getAttribute('data-i18n-opt');
+          if (dictionary[key] && dictionary[key][lang]) {
+            opt.textContent = dictionary[key][lang];
+          }
+        });
       }
 
       window.applyFilters = applyFilters;
@@ -380,12 +429,18 @@
       });
 
       applyFilters();
+      repopulateSelectOptions();
+
+      // Listen to language changes
+      document.addEventListener('languageChanged', () => {
+        repopulateSelectOptions();
+        applyFilters();
+      });
     }
   </script>
 
-  <!-- ── Google Translate ── -->
-  <div id="google_translate_element" style="display:none;"></div>
-  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script src="js/translate.js"></script>
+  <!-- ── Translation Engine ── -->
+      <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
 </body>
 </html>

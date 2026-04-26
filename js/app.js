@@ -27,6 +27,12 @@
     initQuickFilters();
     initCategoryCardHover();
     initTourDropdown();
+
+    // Listen for language changes to re-render dynamic content
+    document.addEventListener('languageChanged', () => {
+      renderFeaturedProperties();
+      updateCalculator();
+    });
   }
 
   // ── Embedded Property Data (fallback for file:// protocol) ──
@@ -49,16 +55,21 @@
       {
         "id": "NSI-2604-LIX2",
         "title": "Casa / Mansión 3 Niveles – Los Ríos",
+        "title_en": "3-Level House / Mansion – Los Ríos",
         "slug": "mansion-3-niveles-los-rios",
         "type": "Casa",
+        "type_en": "House",
         "category": "luxury",
         "badge": "Destacada",
+        "badge_en": "Featured",
         "price": 1000000,
         "currency": "USD",
         "location": {
           "neighborhood": "Los Ríos",
           "city": "Santo Domingo",
-          "province": "Distrito Nacional"
+          "province": "Distrito Nacional",
+          "zone_type": "city",
+          "is_tourist_zone": false
         },
         "features": {
           "bedrooms": 6,
@@ -90,10 +101,34 @@
           "Walking Closet",
           "Jardinera Frontal"
         ],
+        "amenities_en": [
+          "Living Room",
+          "Dining Room",
+          "Cold Kitchen",
+          "Hot Kitchen",
+          "Balcony",
+          "Terrace",
+          "Study",
+          "Laundry Area",
+          "Service Rooms",
+          "Backyard",
+          "3,000 Gallon Water Tank",
+          "Full Power Generator",
+          "Security Cameras",
+          "Intercom",
+          "Common Gas",
+          "Jacuzzi",
+          "Walk-in Closet",
+          "Front Garden"
+        ],
         "description": "Majestuosa casa de 3 niveles, donde el primer piso tiene la particularidad de ser estilo sótano, diseñada para ofrecer amplitud, comodidad y funcionalidad en cada uno de sus espacios. La propiedad cuenta con entrada principal y accesos laterales, una distribución pensada para la vida familiar, el entretenimiento y el servicio, así como amplias áreas interiores y exteriores.\n\nEn el primer nivel se encuentran elegantes áreas sociales, incluyendo dos salas, una sala adicional, oficina, comedor principal, comedor de diario, cocina de gran tamaño con dos credenzas, balcones y un amplio lobby central que conecta armoniosamente con el segundo nivel y el sótano.\n\nEl sótano ofrece entrada interna y externa, dos habitaciones con baño compartido, dos cuartos de servicio con baño independiente, área de lavado y planchado, tendedero y cuarto de almacén.\n\nEn el segundo nivel se destacan 4 habitaciones de generosas dimensiones. La habitación principal cuenta con baño completo, dos lavamanos, dos walking closets en cedro, jacuzzi y ventana corrediza con vista al patio. Las habitaciones secundarias también cuentan con jacuzzi, walking closet y acceso a balcón.\n\nCapacidad total de estacionamiento para 11 vehículos: marquesina sin techo para 5, techada para 2 y espacio exterior para 4 adicionales.",
+        "description_en": "Majestic 3-level home, where the ground floor features a basement-style layout designed to maximize space, comfort, and functionality. The property has a main entrance and side access points, a layout designed for family living, entertaining, and service areas, as well as ample interior and exterior spaces.\n\nOn the first level, elegant social areas include two living rooms, an additional sitting room, an office, a main dining room, a daily dining room, an oversized kitchen with two credenzas, balconies, and a spacious central lobby that seamlessly connects to the second level and the basement.\n\nThe basement features internal and external access, two bedrooms with a shared bathroom, two service rooms with private bathrooms, a laundry and ironing area, a clothesline area, and a storage room.\n\nThe second level features 4 generously sized bedrooms. The master bedroom has a full bathroom, two sinks, two cedar walk-in closets, a jacuzzi, and sliding windows overlooking the patio. The secondary bedrooms also feature jacuzzis, walk-in closets, and balcony access.\n\nTotal parking capacity for 11 vehicles: open-air marquee for 5, covered for 2, and exterior space for 4 additional vehicles.",
         "description_short": "Majestuosa mansión de 3 niveles con 6 habitaciones, jacuzzi, planta eléctrica full y capacidad para 11 vehículos en Los Ríos.",
+        "description_short_en": "Majestic 3-level mansion with 6 bedrooms, jacuzzi, full power generator, and capacity for 11 vehicles in Los Ríos.",
         "status_label": "Listo / Reventa",
+        "status_label_en": "Ready / Resale",
         "finishes": "Pisos de porcelanato de primera, terminación en caoba (puertas, gabinetes, etc.)",
+        "finishes_en": "Premium porcelain floors, mahogany finishes (doors, cabinets, etc.)",
         "documents": [
           "Título de Propiedad",
           "IPI al Día",
@@ -278,6 +313,12 @@
   }
 
   function createPropertyCard(prop) {
+    const lang = window.getCurrentLanguage ? window.getCurrentLanguage() : 'es';
+    const title = lang === 'en' && prop.title_en ? prop.title_en : prop.title;
+    const badge = lang === 'en' && prop.badge_en ? prop.badge_en : prop.badge;
+    const habsLabel = lang === 'en' ? 'Beds' : 'Hab.';
+    const bathsLabel = lang === 'en' ? 'Baths' : 'Baños';
+
     const badgeClass = {
       'luxury': 'badge-luxury',
       'lowcost': 'badge-lowcost'
@@ -290,14 +331,14 @@
     }).format(prop.price);
 
     return `
-      <article class="property-card" onclick="window.location.href='propiedad.html?id=${prop.id}'" role="link" tabindex="0" aria-label="${prop.title}">
+      <article class="property-card" onclick="window.location.href='propiedad.html?id=${prop.id}'" role="link" tabindex="0" aria-label="${title}">
         <div class="property-card__image-wrap">
           <img class="property-card__image" 
                src="${prop.thumbnail}" 
-               alt="${prop.title} - ${prop.location.neighborhood}, ${prop.location.city}"
+               alt="${title} - ${prop.location.neighborhood}, ${prop.location.city}"
                loading="lazy"
                width="400" height="300">
-          <span class="property-card__badge ${badgeClass}">${prop.badge}</span>
+          <span class="property-card__badge ${badgeClass}">${badge}</span>
           <button class="property-card__favorite" aria-label="Guardar como favorito" onclick="event.stopPropagation(); this.classList.toggle('active');">
             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </button>
@@ -310,21 +351,21 @@
                 ${prop.location.neighborhood}, ${prop.location.city}
               </div>
               <button class="copy-id-btn" onclick="event.stopPropagation(); window.copyToClipboard('${prop.id}', this)" style="cursor:pointer; background:none; border:none; padding:0; display:flex; align-items:center; gap:4px; font-family:inherit; transition: color 0.2s;">
-                <span style="font-size:10px; color:var(--color-gray-400); font-weight:600; letter-spacing:0.05em;">REF: ${prop.id}</span>
+                <span style="font-size:10px; color:var(--color-gray-400); font-weight:600; letter-spacing:0.05em;">${window.i18n.dictionary['ui.ref']?.[lang] || 'REF:'} ${prop.id}</span>
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--color-gray-400)" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               </button>
             </div>
           </div>
-          <h3 class="property-card__title">${prop.title}</h3>
+          <h3 class="property-card__title">${title}</h3>
           <div class="property-card__price">${formattedPrice} <span>${prop.currency}</span></div>
           <div class="property-card__features">
             <div class="property-card__feature">
               <svg viewBox="0 0 24 24"><path d="M3 7v11a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7"/><path d="M21 7H3l2-4h14l2 4z"/><path d="M12 4v16"/></svg>
-              ${prop.features.bedrooms} Hab.
+              ${prop.features.bedrooms} ${habsLabel}
             </div>
             <div class="property-card__feature">
               <svg viewBox="0 0 24 24"><path d="M4 12h16a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1z"/><path d="M6 12V5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v7"/><path d="M5 17v3"/><path d="M19 17v3"/></svg>
-              ${prop.features.bathrooms} Baños
+              ${prop.features.bathrooms} ${bathsLabel}
             </div>
             <div class="property-card__feature">
               <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
@@ -512,35 +553,50 @@
   }
 
   function renderSearchResults(results, container) {
+    const lang = window.getCurrentLanguage ? window.getCurrentLanguage() : 'es';
+
     if (!results.length) {
+      const emptyText = lang === 'en' 
+        ? `We couldn't find exact matches. Try different terms or <a href="propiedades.html" style="color:var(--color-gold-light);text-decoration:underline;">explore our full catalog</a>.` 
+        : `No encontramos propiedades que coincidan exactamente. Prueba con otros términos o <a href="propiedades.html" style="color:var(--color-gold-light);text-decoration:underline;">explora todo nuestro catálogo</a>.`;
+      
       container.innerHTML = `
         <div style="padding:var(--space-5);background:rgba(255,255,255,0.08);border-radius:var(--radius-lg);text-align:center;">
-          <p style="color:rgba(255,255,255,0.7);font-size:var(--text-sm);margin:0;">No encontramos propiedades que coincidan exactamente. Prueba con otros términos o <a href="propiedades.html" style="color:var(--color-gold-light);text-decoration:underline;">explora todo nuestro catálogo</a>.</p>
+          <p style="color:rgba(255,255,255,0.7);font-size:var(--text-sm);margin:0;">${emptyText}</p>
         </div>
       `;
       return;
     }
 
     const fmt = (n) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n);
+    
+    const countText = lang === 'en'
+      ? `${results.length} propert${results.length > 1 ? 'ies' : 'y'} found`
+      : `${results.length} propiedad${results.length > 1 ? 'es' : ''} encontrada${results.length > 1 ? 's' : ''}`;
+    
+    const viewAllText = lang === 'en' ? 'View all properties →' : 'Ver todas las propiedades →';
 
     container.innerHTML = `
       <div style="display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-4);">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold-light)" stroke-width="2"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M18 14a6 6 0 0 1-12 0"/></svg>
-        <span style="color:rgba(255,255,255,0.6);font-size:var(--text-sm);">${results.length} propiedad${results.length > 1 ? 'es' : ''} encontrada${results.length > 1 ? 's' : ''}</span>
+        <span style="color:rgba(255,255,255,0.6);font-size:var(--text-sm);">${countText}</span>
       </div>
-      ${results.map(prop => `
+      ${results.map(prop => {
+        const title = lang === 'en' && prop.title_en ? prop.title_en : prop.title;
+        const habsLabel = lang === 'en' ? 'beds' : 'hab';
+        return `
         <a href="propiedad.html?id=${prop.id}" style="display:flex;gap:var(--space-4);padding:var(--space-4);background:rgba(255,255,255,0.08);border-radius:var(--radius-lg);margin-bottom:var(--space-3);text-decoration:none;transition:background 0.3s ease;">
-          <img src="${prop.thumbnail}" alt="${prop.title}" style="width:80px;height:60px;object-fit:cover;border-radius:var(--radius-md);flex-shrink:0;" loading="lazy">
+          <img src="${prop.thumbnail}" alt="${title}" style="width:80px;height:60px;object-fit:cover;border-radius:var(--radius-md);flex-shrink:0;" loading="lazy">
           <div style="flex:1;min-width:0;">
-            <h4 style="color:white;font-size:var(--text-sm);font-weight:600;margin-bottom:var(--space-1);font-family:var(--font-display);">${prop.title}</h4>
-            <p style="color:rgba(255,255,255,0.5);font-size:var(--text-xs);margin:0;">${prop.location.neighborhood} · ${prop.features.bedrooms} hab · ${prop.features.area_m2}m²</p>
+            <h4 style="color:white;font-size:var(--text-sm);font-weight:600;margin-bottom:var(--space-1);font-family:var(--font-display);">${title}</h4>
+            <p style="color:rgba(255,255,255,0.5);font-size:var(--text-xs);margin:0;">${prop.location.neighborhood} · ${prop.features.bedrooms} ${habsLabel} · ${prop.features.area_m2}m²</p>
           </div>
           <div style="text-align:right;flex-shrink:0;">
             <div style="color:var(--color-gold-light);font-weight:700;font-size:var(--text-sm);font-family:var(--font-display);">${fmt(prop.price)}</div>
           </div>
         </a>
-      `).join('')}
-      <a href="propiedades.html" style="display:block;text-align:center;padding:var(--space-3);color:var(--color-gold-light);font-size:var(--text-sm);margin-top:var(--space-2);">Ver todas las propiedades →</a>
+      `}).join('')}
+      <a href="propiedades.html" style="display:block;text-align:center;padding:var(--space-3);color:var(--color-gold-light);font-size:var(--text-sm);margin-top:var(--space-2);">${viewAllText}</a>
     `;
   }
 
@@ -741,8 +797,10 @@
     function showFeedback(el) {
       const originalHTML = el.innerHTML;
       const originalColor = el.style.color;
+      const lang = window.getCurrentLanguage ? window.getCurrentLanguage() : 'es';
+      const copiedText = lang === 'en' ? 'Copied!' : '¡Copiado!';
       
-      el.innerHTML = `<span style="font-size:10px; color:var(--color-gold-dark); font-weight:700;">¡Copiado!</span>`;
+      el.innerHTML = `<span style="font-size:10px; color:var(--color-gold-dark); font-weight:700;">${copiedText}</span>`;
       el.style.color = 'var(--color-gold-dark)';
       
       setTimeout(() => {

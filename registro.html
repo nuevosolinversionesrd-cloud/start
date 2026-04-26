@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crear Cuenta | Nuevo Sol Inversiones</title>
+  <title data-i18n="auth.register.title">Crear Cuenta | Nuevo Sol Inversiones</title>
   <meta name="description" content="Crea tu cuenta en Nuevo Sol Inversiones y publica tus propiedades en nuestra plataforma.">
   <link rel="stylesheet" href="css/variables.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -250,65 +250,84 @@
       .auth-card { padding: 2rem; }
       .form-row { grid-template-columns: 1fr; }
     }
+
+    .lang-toggle-auth {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: white;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+      z-index: 10;
+    }
   </style>
+  <link rel="stylesheet" href="css/translate.css">
 </head>
 <body>
   <div class="auth-card">
-    <a href="login.html" class="back-link">← Volver al inicio de sesión</a>
+    <button class="nav__lang-toggle lang-toggle-auth" aria-label="Cambiar Idioma">🇪🇸 ES</button>
+    <a href="login.html" class="back-link" data-i18n="auth.register.login">← Volver al inicio de sesión</a>
 
     <img src="Nuevo Sol LOGO (Transparente).png" alt="Nuevo Sol Inversiones" class="auth-logo">
-    <h1 class="auth-title">Crea tu cuenta</h1>
-    <p class="auth-subtitle">Regístrate para publicar tus propiedades en nuestra plataforma</p>
+    <h1 class="auth-title" data-i18n="auth.register.title">Crea tu cuenta</h1>
+    <p class="auth-subtitle" data-i18n="auth.register.subtitle">Regístrate para publicar tus propiedades en nuestra plataforma</p>
 
     <form id="registerForm">
       <div class="form-row">
         <div class="form-group">
-          <label for="nombre">Nombre</label>
+          <label for="nombre" data-i18n="auth.register.name">Nombre</label>
           <input type="text" id="nombre" placeholder="Juan" required autocomplete="given-name">
         </div>
         <div class="form-group">
-          <label for="apellido">Apellido</label>
+          <label for="apellido" data-i18n="auth.register.lastname">Apellido</label>
           <input type="text" id="apellido" placeholder="Pérez" required autocomplete="family-name">
         </div>
       </div>
 
       <div class="form-group">
-        <label for="telefono">Teléfono</label>
+        <label for="telefono" data-i18n="auth.register.phone">Teléfono</label>
         <input type="tel" id="telefono" placeholder="809-000-0000" required autocomplete="tel">
       </div>
 
       <div class="form-group">
-        <label for="email">Correo electrónico</label>
+        <label for="email" data-i18n="auth.login.email">Correo electrónico</label>
         <input type="email" id="email" placeholder="tu@correo.com" required autocomplete="email">
       </div>
 
       <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" placeholder="Mínimo 8 caracteres" required autocomplete="new-password">
+        <label for="password" data-i18n="auth.login.password">Contraseña</label>
+        <input type="password" id="password" data-i18n-ph="auth.register.password_hint" placeholder="Mínimo 8 caracteres" required autocomplete="new-password">
         <div class="password-strength">
           <div class="password-strength-bar" id="strengthBar"></div>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="password2">Confirmar contraseña</label>
-        <input type="password" id="password2" placeholder="Repite tu contraseña" required autocomplete="new-password">
+        <label for="password2" data-i18n="auth.register.confirm">Confirmar contraseña</label>
+        <input type="password" id="password2" data-i18n-ph="auth.register.confirm_ph" placeholder="Repite tu contraseña" required autocomplete="new-password">
       </div>
 
       <div class="terms-check">
         <input type="checkbox" id="terminos" required>
         <label for="terminos">
-          He leído y acepto los <a href="formulario-publicar.html" target="_blank">Términos y Condiciones</a> de Nuevo Sol Inversiones, incluyendo la comisión del 2% en publicaciones gratuitas.
+          <span data-i18n="auth.register.terms_prefix">He leído y acepto los</span> 
+          <a href="formulario-publicar.html" target="_blank" data-i18n="auth.register.terms_link">Términos y Condiciones</a> 
+          <span data-i18n="auth.register.terms_suffix">de Nuevo Sol Inversiones, incluyendo la comisión del 2% en publicaciones gratuitas.</span>
         </label>
       </div>
 
-      <button type="submit" class="btn-primary" id="registerBtn">Crear mi cuenta</button>
+      <button type="submit" class="btn-primary" id="registerBtn" data-i18n="auth.register.btn">Crear mi cuenta</button>
       <div class="error-msg" id="errorMsg"></div>
     </form>
 
-    <div class="auth-divider"><span>¿Ya tienes cuenta?</span></div>
+    <div class="auth-divider"><span data-i18n="auth.register.have_account">¿Ya tienes cuenta?</span></div>
     <p class="auth-link">
-      <a href="login.html">Iniciar sesión</a>
+      <a href="login.html" data-i18n="auth.register.login">Iniciar sesión</a>
     </p>
   </div>
 
@@ -378,7 +397,8 @@
       }
 
       btn.disabled = true;
-      btn.textContent = 'Creando cuenta...';
+      const lang = window.i18n ? window.i18n.currentLang : 'es';
+      btn.textContent = (window.i18n && window.i18n.dictionary['auth.register.btn_loading']) ? window.i18n.dictionary['auth.register.btn_loading'][lang] : 'Creando cuenta...';
 
       try {
         // Crear usuario en Firebase Auth
@@ -415,5 +435,7 @@
       }
     });
   </script>
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
 </body>
 </html>

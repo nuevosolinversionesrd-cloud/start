@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 <head>
-  <script>
-    if (localStorage.getItem('ns_lang') === 'en') {
-      document.write('<style id="anti-flicker">html { opacity: 0; transition: opacity 0.4s ease; }</style>');
-    }
-  </script>
+  
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -216,8 +212,9 @@
     }
   </style>
   <link rel="stylesheet" href="css/translate.css">
-</head>
+    </head>
 <body class="page-transition">
+  
 
   <!-- NAV -->
   <nav class="nav nav--transparent" id="mainNav" role="navigation">
@@ -225,15 +222,29 @@
       <div class="nav__inner">
         <a href="index.html" class="nav__logo"><img src="Nuevo Sol LOGO.png" alt="Nuevo Sol Inversiones" style="height: 50px; width: auto;"></a>
         <div class="nav__links">
-          <a href="index.html" class="nav__link">Inicio</a>
-          <a href="propiedades.html" class="nav__link">Propiedades</a>
-          <a href="calculadora.html" class="nav__link nav__link--active">Calculadora</a>
-          <a href="agendar-tour.html" class="nav__link">Agendar Tour</a>
-          <a href="publicar.html" class="nav__link">Publicar</a>
-          <a href="nosotros.html" class="nav__link">Nosotros</a>
-          <a href="agendar-tour.html" class="btn btn-primary btn-sm nav__cta">Contactar</a>
+          <a href="index.html" class="nav__link" data-i18n="nav.home">Inicio</a>
+          <a href="propiedades.html" class="nav__link" data-i18n="nav.properties">Propiedades</a>
+          <a href="calculadora.html" class="nav__link nav__link--active" data-i18n="nav.calculator">Calculadora</a>
+          <a href="agendar-tour.html" class="nav__link" data-i18n="nav.tour">Agendar Tour</a>
+          <a href="publicar.html" class="nav__link" data-i18n="nav.publish">Publicar</a>
+          <a href="nosotros.html" class="nav__link" data-i18n="nav.about">Nosotros</a>
+          <a href="contacto.html" class="btn btn-primary btn-sm nav__cta" data-i18n="nav.contact">Contactar</a>
         
-          <button class="nav__lang-toggle notranslate" aria-label="Cambiar Idioma">🇪🇸 ES</button>
+          <div class="lang-picker">
+          <button class="nav__lang-toggle" aria-label="Cambiar Idioma" data-lang-btn>🇪🇸 ES</button>
+          <div class="lang-dropdown">
+            <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+            <button class="lang-option" data-lang="en">🇺🇸 English</button>          </div>
+        </div>
+          
+          <!-- Desktop Auth -->
+          <div class="nav__auth">
+            <a href="login.html" class="btn-login" data-i18n="nav.login">Login</a>
+            <span class="nav__signup-text">
+              <span data-i18n="nav.no_account">¿No tienes cuenta?</span> 
+              <a href="registro.html" data-i18n="nav.signup">Sign Up</a>
+            </span>
+          </div>
         </div>
         
         <button class="nav__hamburger" id="navHamburger" aria-label="Menú"><span></span><span></span><span></span></button>
@@ -241,22 +252,38 @@
     </div>
   </nav>
   <div class="nav__mobile" id="navMobile">
-    <a href="index.html" class="nav__link" onclick="closeMobileNav()">Inicio</a>
-    <a href="propiedades.html" class="nav__link" onclick="closeMobileNav()">Propiedades</a>
-    <a href="calculadora.html" class="nav__link" onclick="closeMobileNav()">Calculadora</a>
-    <a href="agendar-tour.html" class="nav__link" onclick="closeMobileNav()">Agendar Tour</a>
-    <a href="publicar.html" class="nav__link" onclick="closeMobileNav()">Publicar</a>
-    <a href="nosotros.html" class="nav__link" onclick="closeMobileNav()">Nosotros</a>
+    <a href="index.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.home">Inicio</a>
+    <a href="propiedades.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.properties">Propiedades</a>
+    <a href="calculadora.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.calculator">Calculadora</a>
+    <a href="agendar-tour.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.tour">Agendar Tour</a>
+    <a href="publicar.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.publish">Publicar</a>
+    <a href="nosotros.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.about">Nosotros</a>
+
+    <div class="lang-picker">
+          <button class="nav__lang-toggle" aria-label="Cambiar Idioma" data-lang-btn>🇪🇸 ES</button>
+          <div class="lang-dropdown">
+            <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+            <button class="lang-option" data-lang="en">🇺🇸 English</button>          </div>
+        </div>
+
+    <!-- Mobile Auth -->
+    <div class="nav__auth" style="margin-left: 0; margin-top: var(--space-4);">
+      <a href="login.html" class="btn-login" style="min-height: 44px; width: 200px; font-size: 14px;" data-i18n="nav.login_full">Login / Iniciar Sesión</a>
+      <span class="nav__signup-text" style="font-size: 12px; margin-top: 8px;">
+        <span data-i18n="nav.no_account">¿No tienes cuenta?</span> 
+        <a href="registro.html" style="font-size: 12px;" data-i18n="nav.register_here">Regístrate aquí</a>
+      </span>
+    </div>
   </div>
 
   <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="container">
       <div class="breadcrumbs" style="justify-content:center;">
-        <a href="index.html">Inicio</a><span>/</span><span>Calculadora de Hipotecas</span>
+        <a href="index.html" data-i18n="nav.home">Inicio</a><span>/</span><span data-i18n="calc.header.title">Calculadora de Hipotecas</span>
       </div>
-      <h1>Calculadora de Hipotecas</h1>
-      <p>Planifica tu inversión inmobiliaria con precisión. Estima tu cuota mensual, intereses totales y tabla de amortización.</p>
+      <h1 data-i18n="calc.header.title">Calculadora de Hipotecas</h1>
+      <p data-i18n="calc.header.desc">Planifica tu inversión inmobiliaria con precisión. Estima tu cuota mensual, intereses totales y tabla de amortización.</p>
     </div>
   </div>
 
@@ -266,7 +293,7 @@
       
       <!-- COMING SOON OVERLAY -->
       <div style="position: absolute; inset: 0; z-index: 10; display: flex; align-items: center; justify-content: center; background: rgba(250, 249, 246, 0.4);">
-        <div style="background: var(--color-navy); color: var(--color-gold); padding: var(--space-6) var(--space-10); border-radius: var(--radius-lg); font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+        <div style="background: var(--color-navy); color: var(--color-gold); padding: var(--space-6) var(--space-10); border-radius: var(--radius-lg); font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.2);" data-i18n="home.calc.soon">
           Disponible Próximamente
         </div>
       </div>
@@ -276,7 +303,7 @@
         <div class="calc-card reveal">
           <div class="range-group">
             <div class="range-header">
-              <span class="range-label">Precio de Propiedad</span>
+              <span class="range-label" data-i18n="calc.price">Precio de Propiedad</span>
               <span class="range-value" id="priceDisplay">$0</span>
             </div>
             <input type="range" id="priceRange" min="0" max="2000000" value="0" step="5000">
@@ -285,7 +312,7 @@
 
           <div class="range-group">
             <div class="range-header">
-              <span class="range-label">Pago Inicial</span>
+              <span class="range-label" data-i18n="calc.down">Pago Inicial</span>
               <span class="range-value" id="downDisplay">20% ($0)</span>
             </div>
             <input type="range" id="downRange" min="5" max="60" value="20" step="5">
@@ -294,7 +321,7 @@
 
           <div class="range-group">
             <div class="range-header">
-              <span class="range-label">Tasa de Interés Anual</span>
+              <span class="range-label" data-i18n="calc.rate">Tasa de Interés Anual</span>
               <span class="range-value" id="rateDisplay">8.00%</span>
             </div>
             <input type="range" id="rateRange" min="3" max="18" value="8" step="0.25">
@@ -303,7 +330,7 @@
 
           <div class="range-group">
             <div class="range-header">
-              <span class="range-label">Plazo del Préstamo</span>
+              <span class="range-label" data-i18n="calc.term">Plazo del Préstamo</span>
               <span class="range-value" id="termDisplay">20 años</span>
             </div>
             <input type="range" id="termRange" min="5" max="30" value="20" step="1">
@@ -312,16 +339,16 @@
 
           <!-- Amortization Table -->
           <div style="margin-top: var(--space-8);">
-            <h3 style="font-size:var(--text-xl);margin-bottom:var(--space-4);">Tabla de Amortización Anual</h3>
+            <h3 style="font-size:var(--text-xl);margin-bottom:var(--space-4);" data-i18n="calc.table_title">Tabla de Amortización Anual</h3>
             <div style="overflow-x:auto;">
               <table class="amort-table" id="amortTable">
                 <thead>
                   <tr>
-                    <th>Año</th>
-                    <th>Cuota Anual</th>
-                    <th>Capital</th>
-                    <th>Interés</th>
-                    <th>Balance</th>
+                    <th data-i18n="calc.table.year">Año</th>
+                    <th data-i18n="calc.table.annual_payment">Cuota Anual</th>
+                    <th data-i18n="calc.table.principal">Capital</th>
+                    <th data-i18n="calc.table.interest">Interés</th>
+                    <th data-i18n="calc.table.balance">Balance</th>
                   </tr>
                 </thead>
                 <tbody id="amortBody"></tbody>
@@ -332,8 +359,8 @@
 
         <!-- Results -->
         <div class="calc-result-card reveal">
-          <p style="text-align:center;color:var(--color-gray-400);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:0.2em;margin-bottom:var(--space-4);">Tu Cuota Mensual Estimada</p>
-          <div class="calc-monthly" id="monthlyResult">$1,338<span>/mes</span></div>
+          <p style="text-align:center;color:var(--color-gray-400);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:0.2em;margin-bottom:var(--space-4);" data-i18n="calc.monthly">Tu Cuota Mensual Estimada</p>
+          <div class="calc-monthly" id="monthlyResult">$1,338 <span data-i18n="pub.plans.pro.period">/mes</span></div>
 
           <!-- Donut Chart -->
           <div class="donut-chart">
@@ -344,40 +371,40 @@
             </svg>
             <div class="donut-chart__center">
               <div class="donut-chart__center-value" id="chartPercent">50%</div>
-              <div class="donut-chart__center-label">Capital</div>
+              <div class="donut-chart__center-label" data-i18n="calc.table.principal">Capital</div>
             </div>
           </div>
 
           <div class="chart-legend">
-            <div class="chart-legend__item"><div class="chart-legend__dot" style="background:var(--color-gold);"></div>Capital</div>
-            <div class="chart-legend__item"><div class="chart-legend__dot" style="background:var(--color-green-light);"></div>Intereses</div>
+            <div class="chart-legend__item"><div class="chart-legend__dot" style="background:var(--color-gold);"></div><span data-i18n="calc.table.principal">Capital</span></div>
+            <div class="chart-legend__item"><div class="chart-legend__dot" style="background:var(--color-green-light);"></div><span data-i18n="calc.table.interest">Intereses</span></div>
           </div>
 
           <div class="calc-breakdown">
             <div class="calc-breakdown__item">
-              <div class="calc-breakdown__label">Pago Inicial</div>
+              <div class="calc-breakdown__label" data-i18n="calc.down">Pago Inicial</div>
               <div class="calc-breakdown__value" id="resultDown">$40,000</div>
             </div>
             <div class="calc-breakdown__item">
-              <div class="calc-breakdown__label">Monto Financiado</div>
+              <div class="calc-breakdown__label" data-i18n="calc.loan_amount">Monto Financiado</div>
               <div class="calc-breakdown__value" id="resultLoan">$160,000</div>
             </div>
             <div class="calc-breakdown__item">
-              <div class="calc-breakdown__label">Intereses Totales</div>
+              <div class="calc-breakdown__label" data-i18n="calc.total_interest">Intereses Totales</div>
               <div class="calc-breakdown__value" id="resultInterest">$161,166</div>
             </div>
             <div class="calc-breakdown__item">
-              <div class="calc-breakdown__label">Costo Total</div>
+              <div class="calc-breakdown__label" data-i18n="calc.total_paid">Costo Total</div>
               <div class="calc-breakdown__value" id="resultTotal">$361,166</div>
             </div>
           </div>
 
-          <a href="agendar-tour.html" class="btn btn-primary btn-lg" style="width:100%;margin-bottom:var(--space-3);">
+          <a href="contacto.html" class="btn btn-primary btn-lg" style="width:100%;margin-bottom:var(--space-3);" data-i18n="nav.contact">
             Hablar con un Asesor
           </a>
           <a href="https://wa.me/18096972050?text=Hola%2C%20necesito%20asesor%C3%ADa%20sobre%20financiamiento" class="whatsapp-btn" target="_blank" rel="noopener" style="background:#25D366;color:white;display:flex;align-items:center;justify-content:center;gap:var(--space-2);padding:var(--space-4);border-radius:var(--radius-md);font-weight:600;font-size:var(--text-sm);text-decoration:none;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-            Asesoría por WhatsApp
+            <span data-i18n="pub.cta.whatsapp">Asesoría por WhatsApp</span>
           </a>
         </div>
       </div>
@@ -425,12 +452,15 @@
       const totalInterest = totalPaid - loan;
 
       const fmt = (v) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(v);
+      const lang = window.i18n ? window.i18n.currentLang : 'es';
+      const dictionary = window.i18n ? window.i18n.dictionary : {};
+      const yearsText = (dictionary['calc.years'] && dictionary['calc.years'][lang]) ? dictionary['calc.years'][lang] : 'años';
 
       document.getElementById('priceDisplay').textContent = fmt(price);
       document.getElementById('downDisplay').textContent = `${downPct}% (${fmt(downPayment)})`;
       document.getElementById('rateDisplay').textContent = `${rate.toFixed(2)}%`;
-      document.getElementById('termDisplay').textContent = `${term} años`;
-      document.getElementById('monthlyResult').innerHTML = `${fmt(monthly)}<span>/mes</span>`;
+      document.getElementById('termDisplay').textContent = `${term} ${yearsText}`;
+      document.getElementById('monthlyResult').innerHTML = `${fmt(monthly)} <span data-i18n="pub.plans.pro.period">/mes</span>`;
       document.getElementById('resultDown').textContent = fmt(downPayment);
       document.getElementById('resultLoan').textContent = fmt(loan);
       document.getElementById('resultInterest').textContent = fmt(totalInterest);
@@ -480,8 +510,7 @@
   </script>
 
   <!-- ── Google Translate ── -->
-  <div id="google_translate_element" style="display:none;"></div>
-  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script src="js/translate.js"></script>
+      <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
 </body>
 </html>

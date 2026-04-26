@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="contact.title">Contáctanos | Nuevo Sol Inversiones</title>
+  <meta name="description" content="Ponte en contacto con Nuevo Sol Inversiones. Estamos listos para ayudarte a encontrar tu propiedad ideal en República Dominicana.">
+  <link rel="icon" type="image/png" href="Nuevo Sol LOGO.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/translate.css">
+
+  <style>
+    .contact-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .contact-card {
+      background: var(--color-white);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-10);
+      box-shadow: var(--shadow-lg);
+      margin-bottom: var(--space-8);
+    }
+    .contact-direct {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+      margin-top: var(--space-12);
+    }
+    .direct-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-8);
+      border-radius: var(--radius-xl);
+      background: var(--color-white);
+      box-shadow: var(--shadow-md);
+      transition: all var(--duration-normal) var(--ease-out);
+      text-align: center;
+      border: 1px solid var(--color-gray-100);
+    }
+    .direct-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-gold);
+    }
+    .direct-btn--whatsapp:hover {
+      border-color: #25D366;
+    }
+    .direct-btn__icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-4);
+    }
+    .direct-btn__icon svg {
+      width: 32px;
+      height: 32px;
+      stroke-width: 1.5;
+    }
+    .direct-btn--call .direct-btn__icon { background: var(--color-gold-glow); }
+    .direct-btn--call svg { stroke: var(--color-gold); fill: none; }
+    .direct-btn--whatsapp .direct-btn__icon { background: rgba(37, 211, 102, 0.1); }
+    .direct-btn--whatsapp svg { fill: #25D366; }
+    
+    .direct-btn__title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: var(--weight-semibold);
+      color: var(--color-navy);
+      margin-bottom: var(--space-1);
+    }
+    .direct-btn__text {
+      font-size: var(--text-sm);
+      color: var(--color-gray-500);
+    }
+
+    @media (max-width: 768px) {
+      .contact-direct { grid-template-columns: 1fr; }
+      .contact-card { padding: var(--space-6); }
+    }
+    
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: var(--space-10);
+    }
+    .success-message.show {
+      display: block;
+      animation: scaleIn 0.5s var(--ease-out);
+    }
+  </style>
+</head>
+<body class="page-transition">
+
+  <!-- NAV -->
+  <nav class="nav nav--solid" id="mainNav" role="navigation">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo"><img src="Nuevo Sol LOGO.png" alt="Nuevo Sol Inversiones" style="height: 50px; width: auto;"></a>
+        <div class="nav__links">
+          <a href="index.html" class="nav__link" data-i18n="nav.home">Inicio</a>
+          <a href="propiedades.html" class="nav__link" data-i18n="nav.properties">Propiedades</a>
+          <a href="calculadora.html" class="nav__link" data-i18n="nav.calculator">Calculadora</a>
+          <a href="agendar-tour.html" class="nav__link" data-i18n="nav.tour">Agendar Tour</a>
+          <a href="publicar.html" class="nav__link" data-i18n="nav.publish">Publicar</a>
+          <a href="nosotros.html" class="nav__link" data-i18n="nav.about">Nosotros</a>
+          <a href="contacto.html" class="btn btn-primary btn-sm nav__cta" data-i18n="nav.contact">Contactar</a>
+          <div class="lang-picker">
+          <button class="nav__lang-toggle" aria-label="Cambiar Idioma" data-lang-btn>🇪🇸 ES</button>
+          <div class="lang-dropdown">
+            <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+            <button class="lang-option" data-lang="en">🇺🇸 English</button>          </div>
+        </div>
+        </div>
+        <button class="nav__hamburger" id="navHamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumbs" style="justify-content:center;">
+        <a href="index.html" data-i18n="nav.home">Inicio</a>
+        <span>/</span>
+        <span data-i18n="contact.title">Contáctanos</span>
+      </div>
+      <h1 data-i18n="contact.title">Contáctanos</h1>
+      <p data-i18n="contact.desc">Envíanos un mensaje y nuestro equipo de expertos se pondrá en contacto contigo a la brevedad.</p>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="contact-container">
+        
+        <!-- Form Card -->
+        <div class="contact-card reveal">
+          <form id="contactForm" class="form">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:var(--space-4); margin-bottom:var(--space-4);">
+              <div class="form-group">
+                <label class="form-label" data-i18n="contact.form.name">Nombre Completo</label>
+                <input type="text" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" data-i18n="contact.form.phone">Teléfono</label>
+                <input type="tel" class="form-input">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" data-i18n="contact.form.email">Correo Electrónico</label>
+              <input type="email" class="form-input" required>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" data-i18n="contact.form.subject">Asunto</label>
+              <input type="text" class="form-input">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" data-i18n="contact.form.message">Mensaje</label>
+              <textarea class="form-input" style="min-height:150px;" required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary btn-lg btn-block" data-i18n="contact.form.send">Enviar Mensaje</button>
+          </form>
+
+          <div id="successMessage" class="success-message">
+            <div style="width:80px;height:80px;background:var(--color-gold-glow);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-6);">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <h3 data-i18n="contact.form.success">¡Mensaje Enviado!</h3>
+            <p data-i18n="contact.form.success_desc">Gracias por contactarnos. Te responderemos lo antes posible.</p>
+          </div>
+        </div>
+
+        <!-- Direct Contact -->
+        <div class="text-center">
+          <h3 data-i18n="contact.direct.title" style="margin-bottom:var(--space-2);">Otras formas de contacto</h3>
+          <div class="contact-direct reveal">
+            <a href="tel:+18096972050" class="direct-btn direct-btn--call">
+              <div class="direct-btn__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.27-2.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </div>
+              <span class="direct-btn__title" data-i18n="contact.direct.call">Llamar Ahora</span>
+              <span class="direct-btn__text">+1 (809) 697-2050</span>
+            </a>
+            
+            <a href="https://wa.me/18096972050" target="_blank" class="direct-btn direct-btn--whatsapp">
+              <div class="direct-btn__icon">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+              </div>
+              <span class="direct-btn__title" data-i18n="contact.direct.whatsapp">WhatsApp Directo</span>
+              <span class="direct-btn__text" data-i18n="tour.contact.reply">Respuesta en menos de 5 minutos</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/18096972050" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+  </a>
+
+  <script src="js/app.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contactForm');
+      const successMessage = document.getElementById('successMessage');
+
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const submitBtn = form.querySelector('button[type="submit"]');
+          const originalText = submitBtn.textContent;
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Enviando...';
+
+          // Simulate API call
+          setTimeout(() => {
+            form.style.display = 'none';
+            successMessage.classList.add('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }, 1500);
+        });
+      }
+    });
+  </script>
+
+  <!-- Translation Engine -->
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
+</body>
+</html>

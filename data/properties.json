@@ -17,16 +17,21 @@
     {
       "id": "NSI-2604-LIX2",
       "title": "Casa / Mansión 3 Niveles – Los Ríos",
+      "title_en": "3-Level House / Mansion – Los Ríos",
       "slug": "mansion-3-niveles-los-rios",
       "type": "Casa",
+      "type_en": "House",
       "category": "luxury",
       "badge": "Destacada",
+      "badge_en": "Featured",
       "price": 1000000,
       "currency": "USD",
       "location": {
         "neighborhood": "Los Ríos",
         "city": "Santo Domingo",
-        "province": "Distrito Nacional"
+        "province": "Distrito Nacional",
+        "zone_type": "city",
+        "is_tourist_zone": false
       },
       "features": {
         "bedrooms": 6,
@@ -58,10 +63,34 @@
         "Walking Closet",
         "Jardinera Frontal"
       ],
+      "amenities_en": [
+        "Living Room",
+        "Dining Room",
+        "Cold Kitchen",
+        "Hot Kitchen",
+        "Balcony",
+        "Terrace",
+        "Studio",
+        "Laundry Area",
+        "Maid's Quarters",
+        "Backyard",
+        "3,000 Gallon Cistern",
+        "Full Backup Generator",
+        "Security Cameras",
+        "Intercom",
+        "Common Gas",
+        "Jacuzzi",
+        "Walk-in Closet",
+        "Front Planter"
+      ],
       "description": "Majestuosa casa de 3 niveles, donde el primer piso tiene la particularidad de ser estilo sótano, diseñada para ofrecer amplitud, comodidad y funcionalidad en cada uno de sus espacios. La propiedad cuenta con entrada principal y accesos laterales, una distribución pensada para la vida familiar, el entretenimiento y el servicio, así como amplias áreas interiores y exteriores.\n\nEn el primer nivel se encuentran elegantes áreas sociales, incluyendo dos salas, una sala adicional, oficina, comedor principal, comedor de diario, cocina de gran tamaño con dos credenzas, balcones y un amplio lobby central que conecta armoniosamente con el segundo nivel y el sótano.\n\nEl sótano ofrece entrada interna y externa, dos habitaciones con baño compartido, dos cuartos de servicio con baño independiente, área de lavado y planchado, tendedero y cuarto de almacén.\n\nEn el segundo nivel se destacan 4 habitaciones de generosas dimensiones. La habitación principal cuenta con baño completo, dos lavamanos, dos walking closets en cedro, jacuzzi y ventana corrediza con vista al patio. Las habitaciones secundarias también cuentan con jacuzzi, walking closet y acceso a balcón.\n\nCapacidad total de estacionamiento para 11 vehículos: marquesina sin techo para 5, techada para 2 y espacio exterior para 4 adicionales.",
+      "description_en": "Majestic 3-level house, where the first floor has the particularity of being a basement style, designed to offer spaciousness, comfort, and functionality in each of its spaces. The property has a main entrance and side access, a layout designed for family life, entertainment, and service, as well as spacious indoor and outdoor areas.\n\nOn the first level, there are elegant social areas, including two living rooms, an additional living room, an office, a main dining room, an everyday dining room, a large kitchen with two credenzas, balconies, and a large central lobby that connects harmoniously with the second level and the basement.\n\nThe basement offers internal and external entrances, two bedrooms with a shared bathroom, two maid's quarters with independent bathrooms, a laundry and ironing area, a drying area, and a storage room.\n\nOn the second level, 4 generously sized bedrooms stand out. The master bedroom has a full bathroom, two sinks, two cedar walk-in closets, a jacuzzi, and a sliding window overlooking the backyard. The secondary bedrooms also have a jacuzzi, walk-in closet, and balcony access.\n\nTotal parking capacity for 11 vehicles: unroofed carport for 5, roofed for 2, and outdoor space for 4 additional vehicles.",
       "description_short": "Majestuosa mansión de 3 niveles con 6 habitaciones, jacuzzi, planta eléctrica full y capacidad para 11 vehículos en Los Ríos.",
+      "description_short_en": "Majestic 3-level mansion with 6 bedrooms, jacuzzi, full backup generator, and capacity for 11 vehicles in Los Ríos.",
       "status_label": "Listo / Reventa",
+      "status_label_en": "Ready / Resale",
       "finishes": "Pisos de porcelanato de primera, terminación en caoba (puertas, gabinetes, etc.)",
+      "finishes_en": "First-class porcelain floors, mahogany finish (doors, cabinets, etc.)",
       "documents": [
         "Título de Propiedad",
         "IPI al Día",

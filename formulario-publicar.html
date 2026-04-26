@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Publicación | Nuevo Sol Inversiones</title>
+    <title data-i18n="form.pub.title">Formulario de Publicación | Nuevo Sol Inversiones</title>
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/components.css">
@@ -248,6 +248,21 @@
       color: #64748b;
       font-size: 0.875rem;
     }
+
+    .lang-toggle-form {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      color: #1e293b;
+      padding: 0.5rem 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.75rem;
+      font-weight: 600;
+      z-index: 10;
+    }
   </style>
 </head>
 <body class="page-transition">
@@ -255,22 +270,23 @@
   <!-- Overlay mientras Firebase verifica la sesión -->
   <div id="auth-loading">
     <div class="spinner"></div>
-    <p>Verificando sesión...</p>
+    <p data-i18n="form.loading.verifying">Verificando sesión...</p>
   </div>
 
   <!-- Barra de usuario autenticado -->
   <div id="auth-bar">
     <div class="user-greeting">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:#c5a55a"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-      Publicando como <strong id="auth-username">...</strong>
+      <span data-i18n="form.pub.posting_as">Publicando como</span> <strong id="auth-username">...</strong>
     </div>
-    <button class="btn-logout" id="logoutBtn">Cerrar sesión</button>
+    <button class="btn-logout" id="logoutBtn" data-i18n="form.pub.logout">Cerrar sesión</button>
   </div>
 
     <div class="form-container">
+        <button class="nav__lang-toggle lang-toggle-form" aria-label="Cambiar Idioma">🇪🇸 ES</button>
         <div class="form-header">
-            <h1>Publica tu Propiedad</h1>
-            <p>Completa el formulario para publicar tu inmueble en nuestra plataforma.</p>
+            <h1 data-i18n="form.pub.title">Publica tu Propiedad</h1>
+            <p data-i18n="form.pub.subtitle">Completa el formulario para publicar tu inmueble en nuestra plataforma.</p>
         </div>
 
         <form id="publicarForm">
@@ -278,22 +294,22 @@
             
             <!-- Sección 1: Información del Solicitante -->
             <div class="form-section">
-                <h3 class="form-section__title">👤 Información del Solicitante</h3>
+                <h3 class="form-section__title" data-i18n="form.section.applicant">👤 Información del Solicitante</h3>
                 <div class="form-grid">
                     <div class="form-group form-group--full">
-                        <label for="nombre">Nombre completo del propietario o representante autorizado</label>
+                        <label for="nombre" data-i18n="form.label.fullname_owner">Nombre completo del propietario o representante autorizado</label>
                         <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
                     </div>
                     <div class="form-group">
-                        <label for="cedula">Cédula / RNC / Pasaporte</label>
+                        <label for="cedula" data-i18n="form.label.id">Cédula / RNC / Pasaporte</label>
                         <input type="text" id="cedula" name="cedula" placeholder="001-0000000-0" required>
                     </div>
                     <div class="form-group">
-                        <label for="telefono">Teléfono</label>
+                        <label for="telefono" data-i18n="form.label.phone">Teléfono</label>
                         <input type="tel" id="telefono" name="telefono" placeholder="809-000-0000" required>
                     </div>
                     <div class="form-group form-group--full">
-                        <label for="email">Correo electrónico</label>
+                        <label for="email" data-i18n="auth.login.email">Correo electrónico</label>
                         <input type="email" id="email" name="email" placeholder="juan@ejemplo.com" required>
                     </div>
                 </div>
@@ -301,95 +317,97 @@
 
             <!-- Sección 2: Detalles del Inmueble -->
             <div class="form-section">
-                <h3 class="form-section__title">🏠 Detalles de la Propiedad</h3>
+                <h3 class="form-section__title" data-i18n="form.section.property">🏠 Detalles de la Propiedad</h3>
                 <div class="form-grid">
                     <div class="form-group form-group--full">
-                        <label for="titulo">Título del Anuncio</label>
+                        <label for="titulo" data-i18n="form.label.ad_title">Título del Anuncio</label>
                         <input type="text" id="titulo" name="titulo" placeholder="Ej: Hermosa Villa frente al mar" required>
                     </div>
                     <div class="form-group">
-                        <label for="tipo">Tipo de Inmueble</label>
+                        <label for="tipo" data-i18n="form.label.prop_type">Tipo de Inmueble</label>
                         <select id="tipo" name="tipo" required>
-                            <option value="">Seleccione...</option>
-                            <option value="Casa">Casa</option>
-                            <option value="Apartamento">Apartamento</option>
-                            <option value="Solar">Solar / Terreno</option>
-                            <option value="Villa">Villa</option>
-                            <option value="Local Comercial">Local Comercial</option>
+                            <option value="" data-i18n-opt="tour.form.property_opt1">Seleccione...</option>
+                            <option value="Casa" data-i18n-opt="props.filter.house">Casa</option>
+                            <option value="Apartamento" data-i18n-opt="props.filter.apartment">Apartamento</option>
+                            <option value="Solar" data-i18n-opt="category.plots">Solar / Terreno</option>
+                            <option value="Villa" data-i18n-opt="props.filter.villa">Villa</option>
+                            <option value="Local Comercial" data-i18n-opt="form.label.commercial">Local Comercial</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="operacion">Tipo de Operación</label>
+                        <label for="operacion" data-i18n="form.label.operation">Tipo de Operación</label>
                         <select id="operacion" name="operacion" required>
-                            <option value="Venta">Venta</option>
-                            <option value="Alquiler">Alquiler</option>
+                            <option value="Venta" data-i18n-opt="calc.total_paid">Venta</option>
+                            <option value="Alquiler" data-i18n-opt="pub.plans.pro.period">Alquiler</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="precio">Precio (USD)</label>
+                        <label for="precio" data-i18n="form.label.price_usd">Precio (USD)</label>
                         <input type="number" id="precio" name="precio" placeholder="Ej: 250000" required>
                     </div>
                     <div class="form-group">
-                        <label for="ubicacion">Ubicación (Ciudad/Sector)</label>
+                        <label for="ubicacion" data-i18n="form.label.location_detail">Ubicación (Ciudad/Sector)</label>
                         <input type="text" id="ubicacion" name="ubicacion" placeholder="Ej: Santo Domingo, Piantini" required>
                     </div>
                     <div class="form-group form-group--full">
-                        <label for="descripcion">Descripción Detallada</label>
-                        <textarea id="descripcion" name="descripcion" rows="4" placeholder="Describe las bondades de la propiedad..."></textarea>
+                        <label for="descripcion" data-i18n="form.label.description">Descripción Detallada</label>
+                        <textarea id="descripcion" name="descripcion" rows="4" data-i18n-ph="form.ph.description" placeholder="Describe las bondades de la propiedad..."></textarea>
                     </div>
                 </div>
             </div>
 
             <!-- Sección 3: Multimedia -->
             <div class="form-section">
-                <h3 class="form-section__title">📸 Fotos y Documentos</h3>
+                <h3 class="form-section__title" data-i18n="form.section.media">📸 Fotos y Documentos</h3>
                 <div class="form-group form-group--full">
-                    <label>Enlace a Fotos (Drive, Dropbox, etc.)</label>
+                    <label data-i18n="form.label.photos_link">Enlace a Fotos (Drive, Dropbox, etc.)</label>
                     <input type="url" name="fotos_link" placeholder="https://drive.google.com/drive/folders/...">
-                    <p style="font-size: 10px; color: #64748b; margin-top: 4px;">* Recomendamos subir una carpeta con fotos de alta calidad.</p>
+                    <p style="font-size: 10px; color: #64748b; margin-top: 4px;" data-i18n="form.hint.photos">* Recomendamos subir una carpeta con fotos de alta calidad.</p>
                 </div>
             </div>
 
             <!-- Sección 4: Firma y Aceptación -->
             <div class="form-section">
-                <h3 class="form-section__title">✍️ Firma y Aceptación</h3>
+                <h3 class="form-section__title" data-i18n="form.section.legal">✍️ Firma y Aceptación</h3>
                 <div class="form-group form-group--full">
                     <div style="background: #fefce8; border: 1px solid #fde047; padding: var(--space-4); border-radius: var(--radius-lg); margin-bottom: var(--space-6);">
-                        <p style="font-size: 13px; color: #854d0e; margin: 0; font-weight: 600;">
-                            ⚠️ AVISO IMPORTANTE: Al publicar bajo el plan gratuito, aceptas pagar una comisión del 2% del valor total de la operación si la propiedad genera una venta o alquiler a través de esta plataforma.
+                        <p style="font-size: 13px; color: #854d0e; margin: 0; font-weight: 600;" data-i18n="form.legal.warning">
+                            ⚠️ AVISO LEGAL: Al publicar bajo el plan gratuito, firmas un Contrato de Corretaje Digital. Aceptas pagar una comisión del 3% (Urbano) al 5% (Rural/Terrenos) + ITBIS si la venta se concreta con un prospecto de la plataforma.
                         </p>
                     </div>
 
-                    <label>Firma digital o firma escaneada</label>
+                    <label data-i18n="form.label.signature">Firma digital o firma escaneada</label>
                     <div class="file-upload" id="dropZone">
-                        <span id="fileLabel">Haz clic para subir o arrastra tu firma (PNG, JPG, PDF)</span>
+                        <span id="fileLabel" data-i18n="form.ph.signature">Haz clic para subir o arrastra tu firma (PNG, JPG, PDF)</span>
                         <input type="file" id="firma_archivo" name="firma_archivo" accept=".png,.jpg,.jpeg,.pdf" style="display:none">
                     </div>
-                    <p style="font-size: 10px; color: #64748b; margin-top: 4px;">* Formatos: PNG, JPG, JPEG o PDF. Máx 5MB.</p>
+                    <p style="font-size: 10px; color: #64748b; margin-top: 4px;" data-i18n="form.hint.signature">* Formatos: PNG, JPG, JPEG o PDF. Máx 5MB.</p>
                     
                     <div style="margin-top: 25px; display: flex; flex-direction: column; gap: 15px;">
                         <div style="display: flex; gap: 10px; align-items: flex-start;">
                             <input type="checkbox" id="terminos" name="terminos" required style="margin-top: 4px;">
                             <label for="terminos" style="text-transform: none; font-size: 13px; color: var(--color-navy); cursor: pointer;">
-                                He leído y acepto los <a href="javascript:void(0)" onclick="openTC()" style="color: var(--color-gold); font-weight: 700; text-decoration: underline;">Términos y Condiciones</a> de Nuevo Sol Inversiones.
+                                <span data-i18n="form.legal.terms_prefix">He leído y acepto los</span> 
+                                <a href="javascript:void(0)" onclick="openTC()" style="color: var(--color-gold); font-weight: 700; text-decoration: underline;" data-i18n="form.legal.terms_link">Términos y Condiciones</a> 
+                                <span data-i18n="form.legal.terms_suffix">de Nuevo Sol Inversiones.</span>
                             </label>
                         </div>
                         
                         <div style="display: flex; gap: 10px; align-items: flex-start;">
                             <input type="checkbox" id="comision_acepta" name="comision_acepta" required style="margin-top: 4px;">
-                            <label for="comision_acepta" style="text-transform: none; font-size: 13px; color: var(--color-navy); cursor: pointer;">
-                                Entiendo y acepto que, al publicar gratuitamente, deberé pagar una <strong>comisión del 2%</strong> si la propiedad genera una operación inmobiliaria a través de la plataforma.
+                            <label for="comision_acepta" style="text-transform: none; font-size: 13px; color: var(--color-navy); cursor: pointer;" data-i18n="form.legal.comission_acepta">
+                                Entiendo y acepto el Contrato de Corretaje Digital y mi obligación de pagar una <strong>comisión del 3% al 5%</strong> si la propiedad se vende a través de la intermediación de la plataforma.
                             </label>
                         </div>
                     </div>
                     
-                    <p style="font-size: 11px; color: #64748b; margin-top: 20px; line-height: 1.4;">
+                    <p style="font-size: 11px; color: #64748b; margin-top: 20px; line-height: 1.4;" data-i18n="form.legal.declaration">
                         Al presionar “Enviar Publicación”, declaro bajo la fe del juramento que la información suministrada es real y que tengo la autorización legal para publicar este inmueble.
                     </p>
                 </div>
             </div>
 
-            <button type="submit" class="btn-submit" id="submitBtn">Enviar Publicación</button>
+            <button type="submit" class="btn-submit" id="submitBtn" data-i18n="form.btn.submit">Enviar Publicación</button>
             <div id="formMessage" style="margin-top: 20px; text-align: center; font-size: 14px; display: none;"></div>
         </form>
     </div>
@@ -398,7 +416,7 @@
     <div id="modalTC" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.7); backdrop-filter:blur(5px); padding: 20px; display:flex; align-items:center; justify-content:center;">
         <div style="background:white; max-width:800px; width:100%; max-height:85vh; border-radius:var(--radius-2xl); position:relative; display:flex; flex-direction:column; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);">
             <div style="padding: 25px; border-bottom: 1px solid #eee; display:flex; justify-content:space-between; align-items:center;">
-                <h2 style="font-family:var(--font-display); margin:0; color:var(--color-navy);">Términos y Condiciones de Uso</h2>
+                <h2 style="font-family:var(--font-display); margin:0; color:var(--color-navy);" data-i18n="form.tc.title">Términos y Condiciones de Uso</h2>
                 <button onclick="closeTC()" style="background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
             </div>
             <div id="tcContent" style="padding: 30px; overflow-y:auto; font-size:14px; line-height:1.6; color:#334155;">
@@ -415,12 +433,21 @@
                 <h3>2. Naturaleza del servicio</h3>
                 <p>Nuevo Sol Inversiones ofrece un espacio digital de publicación y promoción inmobiliaria. Salvo acuerdo expreso por escrito, la plataforma no garantiza la venta, alquiler, reserva, cierre contractual ni transferencia de ningún inmueble publicado.</p>
 
-                <h3>3. Tipos de planes disponibles</h3>
-                <h4>3.1. Plan gratuito</h4>
-                <p>El usuario podrá publicar una o varias propiedades sin realizar un pago inicial por la publicación. Al utilizar el plan gratuito, el usuario acepta expresamente que, si la propiedad publicada genera una operación de venta, alquiler, separación, reserva, promesa de venta, contrato definitivo o cualquier transacción derivada directa o indirectamente de la publicación realizada en la plataforma, deberá pagar a Nuevo Sol Inversiones una comisión equivalente al <strong>dos por ciento (2%)</strong> del valor total de la operación inmobiliaria.</p>
+                <h3 data-i18n="form.tc.c3_title">3. Contrato de Corretaje Digital (Plan Éxito Compartido)</h3>
+                <h4 data-i18n="form.tc.c3_1_title">3.1. Reconocimiento de Intermediación</h4>
+                <p data-i18n="form.tc.c3_1_desc">El Usuario reconoce y acepta que Nuevo Sol Inversiones y sus agentes automatizados actúan como corredores inmobiliarios oficiales. La firma digital de estos términos posee plena validez jurídica conforme a la Ley 126-02 de Comercio Electrónico de la República Dominicana.</p>
 
-                <h3>4. Comisión del 2% en publicaciones gratuitas</h3>
-                <p>El usuario reconoce y acepta que el plan gratuito no elimina la obligación de pago en caso de que la publicación genere una transacción inmobiliaria. El usuario no podrá evadir, ocultar, desconocer ni negociar por fuera de la plataforma con contactos generados a través de Nuevo Sol Inversiones con el propósito de evitar el pago de la comisión correspondiente.</p>
+                <h4 data-i18n="form.tc.c3_2_title">3.2. Estructura de Pagos y Facturación</h4>
+                <p data-i18n="form.tc.c3_2_desc">Al optar por el plan gratuito, el propietario se compromete a pagar una comisión del <strong>3% para propiedades urbanas residenciales</strong> y del <strong>5% para terrenos o propiedades rurales</strong>. Esta comisión está sujeta al pago del 18% de ITBIS (Normativas DGII) y será pagadera a la firma del Contrato de Promesa de Venta o al recibo del pago mayoritario.</p>
+
+                <h4 data-i18n="form.tc.c3_3_title">3.3. Certificado de Visita Digital</h4>
+                <p data-i18n="form.tc.c3_3_desc">La IA generará un "Certificado de Visita Digital" por cada lead calificado (verificando Cédula/Pasaporte). Si dicho prospecto figura en el Registro de Títulos (Ley 108-05) como adquiriente, será prueba legal de nuestra intermediación.</p>
+
+                <h4 data-i18n="form.tc.c3_4_title">3.4. Cláusula de Extensión (Derecho Post-Terminación)</h4>
+                <p data-i18n="form.tc.c3_4_desc">El derecho a la comisión se extiende por <strong>doce (12) meses</strong> tras la baja del anuncio si el comprador es un prospecto originalmente presentado por la plataforma.</p>
+
+                <h4 data-i18n="form.tc.c3_5_title">3.5. Penalidades por Evasión</h4>
+                <p data-i18n="form.tc.c3_5_desc">Si se concreta la venta con un prospecto de la plataforma ocultándolo para evadir el pago, el usuario deberá pagar una penalidad equivalente al <strong>doble (200%)</strong> de la tarifa original en concepto de daños y perjuicios.</p>
 
                 <h3>5. Responsabilidad del usuario sobre la información publicada</h3>
                 <p>El usuario declara bajo su responsabilidad que toda la información suministrada sobre la propiedad es verdadera, completa, actualizada y verificable. Nuevo Sol Inversiones no será responsable por datos falsos, incompletos, imprecisos, engañosos o desactualizados suministrados por el usuario.</p>
@@ -440,7 +467,7 @@
                 </div>
             </div>
             <div style="padding: 20px; border-top: 1px solid #eee; text-align:right;">
-                <button onclick="closeTC()" class="btn btn-primary">Entendido y Cerrar</button>
+                <button onclick="closeTC()" class="btn btn-primary" data-i18n="form.tc.close">Entendido y Cerrar</button>
             </div>
         </div>
     </div>
@@ -486,6 +513,14 @@
 
     // ── Referencias UI ──
     const loadingEl   = document.getElementById('auth-loading');
+
+    // ── Safety Timeout: si en 6 segundos no ha cargado, forzar ocultar el loading ──
+    const authTimeout = setTimeout(() => {
+      if (loadingEl && loadingEl.style.display !== 'none') {
+        loadingEl.style.display = 'none';
+        console.warn("Auth check timed out. Forcing UI display.");
+      }
+    }, 6000);
     const authBar     = document.getElementById('auth-bar');
     const authName    = document.getElementById('auth-username');
     const logoutBtn   = document.getElementById('logoutBtn');
@@ -522,11 +557,17 @@
 
     // ── Auth Guard ──
     onAuthStateChanged(auth, async (user) => {
+      clearTimeout(authTimeout);
       loadingEl.style.display = 'none';
 
       if (!user) {
-        sessionStorage.setItem('redirectAfterLogin', 'formulario-publicar.html');
-        window.location.href = 'login.html';
+        sessionStorage.setItem('redirectAfterLogin', window.location.href);
+        // Si estamos en un iframe (como en publicar.html), redirigir la ventana principal
+        if (window.self !== window.top) {
+          window.top.location.href = 'login.html';
+        } else {
+          window.location.href = 'login.html';
+        }
         return;
       }
 
@@ -622,13 +663,15 @@
 
       // 3. Enviar formulario (sin info de contacto)
       btn.disabled    = true;
-      btn.textContent = 'Enviando...';
+      const lang = window.i18n ? window.i18n.currentLang : 'es';
+      btn.textContent = (window.i18n && window.i18n.dictionary['form.btn.submitting']) ? window.i18n.dictionary['form.btn.submitting'][lang] : 'Enviando...';
       msg.style.display = 'none';
 
       const formData = new FormData(e.target);
       const data     = Object.fromEntries(formData.entries());
       data.terminos        = formData.get('terminos')        === 'on';
       data.comision_acepta = formData.get('comision_acepta') === 'on';
+      data.ui_lang         = window.getCurrentLanguage ? window.getCurrentLanguage() : 'es';
 
       // Convertir firma a Base64
       const firmaFile = fileInput.files[0];
@@ -652,7 +695,7 @@
           body:    JSON.stringify(data)
         });
         msg.style.color   = '#059669';
-        msg.textContent   = '¡Publicación enviada con éxito! Nos contactaremos contigo pronto.';
+        msg.textContent   = (window.i18n && window.i18n.dictionary['form.success']) ? window.i18n.dictionary['form.success'][lang] : '¡Publicación enviada con éxito! Nos contactaremos contigo pronto.';
         msg.style.display = 'block';
         e.target.reset();
         fileLabel.textContent = 'Haz clic para subir o arrastra tu firma (PNG, JPG, PDF)';
@@ -660,12 +703,30 @@
       } catch (error) {
         console.error('Error:', error);
         msg.style.color   = '#dc2626';
-        msg.textContent   = 'Hubo un error al enviar. Por favor intenta de nuevo.';
+        msg.textContent   = (window.i18n && window.i18n.dictionary['form.error']) ? window.i18n.dictionary['form.error'][lang] : 'Hubo un error al enviar. Por favor intenta de nuevo.';
         msg.style.display = 'block';
       } finally {
         btn.disabled    = false;
-        btn.textContent = 'Enviar Publicación';
+        btn.textContent = (window.i18n && window.i18n.dictionary['form.btn.submit']) ? window.i18n.dictionary['form.btn.submit'][lang] : 'Enviar Publicación';
       }
+    });
+  </script>
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
+  <script>
+    function repopulateSelectOptions() {
+      const lang = window.i18n ? window.i18n.currentLang : 'es';
+      const dictionary = window.i18n ? window.i18n.dictionary : {};
+      document.querySelectorAll('[data-i18n-opt]').forEach(opt => {
+        const key = opt.getAttribute('data-i18n-opt');
+        if (dictionary[key] && dictionary[key][lang]) {
+          opt.textContent = dictionary[key][lang];
+        }
+      });
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(repopulateSelectOptions, 500);
+      document.addEventListener('languageChanged', repopulateSelectOptions);
     });
   </script>
 </body>

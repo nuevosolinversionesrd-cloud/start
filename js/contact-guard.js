@@ -160,16 +160,32 @@ export async function recordViolation(db, uid) {
  * @returns {string}
  */
 export function formatDuration(ms) {
+  const lang = window.i18n ? window.i18n.currentLang : 'es';
+  const dict = window.i18n ? window.i18n.dictionary : {};
+
   const totalSeconds = Math.floor(ms / 1000);
   const days         = Math.floor(totalSeconds / 86400);
   const hours        = Math.floor((totalSeconds % 86400) / 3600);
   const minutes      = Math.floor((totalSeconds % 3600) / 60);
 
   const parts = [];
-  if (days    > 0) parts.push(`${days} día${days    > 1 ? 's' : ''}`);
-  if (hours   > 0) parts.push(`${hours} hora${hours  > 1 ? 's' : ''}`);
-  if (minutes > 0 && days === 0) parts.push(`${minutes} minuto${minutes > 1 ? 's' : ''}`);
-  return parts.join(' y ') || 'unos minutos';
+  if (days > 0) {
+    const unit = days > 1 ? (dict['cg.dur.days']?.[lang] || 'días') : (dict['cg.dur.day']?.[lang] || 'día');
+    parts.push(`${days} ${unit}`);
+  }
+  if (hours > 0) {
+    const unit = hours > 1 ? (dict['cg.dur.hours']?.[lang] || 'horas') : (dict['cg.dur.hour']?.[lang] || 'hora');
+    parts.push(`${hours} ${unit}`);
+  }
+  if (minutes > 0 && days === 0) {
+    const unit = minutes > 1 ? (dict['cg.dur.minutes']?.[lang] || 'minutos') : (dict['cg.dur.minute']?.[lang] || 'minuto');
+    parts.push(`${minutes} ${unit}`);
+  }
+
+  const andText = dict['cg.dur.and']?.[lang] || 'y';
+  const fewMinsText = dict['cg.dur.few_mins']?.[lang] || 'unos minutos';
+
+  return parts.join(` ${andText} `) || fewMinsText;
 }
 
 /**
@@ -195,7 +211,6 @@ export function injectContactWarningModal() {
         <div style="background:linear-gradient(135deg,#dc2626,#b91c1c); padding:24px; text-align:center;">
           <div style="font-size:2.5rem; margin-bottom:8px;">🚫</div>
           <h2 id="cg-title" style="margin:0; color:#fff; font-family:'Outfit',sans-serif; font-size:1.25rem; font-weight:700;">
-            Información de contacto no permitida
           </h2>
         </div>
         <!-- Body -->
@@ -213,7 +228,7 @@ export function injectContactWarningModal() {
             background:linear-gradient(135deg,#1a3c5e,#0f2640);
             color:#fff; font-family:'Outfit',sans-serif; font-size:1rem;
             font-weight:700; cursor:pointer; transition:opacity 0.2s;
-          ">Entendido</button>
+          "></button>
         </div>
       </div>
     </div>
@@ -233,26 +248,35 @@ export function injectContactWarningModal() {
 }
 
 export function showContactWarningModal({ violations, suspended, suspendedUntil, remainingMs }) {
+  const lang = window.i18n ? window.i18n.currentLang : 'es';
+  const dict = window.i18n ? window.i18n.dictionary : {};
+
   const backdrop    = document.getElementById('cg-backdrop');
   const title       = document.getElementById('cg-title');
   const message     = document.getElementById('cg-message');
   const counterWrap = document.getElementById('cg-counter-wrap');
   const counterText = document.getElementById('cg-counter-text');
+  const closeBtn    = document.getElementById('cg-close');
+
+  closeBtn.textContent = dict['cg.modal.btn_ok']?.[lang] || 'Entendido';
 
   if (suspended) {
-    title.textContent = '🔒 Cuenta suspendida';
-    message.innerHTML = `Tu cuenta ha sido suspendida temporalmente porque intentaste incluir información de contacto repetidamente.<br><br>
-      <strong>Podrás publicar de nuevo en: ${formatDuration(remainingMs)}</strong>`;
+    title.textContent = dict['cg.modal.title_suspended']?.[lang] || '🔒 Cuenta suspendida';
+    let msg = dict['cg.modal.msg_suspended']?.[lang] || 'Tu cuenta ha sido suspendida temporalmente...';
+    message.innerHTML = msg.replace('{duration}', formatDuration(remainingMs));
     counterWrap.style.display = 'none';
   } else {
     const remaining = VIOLATIONS_THRESHOLD - violations;
-    title.textContent   = 'Información de contacto no permitida';
-    message.innerHTML   = `No puedes incluir <strong>teléfonos, correos, WhatsApp ni redes sociales</strong> en tu publicación.<br><br>
-      Toda comunicación con los interesados se realiza exclusivamente a través de <strong>Nuevo Sol Inversiones</strong>.`;
+    title.textContent = dict['cg.modal.title_warning']?.[lang] || 'Información de contacto no permitida';
+    message.innerHTML = dict['cg.modal.msg_warning']?.[lang] || 'No puedes incluir teléfonos...';
+    
     counterWrap.style.display = 'block';
-    counterText.textContent   = remaining === 1
-      ? `⚠️ Este es tu último intento. El siguiente intento suspenderá tu cuenta.`
-      : `Te quedan ${remaining} intento${remaining !== 1 ? 's' : ''} antes de que tu cuenta sea suspendida temporalmente.`;
+    if (remaining === 1) {
+      counterText.textContent = dict['cg.modal.counter_last']?.[lang] || '⚠️ Este es tu último intento...';
+    } else {
+      let t = dict['cg.modal.counter_remaining']?.[lang] || 'Te quedan {n} intentos...';
+      counterText.textContent = t.replace('{n}', remaining);
+    }
   }
 
   backdrop.style.display = 'flex';
@@ -271,6 +295,9 @@ export function closeContactWarningModal() {
  * Muestra un banner de suspensión que bloquea todo el formulario.
  */
 export function showSuspensionBanner(remainingMs) {
+  const lang = window.i18n ? window.i18n.currentLang : 'es';
+  const dict = window.i18n ? window.i18n.dictionary : {};
+
   const form = document.querySelector('form');
   if (!form) return;
 
@@ -289,17 +316,16 @@ export function showSuspensionBanner(remainingMs) {
       <div style="background:linear-gradient(135deg,#7f1d1d,#dc2626); padding:36px 24px;">
         <div style="font-size:4rem; margin-bottom:12px;">🔒</div>
         <h1 style="margin:0; color:#fff; font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800;">
-          Cuenta Suspendida
+          ${dict['cg.banner.title']?.[lang] || 'Cuenta Suspendida'}
         </h1>
       </div>
       <div style="padding:32px 28px;">
         <p style="color:#475569; font-size:0.9375rem; line-height:1.7; margin:0 0 24px;">
-          Tu cuenta ha sido suspendida temporalmente por intentos repetidos de compartir 
-          información de contacto directa, lo cual va en contra de nuestras normas de uso.
+          ${dict['cg.banner.desc']?.[lang] || 'Tu cuenta ha sido suspendida temporalmente...'}
         </p>
         <div style="background:#fef2f2; border:1px solid #fecaca; border-radius:14px; padding:18px; margin-bottom:28px;">
           <p style="margin:0; font-size:0.875rem; color:#991b1b; font-weight:600;">
-            ⏱ Podrás publicar nuevamente en:
+            ${dict['cg.banner.countdown_label']?.[lang] || '⏱ Podrás publicar nuevamente en:'}
           </p>
           <p id="cg-countdown" style="margin:8px 0 0; font-size:1.5rem; font-weight:800; color:#dc2626; font-family:'Outfit',sans-serif;">
             ${formatDuration(remainingMs)}
@@ -309,7 +335,7 @@ export function showSuspensionBanner(remainingMs) {
           display:inline-block; padding:14px 32px; background:linear-gradient(135deg,#1a3c5e,#0f2640);
           color:#fff; border-radius:12px; text-decoration:none; font-family:'Outfit',sans-serif;
           font-weight:700; font-size:0.9375rem;
-        ">Volver al inicio</a>
+        ">${dict['cg.banner.btn_home']?.[lang] || 'Volver al inicio'}</a>
       </div>
     </div>
   `;

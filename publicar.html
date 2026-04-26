@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 <head>
-  <script>
-    if (localStorage.getItem('ns_lang') === 'en') {
-      document.write('<style id="anti-flicker">html { opacity: 0; transition: opacity 0.4s ease; }</style>');
-    }
-  </script>
+  
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,14 +33,18 @@
     .pub-step__num{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#E79E24,#E8D5A3);color:#1A2744;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center;margin:0 auto var(--space-4)}
     .pub-step__title{font-family:var(--font-display);font-weight:600;color:var(--color-navy);margin-bottom:var(--space-2);font-size:var(--text-lg)}
     .pub-step__text{font-size:var(--text-sm);color:var(--color-gray-600);margin:0;line-height:1.6}
-    .pricing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-8);max-width:900px;margin:0 auto;margin-top:var(--space-10)}
-    .pricing-card{border-radius:var(--radius-2xl);padding:var(--space-10);text-align:center;transition:all .4s ease;position:relative;overflow:hidden}
+    .pricing-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-6);max-width:1200px;margin:0 auto;margin-top:var(--space-10)}
+    .pricing-card{border-radius:var(--radius-2xl);padding:var(--space-8);text-align:center;transition:all .4s ease;position:relative;overflow:hidden;display:flex;flex-direction:column}
+    .pricing-card--free{background:#f8fafc;box-shadow:var(--shadow-card);border:2px solid transparent}
+    .pricing-card--free:hover{border-color:#1A2744;transform:translateY(-6px);box-shadow:var(--shadow-card-hover)}
     .pricing-card--basic{background:#fff;box-shadow:var(--shadow-card);border:2px solid transparent}
     .pricing-card--basic:hover{border-color:#E79E24;transform:translateY(-6px);box-shadow:var(--shadow-card-hover)}
-    .pricing-card--pro{background:linear-gradient(135deg,#1A2744,#2A3F6E);color:#fff;box-shadow:0 20px 60px rgba(26,39,68,.3)}
-    .pricing-card--pro:hover{transform:translateY(-6px);box-shadow:0 30px 80px rgba(26,39,68,.4)}
-    .pricing-card__badge{position:absolute;top:20px;right:-30px;background:linear-gradient(135deg,#E79E24,#E8D5A3);color:#1A2744;font-size:.7rem;font-weight:700;padding:6px 40px;transform:rotate(45deg);text-transform:uppercase;letter-spacing:.1em}
-    .pricing-card__price{font-family:var(--font-display);font-size:var(--text-5xl);font-weight:800;margin:var(--space-4) 0}
+    .pricing-card--pro{background:linear-gradient(135deg,#1A2744,#2A3F6E);color:#fff;box-shadow:0 20px 60px rgba(26,39,68,.3);border:2px solid transparent}
+    .pricing-card--pro:hover{transform:translateY(-6px);box-shadow:0 30px 80px rgba(26,39,68,.4);border-color:#E79E24}
+    .pricing-card--enterprise{background:#000;color:#fff;box-shadow:0 20px 60px rgba(0,0,0,.4);border:2px solid var(--color-gold-light)}
+    .pricing-card--enterprise:hover{transform:translateY(-6px);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+    .pricing-card__badge{position:absolute;top:20px;right:-30px;background:linear-gradient(135deg,#E79E24,#E8D5A3);color:#1A2744;font-size:.7rem;font-weight:700;padding:6px 40px;transform:rotate(45deg);text-transform:uppercase;letter-spacing:.1em;z-index:2}
+    .pricing-card__price{font-family:var(--font-display);font-size:var(--text-4xl);font-weight:800;margin:var(--space-4) 0}
     .pricing-card__price span{font-size:var(--text-lg);font-weight:400;opacity:.7}
     .pricing-card__list{list-style:none;padding:0;margin:var(--space-6) 0;text-align:left}
     .pricing-card__list li{padding:var(--space-3) 0;border-bottom:1px solid rgba(128,128,128,.15);font-size:var(--text-sm);display:flex;align-items:flex-start;gap:var(--space-3)}
@@ -63,6 +63,9 @@
     .control-card__title{font-family:var(--font-display);font-weight:600;color:var(--color-navy);margin-bottom:var(--space-2);font-size:var(--text-lg)}
     .control-card__text{font-size:var(--text-sm);color:var(--color-gray-600);margin:0;line-height:1.6}
     .commission-badge{display:inline-flex;align-items:center;gap:var(--space-3);background:linear-gradient(135deg,#E79E24,#E8D5A3);color:#1A2744;padding:var(--space-4) var(--space-8);border-radius:var(--radius-full);font-family:var(--font-display);font-weight:700;font-size:var(--text-xl);margin-top:var(--space-6)}
+    @media(max-width:1100px){
+      .pricing-grid{grid-template-columns:repeat(2,1fr)}
+    }
     @media(max-width:768px){
       .pub-steps,.services-grid{grid-template-columns:1fr 1fr}
       .pricing-grid{grid-template-columns:1fr}
@@ -77,8 +80,9 @@
     }
   </style>
   <link rel="stylesheet" href="css/translate.css">
-</head>
+    </head>
 <body class="page-transition">
+  
 
   <!-- NAV -->
   <nav class="nav nav--transparent" id="mainNav" role="navigation">
@@ -86,15 +90,29 @@
       <div class="nav__inner">
         <a href="index.html" class="nav__logo"><img src="Nuevo Sol LOGO.png" alt="Nuevo Sol Inversiones" style="height: 50px; width: auto;"></a>
         <div class="nav__links">
-          <a href="index.html" class="nav__link">Inicio</a>
-          <a href="propiedades.html" class="nav__link">Propiedades</a>
-          <a href="calculadora.html" class="nav__link">Calculadora</a>
-          <a href="agendar-tour.html" class="nav__link">Agendar Tour</a>
-          <a href="publicar.html" class="nav__link nav__link--active">Publicar</a>
-          <a href="nosotros.html" class="nav__link">Nosotros</a>
-          <a href="agendar-tour.html" class="btn btn-primary btn-sm nav__cta">Contactar</a>
+          <a href="index.html" class="nav__link" data-i18n="nav.home">Inicio</a>
+          <a href="propiedades.html" class="nav__link" data-i18n="nav.properties">Propiedades</a>
+          <a href="calculadora.html" class="nav__link" data-i18n="nav.calculator">Calculadora</a>
+          <a href="agendar-tour.html" class="nav__link" data-i18n="nav.tour">Agendar Tour</a>
+          <a href="publicar.html" class="nav__link nav__link--active" data-i18n="nav.publish">Publicar</a>
+          <a href="nosotros.html" class="nav__link" data-i18n="nav.about">Nosotros</a>
+          <a href="contacto.html" class="btn btn-primary btn-sm nav__cta" data-i18n="nav.contact">Contactar</a>
         
-          <button class="nav__lang-toggle notranslate" aria-label="Cambiar Idioma">🇪🇸 ES</button>
+          <div class="lang-picker">
+          <button class="nav__lang-toggle" aria-label="Cambiar Idioma" data-lang-btn>🇪🇸 ES</button>
+          <div class="lang-dropdown">
+            <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+            <button class="lang-option" data-lang="en">🇺🇸 English</button>          </div>
+        </div>
+          
+          <!-- Desktop Auth -->
+          <div class="nav__auth">
+            <a href="login.html" class="btn-login" data-i18n="nav.login">Login</a>
+            <span class="nav__signup-text">
+              <span data-i18n="nav.no_account">¿No tienes cuenta?</span> 
+              <a href="registro.html" data-i18n="nav.signup">Sign Up</a>
+            </span>
+          </div>
         </div>
         
         <button class="nav__hamburger" id="navHamburger" aria-label="Menú"><span></span><span></span><span></span></button>
@@ -102,12 +120,28 @@
     </div>
   </nav>
   <div class="nav__mobile" id="navMobile">
-    <a href="index.html" class="nav__link" onclick="closeMobileNav()">Inicio</a>
-    <a href="propiedades.html" class="nav__link" onclick="closeMobileNav()">Propiedades</a>
-    <a href="calculadora.html" class="nav__link" onclick="closeMobileNav()">Calculadora</a>
-    <a href="agendar-tour.html" class="nav__link" onclick="closeMobileNav()">Agendar Tour</a>
-    <a href="publicar.html" class="nav__link" onclick="closeMobileNav()">Publicar</a>
-    <a href="nosotros.html" class="nav__link" onclick="closeMobileNav()">Nosotros</a>
+    <a href="index.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.home">Inicio</a>
+    <a href="propiedades.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.properties">Propiedades</a>
+    <a href="calculadora.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.calculator">Calculadora</a>
+    <a href="agendar-tour.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.tour">Agendar Tour</a>
+    <a href="publicar.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.publish">Publicar</a>
+    <a href="nosotros.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.about">Nosotros</a>
+
+    <div class="lang-picker">
+          <button class="nav__lang-toggle" aria-label="Cambiar Idioma" data-lang-btn>🇪🇸 ES</button>
+          <div class="lang-dropdown">
+            <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+            <button class="lang-option" data-lang="en">🇺🇸 English</button>          </div>
+        </div>
+
+    <!-- Mobile Auth -->
+    <div class="nav__auth" style="margin-left: 0; margin-top: var(--space-4);">
+      <a href="login.html" class="btn-login" style="min-height: 44px; width: 200px; font-size: 14px;" data-i18n="nav.login_full">Login / Iniciar Sesión</a>
+      <span class="nav__signup-text" style="font-size: 12px; margin-top: 8px;">
+        <span data-i18n="nav.no_account">¿No tienes cuenta?</span> 
+        <a href="registro.html" style="font-size: 12px;" data-i18n="nav.register_here">Regístrate aquí</a>
+      </span>
+    </div>
   </div>
 
   <!-- HERO -->
@@ -118,12 +152,12 @@
     <div class="pub-hero__overlay"></div>
     <div class="container" style="position:relative;z-index:2;">
       <div class="pub-hero__content" style="animation:fadeInUp 1s ease both;">
-        <span class="section-label" style="color:var(--color-gold-light);">Para Propietarios y Agentes</span>
-        <h1 style="color:#fff;font-size:var(--text-5xl);margin-bottom:var(--space-6);">Publica tu propiedad</h1>
-        <p style="color:rgba(255,255,255,.75);font-size:var(--text-lg);line-height:var(--leading-relaxed);">Llega a miles de compradores potenciales en República Dominicana. Publica sin costo inicial o accede a planes exclusivos para agentes inmobiliarios con herramientas avanzadas de promoción y analítica.</p>
+        <span class="section-label" style="color:var(--color-gold-light);" data-i18n="pub.hero.label">Para Propietarios y Agentes</span>
+        <h1 style="color:#fff;font-size:var(--text-5xl);margin-bottom:var(--space-6);" data-i18n="pub.header.title">Publica tu propiedad</h1>
+        <p style="color:rgba(255,255,255,.75);font-size:var(--text-lg);line-height:var(--leading-relaxed);" data-i18n="pub.header.desc">Llega a miles de compradores potenciales en República Dominicana. Publica sin costo inicial o accede a planes exclusivos para agentes inmobiliarios con herramientas avanzadas de promoción y analítica.</p>
         <div style="display:flex;gap:var(--space-4);margin-top:var(--space-8);flex-wrap:wrap;">
-          <a href="#sinPago" class="btn btn-primary btn-lg">Publicar Gratis</a>
-          <a href="#planes" class="btn btn-outline-white btn-lg">Ver Planes</a>
+          <a href="login.html" class="btn btn-primary btn-lg" data-i18n="pub.hero.free">Publicar Gratis</a>
+          <a href="#planes" class="btn btn-outline-white btn-lg" data-i18n="pub.plans.title">Ver Planes</a>
         </div>
       </div>
     </div>
@@ -133,36 +167,36 @@
   <section class="pub-section" id="sinPago" aria-label="Modalidad sin pago anticipado">
     <div class="container">
       <div class="text-center reveal" style="margin-bottom:var(--space-4);">
-        <span class="section-label" style="justify-content:center;">Modalidad Gratuita</span>
-        <h2 class="section-title" style="margin:0 auto;">Publica sin costo inicial</h2>
-        <p class="section-subtitle" style="margin:0 auto;">Publica tu inmueble sin pagar nada por adelantado. Solo cobramos una comisión del 2% sobre las ganancias netas si se concreta la venta a través de nuestra plataforma.</p>
-        <div class="commission-badge">💰 Solo 2% al concretar la venta</div>
+        <span class="section-label" style="justify-content:center;" data-i18n="pub.free.label">Modalidad Gratuita</span>
+        <h2 class="section-title" style="margin:0 auto;" data-i18n="pub.free.title">Publica sin costo inicial</h2>
+        <p class="section-subtitle" style="margin:0 auto;" data-i18n="pub.free.desc">Publica tu inmueble sin pagar nada por adelantado. Solo cobramos una comisión del 2% sobre las ganancias netas si se concreta la venta a través de nuestra plataforma.</p>
+        <div class="commission-badge" data-i18n="pub.free.badge">💰 Solo 2% al concretar la venta</div>
       </div>
       <div class="pub-steps stagger">
         <div class="pub-step">
           <div class="pub-step__num">1</div>
-          <h4 class="pub-step__title">Acepta los Términos</h4>
-          <p class="pub-step__text">Lee y acepta expresamente los términos y condiciones de publicación, incluyendo la comisión del 2% en caso de venta.</p>
+          <h4 class="pub-step__title" data-i18n="pub.step1.title">Acepta los Términos</h4>
+          <p class="pub-step__text" data-i18n="pub.step1.desc">Lee y acepta expresamente los términos y condiciones de publicación, incluyendo la comisión del 2% en caso de venta.</p>
         </div>
         <div class="pub-step">
           <div class="pub-step__num">2</div>
-          <h4 class="pub-step__title">Completa el Formulario</h4>
-          <p class="pub-step__text">Llena todos los datos del inmueble: ubicación, precio, características, fotos y descripción detallada.</p>
+          <h4 class="pub-step__title" data-i18n="pub.step2.title">Completa el Formulario</h4>
+          <p class="pub-step__text" data-i18n="pub.step2.desc">Llena todos los datos del inmueble: ubicación, precio, características, fotos y descripción detallada.</p>
         </div>
         <div class="pub-step">
           <div class="pub-step__num">3</div>
-          <h4 class="pub-step__title">Sube tu Identificación</h4>
-          <p class="pub-step__text">Carga un documento de identidad válido (cédula, ID o pasaporte) para verificar tu identidad como propietario.</p>
+          <h4 class="pub-step__title" data-i18n="pub.step3.title">Sube tu Identificación</h4>
+          <p class="pub-step__text" data-i18n="pub.step3.desc">Carga un documento de identidad válido (cédula, ID o pasaporte) para verificar tu identidad como propietario.</p>
         </div>
         <div class="pub-step">
           <div class="pub-step__num">4</div>
-          <h4 class="pub-step__title">Firma Digital</h4>
-          <p class="pub-step__text">Incorpora tu firma digital como constancia de aceptación contractual y reconocimiento de tus obligaciones.</p>
+          <h4 class="pub-step__title" data-i18n="pub.step4.title">Firma Digital</h4>
+          <p class="pub-step__text" data-i18n="pub.step4.desc">Incorpora tu firma digital como constancia de aceptación contractual y reconocimiento de tus obligaciones.</p>
         </div>
       </div>
     </div>
     <div class="text-center reveal" style="margin-top:var(--space-10);">
-      <button class="btn btn-primary btn-lg" id="btnPublicarYa" style="padding: var(--space-4) var(--space-12); font-size: var(--text-xl);">Publica Ya</button>
+      <a href="login.html" class="btn btn-primary btn-lg" id="btnPublicarYa" style="padding: var(--space-4) var(--space-12); font-size: var(--text-xl); display: inline-block; text-decoration: none;" data-i18n="pub.btn.now">Publica Ya</a>
     </div>
   </section>
 
@@ -170,25 +204,25 @@
   <section class="pub-section section--cream" id="control" aria-label="Control del contacto">
     <div class="container">
       <div class="text-center reveal" style="margin-bottom:var(--space-4);">
-        <span class="section-label" style="justify-content:center;">Protección Comercial</span>
-        <h2 class="section-title" style="margin:0 auto;">Control del contacto con interesados</h2>
-        <p class="section-subtitle" style="margin:0 auto;">Todas las interacciones entre compradores y vendedores pasan por nuestra plataforma, garantizando trazabilidad y respaldo para ambas partes.</p>
+        <span class="section-label" style="justify-content:center;" data-i18n="pub.control.label">Protección Comercial</span>
+        <h2 class="section-title" style="margin:0 auto;" data-i18n="pub.control.title">Control del contacto con interesados</h2>
+        <p class="section-subtitle" style="margin:0 auto;" data-i18n="pub.control.desc">Todas las interacciones entre compradores y vendedores pasan por nuestra plataforma, garantizando trazabilidad y respaldo para ambas partes.</p>
       </div>
       <div class="control-grid stagger">
         <div class="control-card">
           <div class="control-card__icon">🛡️</div>
-          <h4 class="control-card__title">Intermediación Segura</h4>
-          <p class="control-card__text">Los interesados escriben a través de la plataforma. Nuestro equipo se encarga de contactar al propietario para coordinar todo el proceso.</p>
+          <h4 class="control-card__title" data-i18n="pub.ctrl1.title">Intermediación Segura</h4>
+          <p class="control-card__text" data-i18n="pub.ctrl1.desc">Los interesados escriben a través de la plataforma. Nuestro equipo se encarga de contactar al propietario para coordinar todo el proceso.</p>
         </div>
         <div class="control-card">
           <div class="control-card__icon">📋</div>
-          <h4 class="control-card__title">Registro de Interacciones</h4>
-          <p class="control-card__text">Todos los mensajes, solicitudes de visita y coordinaciones quedan registrados en el sistema como historial verificable.</p>
+          <h4 class="control-card__title" data-i18n="pub.ctrl2.title">Registro de Interacciones</h4>
+          <p class="control-card__text" data-i18n="pub.ctrl2.desc">Todos los mensajes, solicitudes de visita y coordinaciones quedan registrados en el sistema como historial verificable.</p>
         </div>
         <div class="control-card">
           <div class="control-card__icon">⚖️</div>
-          <h4 class="control-card__title">Respaldo Legal</h4>
-          <p class="control-card__text">El historial documentado protege a ambas partes y sirve como evidencia de la gestión realizada por la plataforma.</p>
+          <h4 class="control-card__title" data-i18n="pub.ctrl3.title">Respaldo Legal</h4>
+          <p class="control-card__text" data-i18n="pub.ctrl3.desc">El historial documentado protege a ambas partes y sirve como evidencia de la gestión realizada por la plataforma.</p>
         </div>
       </div>
     </div>
@@ -198,38 +232,76 @@
   <section class="pub-section" id="planes" aria-label="Planes para agentes">
     <div class="container">
       <div class="text-center reveal" style="margin-bottom:var(--space-4);">
-        <span class="section-label" style="justify-content:center;">Planes de Suscripción</span>
-        <h2 class="section-title" style="margin:0 auto;">Planes para Agentes Inmobiliarios</h2>
-        <p class="section-subtitle" style="margin:0 auto;">Publica propiedades de forma ilimitada y accede a herramientas profesionales para potenciar tus ventas.</p>
+        <span class="section-label" style="justify-content:center;" data-i18n="pub.plans.label">Planes de Suscripción</span>
+        <h2 class="section-title" style="margin:0 auto;" data-i18n="pub.plans.agents.title">Planes para Agentes Inmobiliarios</h2>
+        <p class="section-subtitle" style="margin:0 auto;" data-i18n="pub.plans.agents.desc">Publica propiedades de forma ilimitada y accede a herramientas profesionales para potenciar tus ventas.</p>
       </div>
       <div class="pricing-grid stagger">
-        <!-- Plan Básico -->
-        <div class="pricing-card pricing-card--basic">
-          <p style="font-size:var(--text-sm);text-transform:uppercase;letter-spacing:.15em;color:var(--color-gray-500);font-weight:600;margin-bottom:var(--space-2);">Plan Profesional</p>
-          <div class="pricing-card__price" style="color:var(--color-navy);">$100<span>/mes</span></div>
-          <ul class="pricing-card__list">
-            <li>Publicación ilimitada de propiedades</li>
-            <li>Optimización SEO de tus publicaciones para mayor visibilidad</li>
-            <li>Promoción de tus propiedades a través de Instagram</li>
-            <li>Panel de gestión de publicaciones</li>
-            <li>Soporte por correo electrónico</li>
-          </ul>
-          <a href="https://wa.me/18096972050?text=Hola%2C%20me%20interesa%20el%20Plan%20Profesional%20de%20%24100%2Fmes" class="btn btn-outline btn-lg" style="width:100%;" target="_blank" rel="noopener">Comenzar Ahora</a>
+        <!-- 1. Éxito Compartido -->
+        <div class="pricing-card pricing-card--free" style="justify-content: space-between;">
+          <div>
+            <p style="font-size:var(--text-sm);text-transform:uppercase;letter-spacing:.15em;color:var(--color-gray-500);font-weight:600;margin-bottom:var(--space-2);" data-i18n="pub.plan.free.name">Éxito Compartido</p>
+            <div class="pricing-card__price" style="color:var(--color-navy);">$0 <span data-i18n="pub.plans.pro.period">/mes</span></div>
+            <p style="font-size:var(--text-sm);color:var(--color-gray-500);margin-bottom:var(--space-4);" data-i18n="pub.plan.free.desc">Ideal para propietarios particulares que no quieren riesgo inicial.</p>
+            <div style="font-weight:700;color:var(--color-navy);margin-bottom:var(--space-4);" data-i18n="pub.plan.free.comision">Comisión por Venta: 3% - 5%</div>
+            <ul class="pricing-card__list">
+              <li data-i18n="pub.plan.free.f1">Publicación estándar con optimización SEO básica.</li>
+              <li data-i18n="pub.plan.free.f2">Agente de captura de datos básico para filtrar curiosos.</li>
+              <li data-i18n="pub.plan.free.f3">Indexación automática en Google.</li>
+              <li data-i18n="pub.plan.free.f4" style="color:var(--color-gray-500);font-style:italic;">Competencia orgánica sin prioridad de pauta.</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/18096972050?text=Hola%2C%20me%20interesa%20el%20Plan%20%C3%89xito%20Compartido" class="btn btn-outline btn-lg" style="width:100%;margin-top:var(--space-4);" target="_blank" rel="noopener" data-i18n="pub.plan.btn.start">Comenzar Ahora</a>
         </div>
-        <!-- Plan Premium -->
-        <div class="pricing-card pricing-card--pro">
-          <div class="pricing-card__badge">Popular</div>
-          <p style="font-size:var(--text-sm);text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.6);font-weight:600;margin-bottom:var(--space-2);">Plan Premium</p>
-          <div class="pricing-card__price" style="color:var(--color-gold-light);">$200<span>/mes</span></div>
-          <ul class="pricing-card__list" style="color:rgba(255,255,255,.8);">
-            <li>Todo lo incluido en el Plan Profesional</li>
-            <li>Automatizaciones personalizadas para tu flujo de trabajo</li>
-            <li>Registro detallado de actividad por propiedad</li>
-            <li>Analíticas avanzadas e indicadores de interacción</li>
-            <li>Herramientas de estimación de probabilidad de venta</li>
-            <li>Soporte prioritario dedicado</li>
-          </ul>
-          <a href="https://wa.me/18096972050?text=Hola%2C%20me%20interesa%20el%20Plan%20Premium%20de%20%24200%2Fmes" class="btn btn-primary btn-lg" style="width:100%;" target="_blank" rel="noopener">Comenzar Ahora</a>
+
+        <!-- 2. Agente Pro -->
+        <div class="pricing-card pricing-card--basic" style="justify-content: space-between;">
+          <div>
+            <p style="font-size:var(--text-sm);text-transform:uppercase;letter-spacing:.15em;color:var(--color-navy);font-weight:600;margin-bottom:var(--space-2);" data-i18n="pub.plan.pro.name">Agente Pro</p>
+            <div class="pricing-card__price" style="color:var(--color-navy);">~$49 <span data-i18n="pub.plans.pro.period">/mes</span></div>
+            <p style="font-size:var(--text-sm);color:var(--color-gray-500);margin-bottom:var(--space-4);" data-i18n="pub.plan.pro.desc">Ideal para agentes independientes que quieren volumen.</p>
+            <div style="font-weight:700;color:#E79E24;margin-bottom:var(--space-4);" data-i18n="pub.plan.pro.comision">Comisión por Venta: 0%</div>
+            <ul class="pricing-card__list">
+              <li data-i18n="pub.plan.pro.f1">SEO de Guerrilla con IA: Landing Pages dinámicas generadas en milisegundos.</li>
+              <li data-i18n="pub.plan.pro.f2">CRM Inteligente: Bot 24/7 (WhatsApp/Web) que agenda citas.</li>
+              <li data-i18n="pub.plan.pro.f3">Mejora automática de fotos mediante IA.</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/18096972050?text=Hola%2C%20me%20interesa%20el%20Plan%20Agente%20Pro" class="btn btn-outline btn-lg" style="width:100%;margin-top:var(--space-4);" target="_blank" rel="noopener" data-i18n="pub.plan.btn.start">Comenzar Ahora</a>
+        </div>
+
+        <!-- 3. Dominación Regional -->
+        <div class="pricing-card pricing-card--pro" style="justify-content: space-between;">
+          <div class="pricing-card__badge" data-i18n="pub.plan.badge.popular">Popular</div>
+          <div>
+            <p style="font-size:var(--text-sm);text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.6);font-weight:600;margin-bottom:var(--space-2);" data-i18n="pub.plan.premium.name">Dominación Regional</p>
+            <div class="pricing-card__price" style="color:var(--color-gold-light);">~$149 <span data-i18n="pub.plans.pro.period">/mes</span></div>
+            <p style="font-size:var(--text-sm);color:rgba(255,255,255,.7);margin-bottom:var(--space-4);" data-i18n="pub.plan.premium.desc">Para quienes necesitan vender rápido propiedades de alto valor.</p>
+            <div style="font-weight:700;color:var(--color-gold-light);margin-bottom:var(--space-4);" data-i18n="pub.plan.premium.comision">Comisión por Venta: 0%</div>
+            <ul class="pricing-card__list" style="color:rgba(255,255,255,.8);">
+              <li data-i18n="pub.plan.premium.f1">Pauta Automatizada: Gestión de micro-presupuesto Ads con IA.</li>
+              <li data-i18n="pub.plan.premium.f2">Traducción Global: Adaptación a 5 idiomas y SEO internacional.</li>
+              <li data-i18n="pub.plan.premium.f3">Tour Virtual IA: Recorrido narrado por voz sintética.</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/18096972050?text=Hola%2C%20me%20interesa%20el%20Plan%20Dominaci%C3%B3n%20Regional" class="btn btn-primary btn-lg" style="width:100%;margin-top:var(--space-4);" target="_blank" rel="noopener" data-i18n="pub.plan.btn.start">Comenzar Ahora</a>
+        </div>
+
+        <!-- 4. Inversionista / Constructora -->
+        <div class="pricing-card pricing-card--enterprise" style="justify-content: space-between;">
+          <div class="pricing-card__badge" style="background:#fff; color:#000;" data-i18n="pub.plan.badge.top">Top 1</div>
+          <div>
+            <p style="font-size:var(--text-sm);text-transform:uppercase;letter-spacing:.15em;color:var(--color-gold-light);font-weight:600;margin-bottom:var(--space-2);" data-i18n="pub.plan.enterprise.name">Inversionista</p>
+            <div class="pricing-card__price" style="color:#fff;font-size:var(--text-3xl);display:flex;align-items:center;justify-content:center;height:45px;margin:var(--space-4) 0;" data-i18n="pub.plan.enterprise.price">Personalizado</div>
+            <p style="font-size:var(--text-sm);color:rgba(255,255,255,.7);margin-bottom:var(--space-4);" data-i18n="pub.plan.enterprise.desc">Para proyectos nuevos o torres en construcción.</p>
+            <div style="font-weight:700;color:#fff;margin-bottom:var(--space-4);" data-i18n="pub.plan.enterprise.comision">Comisión basada en unidades</div>
+            <ul class="pricing-card__list" style="color:rgba(255,255,255,.8);">
+              <li data-i18n="pub.plan.enterprise.f1">Predictive Analytics: Campañas a inversores internacionales.</li>
+              <li data-i18n="pub.plan.enterprise.f2">Asistente de Cierre: IA experta en leyes y procesos bancarios.</li>
+              <li data-i18n="pub.plan.enterprise.f3">Prioridad Absoluta: "Top 1" garantizado en todas las búsquedas.</li>
+            </ul>
+          </div>
+          <a href="https://wa.me/18096972050?text=Hola%2C%20soy%20inversionista%2Fconstructora%20y%20me%20interesa%20un%20plan%20personalizado" class="btn btn-outline-white btn-lg" style="width:100%;margin-top:var(--space-4);" target="_blank" rel="noopener" data-i18n="pub.plan.btn.contact">Contactar</a>
         </div>
       </div>
     </div>
@@ -239,34 +311,35 @@
   <section class="pub-section section--dark" id="servicios" aria-label="Servicios adicionales">
     <div class="container">
       <div class="text-center reveal" style="margin-bottom:var(--space-4);">
-        <span class="section-label" style="justify-content:center;color:var(--color-gold-light);">Servicios Complementarios</span>
-        <h2 class="section-title" style="margin:0 auto;color:#fff;">Servicios Adicionales</h2>
-        <p class="section-subtitle" style="margin:0 auto;color:rgba(255,255,255,.6);">Potencia la presentación de tus propiedades con nuestros servicios profesionales de producción de contenido.</p>
+        <span class="section-label" style="justify-content:center;color:var(--color-gold-light);" data-i18n="pub.services.label">Servicios Complementarios</span>
+        <h2 class="section-title" style="margin:0 auto;color:#fff;" data-i18n="pub.services.title">Servicios Adicionales</h2>
+        <p class="section-subtitle" style="margin:0 auto;color:rgba(255,255,255,.6);" data-i18n="pub.services.desc">Potencia la presentación de tus propiedades con nuestros servicios profesionales de producción de contenido.</p>
       </div>
       <div class="services-grid stagger">
         <div class="service-card">
           <div class="service-card__icon">🏠</div>
           <div class="service-card__price">$100</div>
-          <h4 class="service-card__title">Agente para Recorrido</h4>
-          <p class="service-card__text">Un agente profesional acompañará a los interesados en el recorrido presencial de tu propiedad.</p>
+          <h4 class="service-card__title" data-i18n="pub.svc1.title">Agente para Recorrido</h4>
+          <p class="service-card__text" data-i18n="pub.svc1.desc">Un agente profesional acompañará a los interesados en el recorrido presencial de tu propiedad.</p>
         </div>
         <div class="service-card">
           <div class="service-card__icon">📸</div>
           <div class="service-card__price">$200</div>
-          <h4 class="service-card__title">Sesión de Fotos</h4>
-          <p class="service-card__text">Sesión fotográfica profesional para destacar cada espacio de tu propiedad con imágenes de alta calidad.</p>
+          <h4 class="service-card__title" data-i18n="pub.svc2.title">Sesión de Fotos</h4>
+          <p class="service-card__text" data-i18n="pub.svc2.desc">Sesión fotográfica profesional para destacar cada espacio de tu propiedad con imágenes de alta calidad.</p>
         </div>
         <div class="service-card">
-          <div class="service-card__icon">🎬</div>
+          <div class="service-card__icon">🎦</div>
           <div class="service-card__price">$300</div>
-          <h4 class="service-card__title">Video con Edición</h4>
-          <p class="service-card__text">Video de recorrido profesional con edición llamativa, música y transiciones para redes sociales.</p>
+          <h4 class="service-card__title" data-i18n="pub.svc3.title">Video con Edición</h4>
+          <p class="service-card__text" data-i18n="pub.svc3.desc">Video de recorrido profesional con edición llamativa, música y transiciones para redes sociales.</p>
         </div>
         <div class="service-card">
           <div class="service-card__icon">🏗️</div>
           <div class="service-card__price">$500</div>
-          <h4 class="service-card__title">Renders 3D</h4>
-          <p class="service-card__text">Renders fotorrealistas 3D a partir de los planos de tu propiedad para visualizar el resultado final.</p>
+          <h4 class="service-card__title" data-i18n="pub.svc4.title">Renders 3D</h4>
+          <p class="service-card__text" data-i18n="pub.svc4.desc">Renders fotorrealistas 3D a partir de los planos de tu propiedad para visualizar el resultado final.</p>
+        </div> partir de los planos de tu propiedad para visualizar el resultado final.</p>
         </div>
       </div>
     </div>
@@ -276,13 +349,11 @@
   <section class="pub-section">
     <div class="container">
       <div class="text-center reveal" style="max-width:700px;margin:0 auto;">
-        <h2 style="color:var(--color-navy);font-size:var(--text-4xl);margin-bottom:var(--space-6);">¿Listo para publicar tu propiedad?</h2>
-        <p style="color:var(--color-gray-600);font-size:var(--text-lg);margin-bottom:var(--space-8);">Contáctanos y te guiaremos en cada paso del proceso. Tu propiedad llegará a miles de compradores potenciales.</p>
+        <h2 style="color:var(--color-navy);font-size:var(--text-4xl);margin-bottom:var(--space-6);" data-i18n="pub.cta.title">¿Listo para publicar tu propiedad?</h2>
+        <p style="color:var(--color-gray-600);font-size:var(--text-lg);margin-bottom:var(--space-8);" data-i18n="pub.cta.desc">Contáctanos y te guiaremos en cada paso del proceso. Tu propiedad llegará a miles de compradores potenciales.</p>
         <div style="display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap;">
-          <a href="https://wa.me/18096972050?text=Hola%2C%20quiero%20publicar%20mi%20propiedad" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
-            Publicar por WhatsApp
-          </a>
-          <a href="agendar-tour.html" class="btn btn-outline btn-lg">Contactar un Asesor</a>
+          <a href="https://wa.me/18096972050?text=Hola%2C%20quiero%20publicar%20mi%20propiedad" class="btn btn-primary btn-lg" target="_blank" rel="noopener" data-i18n="pub.cta.whatsapp">Publicar por WhatsApp</a>
+          <a href="agendar-tour.html" class="btn btn-outline btn-lg" data-i18n="pub.cta.advisor">Contactar un Asesor</a>
         </div>
       </div>
     </div>
@@ -292,7 +363,7 @@
   <footer class="footer">
     <div class="container">
       <div class="footer__bottom" style="border-top:none;">
-        <p>&copy; 2026 Nuevo Sol Inversiones. Todos los derechos reservados.</p>
+        <p data-i18n="footer.rights">&copy; 2026 Nuevo Sol Inversiones. Todos los derechos reservados.</p>
         <div class="footer__social">
           <a href="https://www.instagram.com/nuevosol.inversiones" target="_blank" aria-label="Instagram">
             <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
@@ -315,21 +386,59 @@
     </div>
   </div>
 
+  <!-- Modal Invitación (Login/Register) -->
+  <div id="modalInvitacion" class="modal" style="display:none; position:fixed; inset:0; z-index:1001; background:rgba(26,39,68,.85); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:var(--space-4);">
+    <div style="width:100%; max-width:450px; background:#fff; border-radius:var(--radius-2xl); padding:var(--space-10); text-align:center; position:relative; box-shadow:0 25px 50px -12px rgba(0,0,0,0.25); animation:modalFadeIn 0.4s ease-out;">
+      <button id="closeInvite" style="position:absolute; top:15px; right:15px; background:none; border:none; font-size:24px; color:var(--color-gray-400); cursor:pointer;">&times;</button>
+      
+      <div style="width:80px; height:80px; background:rgba(197, 165, 90, 0.1); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto var(--space-6);">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c5a55a" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+
+      <h2 style="font-family:var(--font-display); color:var(--color-navy); margin-bottom:var(--space-4);" data-i18n="pub.invite.title">¡Casi listo!</h2>
+      <p style="color:var(--color-gray-600); line-height:1.6; margin-bottom:var(--space-8);" data-i18n="pub.invite.desc">Para publicar tu propiedad, necesitas ser parte de nuestra comunidad. Inicia sesión o regístrate en segundos.</p>
+      
+      <div style="display:flex; flex-direction:column; gap:var(--space-3);">
+        <a href="login.html" class="btn btn-primary" style="width:100%;" data-i18n="pub.invite.login">Iniciar Sesión</a>
+        <a href="registro.html" class="btn btn-outline" style="width:100%;" data-i18n="pub.invite.register">Registrarse</a>
+      </div>
+    </div>
+  </div>
+
   <script src="js/app.js" defer></script>
+  
+  <!-- Firebase Auth Guard for Instant Verification -->
+  <script type="module">
+    import { auth } from './js/firebase-config.js';
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+
+    window.isUserLoggedIn = false;
+    onAuthStateChanged(auth, (user) => {
+      window.isUserLoggedIn = !!user;
+      console.log("Session verified:", window.isUserLoggedIn);
+    });
+  </script>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const btn = document.getElementById('btnPublicarYa');
       const modal = document.getElementById('modalFormulario');
+      const modalInvite = document.getElementById('modalInvitacion');
       const close = document.getElementById('closeModal');
+      const closeInvite = document.getElementById('closeInvite');
       const body = document.body;
       const html = document.documentElement;
       let scrollPosition = 0;
 
-      // Asegurar que el modal esté cerrado al inicio (por si acaso)
-      if (modal) modal.style.display = 'none';
-
       function openModal(e) {
         if (e) e.preventDefault();
+
+        // Instant Verification Check
+        if (!window.isUserLoggedIn) {
+          modalInvite.style.display = 'flex';
+          return;
+        }
+
         scrollPosition = window.pageYOffset;
         body.style.overflow = 'hidden';
         body.style.position = 'fixed';
@@ -345,6 +454,7 @@
         body.style.top = '';
         body.style.width = '';
         modal.style.display = 'none';
+        modalInvite.style.display = 'none';
         window.scrollTo(0, scrollPosition);
         setTimeout(() => {
           html.style.scrollBehavior = '';
@@ -352,15 +462,14 @@
       }
 
       if(btn && modal) {
-        btn.onclick = openModal; // Usar onclick para evitar múltiples listeners
+        btn.onclick = openModal;
       }
 
-      if(close && modal) {
-        close.onclick = closeModal;
-      }
+      if(close) close.onclick = closeModal;
+      if(closeInvite) closeInvite.onclick = closeModal;
 
-      modal.onclick = (e) => {
-        if(e.target === modal) {
+      window.onclick = (e) => {
+        if(e.target === modal || e.target === modalInvite) {
           closeModal();
         }
       };
@@ -368,8 +477,7 @@
   </script>
 
   <!-- ── Google Translate ── -->
-  <div id="google_translate_element" style="display:none;"></div>
-  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script src="js/translate.js"></script>
+      <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
 </body>
 </html>

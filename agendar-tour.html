@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
 <head>
-  <script>
-    if (localStorage.getItem('ns_lang') === 'en') {
-      document.write('<style id="anti-flicker">html { opacity: 0; transition: opacity 0.4s ease; }</style>');
-    }
-  </script>
+  
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -120,8 +116,9 @@
     }
   </style>
   <link rel="stylesheet" href="css/translate.css">
-</head>
+    </head>
 <body class="page-transition">
+  
 
   <!-- NAV -->
   <nav class="nav nav--transparent" id="mainNav" role="navigation">
@@ -129,15 +126,29 @@
       <div class="nav__inner">
         <a href="index.html" class="nav__logo"><img src="Nuevo Sol LOGO.png" alt="Nuevo Sol Inversiones" style="height: 50px; width: auto;"></a>
         <div class="nav__links">
-          <a href="index.html" class="nav__link">Inicio</a>
-          <a href="propiedades.html" class="nav__link">Propiedades</a>
-          <a href="calculadora.html" class="nav__link">Calculadora</a>
-          <a href="agendar-tour.html" class="nav__link nav__link--active">Agendar Tour</a>
-          <a href="publicar.html" class="nav__link">Publicar</a>
-          <a href="nosotros.html" class="nav__link">Nosotros</a>
-          <a href="agendar-tour.html" class="btn btn-primary btn-sm nav__cta">Contactar</a>
+          <a href="index.html" class="nav__link" data-i18n="nav.home">Inicio</a>
+          <a href="propiedades.html" class="nav__link" data-i18n="nav.properties">Propiedades</a>
+          <a href="calculadora.html" class="nav__link" data-i18n="nav.calculator">Calculadora</a>
+          <a href="agendar-tour.html" class="nav__link nav__link--active" data-i18n="nav.tour">Agendar Tour</a>
+          <a href="publicar.html" class="nav__link" data-i18n="nav.publish">Publicar</a>
+          <a href="nosotros.html" class="nav__link" data-i18n="nav.about">Nosotros</a>
+          <a href="contacto.html" class="btn btn-primary btn-sm nav__cta" data-i18n="nav.contact">Contactar</a>
         
-          <button class="nav__lang-toggle notranslate" aria-label="Cambiar Idioma">🇪🇸 ES</button>
+          <div class="lang-picker">
+          <button class="nav__lang-toggle" aria-label="Cambiar Idioma" data-lang-btn>🇪🇸 ES</button>
+          <div class="lang-dropdown">
+            <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+            <button class="lang-option" data-lang="en">🇺🇸 English</button>          </div>
+        </div>
+          
+          <!-- Desktop Auth -->
+          <div class="nav__auth">
+            <a href="login.html" class="btn-login" data-i18n="nav.login">Login</a>
+            <span class="nav__signup-text">
+              <span data-i18n="nav.no_account">¿No tienes cuenta?</span> 
+              <a href="registro.html" data-i18n="nav.signup">Sign Up</a>
+            </span>
+          </div>
         </div>
         
         <button class="nav__hamburger" id="navHamburger" aria-label="Menú"><span></span><span></span><span></span></button>
@@ -145,22 +156,38 @@
     </div>
   </nav>
   <div class="nav__mobile" id="navMobile">
-    <a href="index.html" class="nav__link" onclick="closeMobileNav()">Inicio</a>
-    <a href="propiedades.html" class="nav__link" onclick="closeMobileNav()">Propiedades</a>
-    <a href="calculadora.html" class="nav__link" onclick="closeMobileNav()">Calculadora</a>
-    <a href="agendar-tour.html" class="nav__link" onclick="closeMobileNav()">Agendar Tour</a>
-    <a href="publicar.html" class="nav__link" onclick="closeMobileNav()">Publicar</a>
-    <a href="nosotros.html" class="nav__link" onclick="closeMobileNav()">Nosotros</a>
+    <a href="index.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.home">Inicio</a>
+    <a href="propiedades.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.properties">Propiedades</a>
+    <a href="calculadora.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.calculator">Calculadora</a>
+    <a href="agendar-tour.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.tour">Agendar Tour</a>
+    <a href="publicar.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.publish">Publicar</a>
+    <a href="nosotros.html" class="nav__link" onclick="closeMobileNav()" data-i18n="nav.about">Nosotros</a>
+
+    <div class="lang-picker">
+          <button class="nav__lang-toggle" aria-label="Cambiar Idioma" data-lang-btn>🇪🇸 ES</button>
+          <div class="lang-dropdown">
+            <button class="lang-option" data-lang="es">🇪🇸 Español</button>
+            <button class="lang-option" data-lang="en">🇺🇸 English</button>          </div>
+        </div>
+
+    <!-- Mobile Auth -->
+    <div class="nav__auth" style="margin-left: 0; margin-top: var(--space-4);">
+      <a href="login.html" class="btn-login" style="min-height: 44px; width: 200px; font-size: 14px;" data-i18n="nav.login_full">Login / Iniciar Sesión</a>
+      <span class="nav__signup-text" style="font-size: 12px; margin-top: 8px;">
+        <span data-i18n="nav.no_account">¿No tienes cuenta?</span> 
+        <a href="registro.html" style="font-size: 12px;" data-i18n="nav.register_here">Regístrate aquí</a>
+      </span>
+    </div>
   </div>
 
   <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="container">
       <div class="breadcrumbs" style="justify-content:center;">
-        <a href="index.html">Inicio</a><span>/</span><span>Agendar Tour</span>
+        <a href="index.html" data-i18n="nav.home">Inicio</a><span>/</span><span data-i18n="nav.tour">Agendar Tour</span>
       </div>
-      <h1>Agenda tu Visita</h1>
-      <p>Recorre nuestras propiedades con un asesor experto. Conoce cada espacio y toma la mejor decisión.</p>
+      <h1  data-i18n="tour.header.title">Agenda tu Visita</h1>
+      <p data-i18n="tour.header.desc">Recorre nuestras propiedades con un asesor experto. Conoce cada espacio y toma la mejor decisión.</p>
     </div>
   </div>
 
@@ -171,42 +198,42 @@
         <!-- Form -->
         <div class="tour-form-card reveal">
           <form id="tourForm" novalidate>
-            <h3 style="font-size:var(--text-2xl);margin-bottom:var(--space-2);color:var(--color-navy);">Reserva tu Tour</h3>
-            <p style="color:var(--color-gray-500);font-size:var(--text-sm);margin-bottom:var(--space-8);">Completa el formulario y nos comunicaremos contigo para confirmar tu visita.</p>
+            <h3 style="font-size:var(--text-2xl);margin-bottom:var(--space-2);color:var(--color-navy);" data-i18n="tour.form.title">Reserva tu Tour</h3>
+            <p style="color:var(--color-gray-500);font-size:var(--text-sm);margin-bottom:var(--space-8);" data-i18n="tour.form.subtitle">Completa el formulario y nos comunicaremos contigo para confirmar tu visita.</p>
 
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label" for="tourName">Nombre Completo *</label>
-                <input type="text" class="form-input" id="tourName" name="name" placeholder="Tu nombre" required>
+                <label class="form-label" for="tourName" data-i18n="tour.form.name">Nombre Completo *</label>
+                <input type="text" class="form-input" id="tourName" name="name" placeholder="Tu nombre" data-i18n="tour.form.name_ph" required>
               </div>
               <div class="form-group">
-                <label class="form-label" for="tourPhone">Teléfono *</label>
+                <label class="form-label" for="tourPhone" data-i18n="tour.form.phone">Teléfono *</label>
                 <input type="tel" class="form-input" id="tourPhone" name="phone" placeholder="+1 (809) 697-2050" required>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="tourEmail">Correo Electrónico *</label>
+              <label class="form-label" for="tourEmail" data-i18n="tour.form.email">Correo Electrónico *</label>
               <input type="email" class="form-input" id="tourEmail" name="email" placeholder="tu@email.com" required>
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="tourProperty">Propiedad de Interés</label>
+              <label class="form-label" for="tourProperty" data-i18n="tour.form.property">Propiedad de Interés</label>
               <select class="form-select" id="tourProperty" name="property">
-                <option value="">Selecciona una propiedad</option>
-                <option value="Otra / No estoy seguro">Otra / No estoy seguro</option>
+                <option value="" data-i18n="tour.form.property_opt1">Selecciona una propiedad</option>
+                <option value="Otra / No estoy seguro" data-i18n="tour.form.property_opt2">Otra / No estoy seguro</option>
               </select>
             </div>
 
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label" for="tourDate">Fecha Preferida *</label>
+                <label class="form-label" for="tourDate" data-i18n="tour.form.date">Fecha Preferida *</label>
                 <input type="date" class="form-input" id="tourDate" name="date" required>
               </div>
               <div class="form-group">
-                <label class="form-label" for="tourTime">Hora Preferida</label>
+                <label class="form-label" for="tourTime" data-i18n="tour.form.time">Hora Preferida</label>
                 <select class="form-select" id="tourTime" name="time">
-                  <option value="">Selecciona una hora</option>
+                  <option value="" data-i18n="tour.form.time_opt">Selecciona una hora</option>
                   <option value="09:00">9:00 AM</option>
                   <option value="10:00">10:00 AM</option>
                   <option value="11:00">11:00 AM</option>
@@ -220,13 +247,13 @@
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="tourComments">Comentarios Adicionales</label>
-              <textarea class="form-input" id="tourComments" name="comments" placeholder="¿Hay algo específico que te gustaría saber o ver durante la visita?" rows="4"></textarea>
+              <label class="form-label" for="tourComments" data-i18n="tour.form.comments">Comentarios Adicionales</label>
+              <textarea class="form-input" id="tourComments" name="comments" placeholder="¿Hay algo específico que te gustaría saber o ver durante la visita?" data-i18n="tour.form.comments_ph" rows="4"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
-              Confirmar Tour
+              <span data-i18n="tour.form.submit">Confirmar Tour</span>
             </button>
           </form>
 
@@ -235,24 +262,24 @@
             <div class="success-icon">
               <svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>
             </div>
-            <h3 style="font-size:var(--text-2xl);margin-bottom:var(--space-3);color:var(--color-navy);">¡Tour Agendado!</h3>
-            <p style="color:var(--color-gray-600);margin-bottom:var(--space-6);">Nos comunicaremos contigo pronto para confirmar los detalles de tu visita. Mientras tanto, puedes contactarnos directamente.</p>
+            <h3 style="font-size:var(--text-2xl);margin-bottom:var(--space-3);color:var(--color-navy);" data-i18n="tour.form.success_title">¡Tour Agendado!</h3>
+            <p style="color:var(--color-gray-600);margin-bottom:var(--space-6);" data-i18n="tour.form.success_desc">Nos comunicaremos contigo pronto para confirmar los detalles de tu visita. Mientras tanto, puedes contactarnos directamente.</p>
             <a href="https://wa.me/18096972050?text=Hola%2C%20acabo%20de%20agendar%20un%20tour" class="btn btn-primary" target="_blank" rel="noopener">Confirmar por WhatsApp</a>
           </div>
         </div>
 
         <!-- Info -->
         <div class="tour-info reveal--right">
-          <h3 style="font-size:var(--text-3xl);margin-bottom:var(--space-2);color:var(--color-navy);">¿Cómo funciona?</h3>
-          <p style="color:var(--color-gray-600);margin-bottom:var(--space-6);">Agenda tu visita en 3 simples pasos.</p>
+          <h3 style="font-size:var(--text-3xl);margin-bottom:var(--space-2);color:var(--color-navy);" data-i18n="tour.info.title">¿Cómo funciona?</h3>
+          <p style="color:var(--color-gray-600);margin-bottom:var(--space-6);" data-i18n="tour.info.subtitle">Agenda tu visita en 3 simples pasos.</p>
 
           <div class="tour-info__item">
             <div class="tour-info__icon">
               <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
             </div>
             <div>
-              <h4 class="tour-info__title">1. Elige Fecha y Hora</h4>
-              <p class="tour-info__text">Selecciona el día y hora que mejor se adapte a tu agenda. Disponibles de lunes a sábado.</p>
+              <h4 class="tour-info__title" data-i18n="tour.step1.title">1. Elige Fecha y Hora</h4>
+              <p class="tour-info__text" data-i18n="tour.step1.desc">Selecciona el día y hora que mejor se adapte a tu agenda. Disponibles de lunes a sábado.</p>
             </div>
           </div>
 
@@ -261,8 +288,8 @@
               <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"/></svg>
             </div>
             <div>
-              <h4 class="tour-info__title">2. Confirmación</h4>
-              <p class="tour-info__text">Te contactaremos por WhatsApp o llamada para confirmar tu cita y darte la dirección exacta.</p>
+              <h4 class="tour-info__title" data-i18n="tour.step2.title">2. Confirmación</h4>
+              <p class="tour-info__text" data-i18n="tour.step2.desc">Te contactaremos por WhatsApp o llamada para confirmar tu cita y darte la dirección exacta.</p>
             </div>
           </div>
 
@@ -271,18 +298,18 @@
               <svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div>
-              <h4 class="tour-info__title">3. Visita Personalizada</h4>
-              <p class="tour-info__text">Un asesor te acompañará por toda la propiedad, responderá tus preguntas y te brindará toda la información necesaria.</p>
+              <h4 class="tour-info__title" data-i18n="tour.step3.title">3. Visita Personalizada</h4>
+              <p class="tour-info__text" data-i18n="tour.step3.desc">Un asesor te acompañará por toda la propiedad, responderá tus preguntas y te brindará toda la información necesaria.</p>
             </div>
           </div>
 
           <div style="margin-top:var(--space-8);padding:var(--space-6);background:var(--color-cream-warm);border-radius:var(--radius-xl);">
-            <h4 style="font-size:var(--text-base);margin-bottom:var(--space-3);color:var(--color-navy);">¿Prefieres contacto inmediato?</h4>
+            <h4 style="font-size:var(--text-base);margin-bottom:var(--space-3);color:var(--color-navy);" data-i18n="tour.contact.title">¿Prefieres contacto inmediato?</h4>
             <a href="https://wa.me/18096972050?text=Hola%2C%20quiero%20agendar%20un%20tour" class="btn btn-primary" style="width:100%;" target="_blank" rel="noopener">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-              WhatsApp Directo
+              <span data-i18n="tour.contact.whatsapp">WhatsApp Directo</span>
             </a>
-            <p style="font-size:var(--text-xs);color:var(--color-gray-500);text-align:center;margin-top:var(--space-3);margin-bottom:0;">Respuesta en menos de 5 minutos</p>
+            <p style="font-size:var(--text-xs);color:var(--color-gray-500);text-align:center;margin-top:var(--space-3);margin-bottom:0;" data-i18n="tour.contact.reply">Respuesta en menos de 5 minutos</p>
           </div>
         </div>
       </div>
@@ -340,8 +367,7 @@
   </script>
 
   <!-- ── Google Translate ── -->
-  <div id="google_translate_element" style="display:none;"></div>
-  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script src="js/translate.js"></script>
+      <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
 </body>
 </html>
