@@ -182,14 +182,23 @@
     const isInitiallyTransparent = nav.classList.contains('nav--transparent');
     let scrollTicking = false;
 
+    // Initial state check
+    if (window.scrollY > 80 || !isInitiallyTransparent) {
+      nav.classList.remove('nav--transparent');
+      nav.classList.add('nav--solid');
+    } else {
+      nav.classList.add('nav--transparent');
+      nav.classList.remove('nav--solid');
+    }
+
     window.addEventListener('scroll', () => {
       if (!scrollTicking) {
         window.requestAnimationFrame(() => {
           const currentScroll = window.scrollY;
-          if (currentScroll > 80) {
+          if (currentScroll > 80 || !isInitiallyTransparent) {
             nav.classList.remove('nav--transparent');
             nav.classList.add('nav--solid');
-          } else if (isInitiallyTransparent) {
+          } else {
             nav.classList.add('nav--transparent');
             nav.classList.remove('nav--solid');
           }
